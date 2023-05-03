@@ -18,7 +18,7 @@
     "test": "jest --watchAll",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "format": "prettier -w '**/*.{js,jsx,ts,tsx}'",
-    "knex": "knex"
+    "knex": "knex --knexfile ./server/db/knexfile.js"
   },
   "babel": {
     "presets": [

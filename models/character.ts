@@ -8,6 +8,8 @@ export interface UnsplashCharacter {
   id:string;
   alt_description:string;
   links:Links;
+  total_pages:string;
+
 }
 export interface Urls {
   regular:string;
