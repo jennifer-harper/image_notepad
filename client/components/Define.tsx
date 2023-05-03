@@ -36,8 +36,6 @@ export function Define() {
         value={searchCategory}
         onChange={handleInputChange}
       />
-
-
       <button type="submit">Search</button>
     </form>
 
@@ -46,12 +44,15 @@ export function Define() {
 
     <div className="image-grid">
       {images.map((image) => (
-        <img
-          key={image.id}
-          className="unsplash"
-          src={image.urls.regular}
-          alt={image.alt_description}
-        />
+        <div key={image.id}>
+          <img          
+            className="unsplash"
+            src={image.urls.regular}
+            alt={image.alt_description}
+          />
+          <p><a href={image.links.html}>Download here</a></p>
+          <p>Category: {searchCategory}</p>    
+        </div>
       ))}
     </div>
     </>

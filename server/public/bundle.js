@@ -4261,28 +4261,19 @@ function getUnsplash() {
     console.log('Err message: ' + err);
   });
 }
-
-// export function searchUnsplash(){
-//   return request
-
-//   .get(`https://api.unsplash.com/search/photos?client_id=${process.env.UNSPLASH_KEY}&page=1&per_page=6&color=red&orientation=landscape&query={}`)
-//   .then((res) => {
-//     console.log(res.body)
-//     return res.body
-//   })
-//   .catch((err) => {
-//     console.log('Err message: ' + err)
-//   })
-// }
-
 function defineUnsplash(query) {
-  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`https://api.unsplash.com/search/photos?client_id=${"48xo5zkXZ6Sh8EYO_etxPja_x05J4Zyhitdp7r7VH38"}&page=1&per_page=6&orientation=landscape&query=${query}`).then(res => {
+  const randomPageNumber = Math.floor(Math.random() * 100) + 1;
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`https://api.unsplash.com/search/photos?client_id=${"48xo5zkXZ6Sh8EYO_etxPja_x05J4Zyhitdp7r7VH38"}&page=${randomPageNumber}&per_page=12&orientation=landscape&query=${query}`).then(res => {
     console.log(res.body);
     return res.body;
   }).catch(err => {
     console.log('Err message: ' + err);
   });
 }
+
+// Link: <https://api.unsplash.com/search/photos?page=1&query=office>; rel="first", <https://api.unsplash.com/search/photos?page=1&query=office>; rel="prev", <https://api.unsplash.com/search/photos?page=3&query=office>; rel="last", <https://api.unsplash.com/search/photos?page=3&query=office>; rel="next"
+// X-Ratelimit-Limit: 1000
+// X-Ratelimit-Remaining: 999
 
 /***/ }),
 
@@ -4331,7 +4322,7 @@ function App() {
         path: "/",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Unsplash__WEBPACK_IMPORTED_MODULE_3__.Unsplash, {})
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
-        path: "/define",
+        path: "/search",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Define__WEBPACK_IMPORTED_MODULE_4__.Define, {})
       })]
     })]
@@ -4392,10 +4383,19 @@ function Define() {
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "image-grid",
-      children: images.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-        className: "unsplash",
-        src: image.urls.regular,
-        alt: image.alt_description
+      children: images.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+          className: "unsplash",
+          src: image.urls.regular,
+          alt: image.alt_description
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
+            href: image.links.html,
+            children: "Download here"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+          children: ["Category: ", searchCategory]
+        })]
       }, image.id))
     })]
   });
@@ -4430,7 +4430,7 @@ function Nav() {
           children: "Home"
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/define",
+        to: "/search",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
           children: "Search"
         })

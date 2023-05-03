@@ -25,7 +25,7 @@ function App() {
     <h1>{welcomeStatement}</h1>
     <Routes>
       <Route path='/' element={<Unsplash />} />
-      <Route path='/define' element={<Define />} />
+      <Route path='/search' element={<Define />} />
     </Routes>
   </>
   )

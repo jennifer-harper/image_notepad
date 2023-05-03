@@ -7,11 +7,12 @@ export interface UnsplashCharacter {
   urls:Urls;
   id:string;
   alt_description:string;
-  links:LinkStyle;
+  links:Links;
 }
 export interface Urls {
-  regular:  string;
+  regular:string;
+  small:  string;
 }
 export interface Links {
-  download:  string;
+  html:  string;
 }
