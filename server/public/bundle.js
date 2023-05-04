@@ -4241,18 +4241,14 @@ function getTargetMatch(matches, location) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "defineUnsplash": () => (/* binding */ defineUnsplash),
-/* harmony export */   "getUnsplash": () => (/* binding */ getUnsplash),
-/* harmony export */   "getWelcome": () => (/* binding */ getWelcome)
+/* harmony export */   "getUnsplash": () => (/* binding */ getUnsplash)
 /* harmony export */ });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
 
-const serverURL = 'http://localhost:3000/api/v1';
 
-// *** EXAMPLE ***
-function getWelcome() {
-  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`${serverURL}/welcome`).then(response => response.body);
-}
+//******************Unsplash API/
+
 function getUnsplash() {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`https://api.unsplash.com/photos/random/?client_id=${"48xo5zkXZ6Sh8EYO_etxPja_x05J4Zyhitdp7r7VH38"}&orientation=landscape`).then(res => {
     console.log(res.body);
@@ -4261,39 +4257,6 @@ function getUnsplash() {
     console.log('Err message: ' + err);
   });
 }
-
-// export function defineUnsplash(query: string){
-
-//   const randomPageNumber = Math.floor(Math.random() * 100) + 1
-
-//   return request
-//   .get(`https://api.unsplash.com/search/photos?client_id=${process.env.UNSPLASH_KEY}&page=${randomPageNumber}&per_page=12&orientation=landscape&query=${query}`)
-//   .then((res) => {
-//     console.log(res.body)
-//     return res.body
-//   })
-//   .catch((err) => {
-//     console.log('Err message: ' + err)
-//   })
-// }
-
-// export function defineUnsplash(query: string){
-//   return request
-//     .get(`https://api.unsplash.com/search/photos?client_id=${process.env.UNSPLASH_KEY}&per_page=12&orientation=landscape&query=${query}`)
-//     .then((res) => {
-//       const totalPages = res.body.total_pages;
-//       const randomPageNumber = Math.floor(Math.random() * totalPages) + 1;
-//       return request.get(`https://api.unsplash.com/search/photos?client_id=${process.env.UNSPLASH_KEY}&page=${randomPageNumber}&per_page=12&orientation=landscape&query=${query}`);
-//     })
-//     .then((res) => {
-//       console.log(res.body);
-//       return res.body;
-//     })
-//     .catch((err) => {
-//       console.log('Err message: ' + err);
-//     });
-// }
-
 async function defineUnsplash(query) {
   try {
     const res1 = await superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`https://api.unsplash.com/search/photos?client_id=${"48xo5zkXZ6Sh8EYO_etxPja_x05J4Zyhitdp7r7VH38"}&per_page=12&orientation=landscape&query=${query}`);
@@ -4320,16 +4283,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _apiClient__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apiClient */ "./client/apiClient.ts");
-/* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Nav */ "./client/components/Nav.tsx");
-/* harmony import */ var _Unsplash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Unsplash */ "./client/components/Unsplash.tsx");
-/* harmony import */ var _Define__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Define */ "./client/components/Define.tsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Nav */ "./client/components/Nav.tsx");
+/* harmony import */ var _Unsplash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Unsplash */ "./client/components/Unsplash.tsx");
+/* harmony import */ var _Define__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Define */ "./client/components/Define.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -4338,24 +4296,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function App() {
-  const [welcomeStatement, setWelcomeStatement] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    (0,_apiClient__WEBPACK_IMPORTED_MODULE_1__.getWelcome)().then(res => {
-      setWelcomeStatement(res.statement);
-    }).catch(err => {
-      console.error(err.message);
-    });
-  });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Nav__WEBPACK_IMPORTED_MODULE_2__.Nav, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
-      children: welcomeStatement
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Routes, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Nav__WEBPACK_IMPORTED_MODULE_0__.Nav, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Routes, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
         path: "/",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Unsplash__WEBPACK_IMPORTED_MODULE_3__.Unsplash, {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Unsplash__WEBPACK_IMPORTED_MODULE_1__.Unsplash, {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
         path: "/search",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Define__WEBPACK_IMPORTED_MODULE_4__.Define, {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Define__WEBPACK_IMPORTED_MODULE_2__.Define, {})
       })]
     })]
   });
