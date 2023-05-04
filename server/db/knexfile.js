@@ -1,5 +1,5 @@
 // Update with your config settings.
-
+const { join } = require('node:path')
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
@@ -9,7 +9,7 @@ module.exports = {
     client: 'sqlite3',
     useNullAsDefault: true,
     connection: {
-      filename: './dev.sqlite3'
+      filename: join(__dirname, 'dev.sqlite3'),
     }
   },
 

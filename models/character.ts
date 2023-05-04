@@ -18,3 +18,15 @@ export interface Urls {
 export interface Links {
   html:  string;
 }
+
+
+//db table
+export interface ImgSearchData {
+  src:string;
+  url:string;
+  category:string
+}
+
+export interface ImgSearch extends ImgSearchData{
+  id:number;
+}
