@@ -1,5 +1,6 @@
 import request from 'superagent'
-
+import * as Img from '../models/character'
+const serverURL = '/api/v1/images'
 //******************Unsplash API/
 
 export function getUnsplash() {
@@ -30,4 +31,17 @@ export async function defineUnsplash(query: string){
   } catch (err) {
     console.log('Err message: ' + err)
   }
+}
+
+export function getAllImgs(): Promise<Img.ImgSearch[]> {
+  return request.get(serverURL)
+    .then(res => res.body)
+}
+
+export function createNewImg(data:Img.ImgSearchData): Promise<Img.ImgSearch>{
+  console.log(data)
+  return request
+  .post('/api/v1/images')
+  .send(data)
+  .then(res => res.body)
 }
