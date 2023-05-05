@@ -1,12 +1,12 @@
 import * as Img from '../../models/character'
-import { useEffect, useState } from "react";
-import { getAllImgs } from '../apiClient'
+// import { useEffect, useState } from "react";
+// import { getAllImgs } from '../apiClient'
 
 type ProfilesProps = {
   users: Img.ImgSearch[]
 }
 
-function Profiles(props: ProfilesProps) {
+export function Profiles(props: ProfilesProps) {
   const { users } = props
 
   return (

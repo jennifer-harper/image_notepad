@@ -1,7 +1,7 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState, useEffect} from "react";
 import * as Base64 from "base64-arraybuffer";
-import { createNewImg } from '../apiClient';
-// import { Profiles } from "./Profile";
+import { createNewImg, getAllImgs } from '../apiClient';
+import { Profiles } from "./Profile";
 import * as Img from '../../models/character';
 
 type InputChange = ChangeEvent<HTMLInputElement>;
@@ -11,6 +11,18 @@ function UploadToDb() {
   const [url, setUrl] = useState('')
   const [category, setCategory] = useState('')
   const [file, setFile] = useState(null as null | File)
+  const [users, setUsers] = useState([] as Img.ImgSearch[])
+
+
+
+  useEffect(() => {
+    // fetch profiles from the database
+    getAllImgs()
+    .then((data) => {
+      setUsers(data);
+    })
+    .catch
+  }, []);
 
 
   const handleSubmit = async (e: FormEvent) => {
@@ -27,8 +39,8 @@ function UploadToDb() {
     }
 
     createNewImg(newUser)
-      // .then(data => setUsers([...users, data]))
-      // .catch(err => console.error(err))
+    .then(data => setUsers([...users, data]))
+    .catch(err => console.error(err))
 
     setUrl('')
     setCategory('')
@@ -71,7 +83,7 @@ function UploadToDb() {
       </form>
 
       {/* Render Profiles component and pass users data as a prop */}
-      {/* <Profiles users={users} /> */}
+      <Profiles users={users} />
     </section>
   )
 }
