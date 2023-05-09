@@ -4242,6 +4242,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createNewImg": () => (/* binding */ createNewImg),
 /* harmony export */   "defineUnsplash": () => (/* binding */ defineUnsplash),
+/* harmony export */   "delImg": () => (/* binding */ delImg),
 /* harmony export */   "getAllImgs": () => (/* binding */ getAllImgs),
 /* harmony export */   "getUnsplash": () => (/* binding */ getUnsplash)
 /* harmony export */ });
@@ -4277,6 +4278,11 @@ function getAllImgs() {
 function createNewImg(data) {
   console.log(data);
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().post('/api/v1/images').send(data).then(res => res.body);
+}
+function delImg(id) {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`${serverURL}/${id}`).then(res => {
+    return res.body;
+  });
 }
 
 /***/ }),
@@ -4453,25 +4459,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Profiles": () => (/* binding */ Profiles)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _apiClient__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../apiClient */ "./client/apiClient.ts");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
-// import { useEffect, useState } from "react";
-// import { getAllImgs } from '../apiClient'
 
-function Profiles(props) {
-  const {
+function Profiles(_ref) {
+  let {
+    refreshList,
     users
-  } = props;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+  } = _ref;
+  // const { users } = props
+
+  const handleDel = async id => {
+    (0,_apiClient__WEBPACK_IMPORTED_MODULE_0__.delImg)(id).then(() => {
+      refreshList();
+    }).catch(err => alert(err.message));
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     className: "user__grid",
-    children: users.map(u => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    children: users.map(u => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       className: "user",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
         src: `data:image/jpg;base64,${u.src}`,
         alt: u.category
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
         children: u.category
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+        className: "del_button",
+        onClick: () => handleDel(u.id),
+        children: "Delete"
       })]
     }, u.id))
   });
@@ -4549,11 +4566,15 @@ function UploadToDb() {
   const [file, setFile] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [users, setUsers] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    // fetch profiles from the database
     (0,_apiClient__WEBPACK_IMPORTED_MODULE_2__.getAllImgs)().then(data => {
       setUsers(data);
-    }).catch;
+    }).catch(err => alert(err.message));
   }, []);
+  const refreshList = () => {
+    (0,_apiClient__WEBPACK_IMPORTED_MODULE_2__.getAllImgs)().then(data => {
+      setUsers(data);
+    }).catch(err => alert(err.message));
+  };
   const handleSubmit = async e => {
     e.preventDefault();
     if (!url) return alert('please add a name');
@@ -4621,7 +4642,8 @@ function UploadToDb() {
         children: "Add"
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Profile__WEBPACK_IMPORTED_MODULE_3__.Profiles, {
-      users: users
+      users: users,
+      refreshList: refreshList
     })]
   });
 }

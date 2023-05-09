@@ -45,3 +45,8 @@ export function createNewImg(data:Img.ImgSearchData): Promise<Img.ImgSearch>{
   .send(data)
   .then(res => res.body)
 }
+
+export function delImg(id:number){
+  return request.delete(`${serverURL}/${id}`)
+  .then((res) => {return res.body})
+}

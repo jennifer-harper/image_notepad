@@ -16,13 +16,20 @@ function UploadToDb() {
 
 
   useEffect(() => {
-    // fetch profiles from the database
     getAllImgs()
     .then((data) => {
       setUsers(data);
     })
-    .catch
+    .catch((err) => alert(err.message));
   }, []);
+
+  const refreshList = () => {
+    getAllImgs()
+    .then((data) => {
+      setUsers(data);
+    })
+    .catch((err) => alert(err.message));
+  }
 
 
   const handleSubmit = async (e: FormEvent) => {
@@ -83,7 +90,7 @@ function UploadToDb() {
       </form>
 
       {/* Render Profiles component and pass users data as a prop */}
-      <Profiles users={users} />
+      <Profiles users={users} refreshList={refreshList}/>
     </section>
   )
 }

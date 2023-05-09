@@ -3,3 +3,16 @@
     flex-direction: row;
     justify-content: space-around;
 }
+.user__grid{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.user__grid .user{
+    max-width: 25%;
+    min-width: 300px;
+}
+
+.user__grid img{
+    width: 100%;
+}
