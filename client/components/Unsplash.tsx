@@ -1,7 +1,7 @@
 import { UnsplashCharacter } from '../../models/character'
 import { useState, useEffect } from 'react'
 
-import { getUnsplash } from '../apiClient'
+import { getUnsplash } from '../apis/srcUnsplash'
 
 export function Unsplash() {
 

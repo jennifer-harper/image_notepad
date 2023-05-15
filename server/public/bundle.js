@@ -4231,27 +4231,23 @@ function getTargetMatch(matches, location) {
 
 /***/ }),
 
-/***/ "./client/apiClient.ts":
-/*!*****************************!*\
-  !*** ./client/apiClient.ts ***!
-  \*****************************/
+/***/ "./client/apis/srcUnsplash.ts":
+/*!************************************!*\
+  !*** ./client/apis/srcUnsplash.ts ***!
+  \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createNewImg": () => (/* binding */ createNewImg),
 /* harmony export */   "defineUnsplash": () => (/* binding */ defineUnsplash),
-/* harmony export */   "delImg": () => (/* binding */ delImg),
-/* harmony export */   "getAllImgs": () => (/* binding */ getAllImgs),
 /* harmony export */   "getUnsplash": () => (/* binding */ getUnsplash)
 /* harmony export */ });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
 
-const serverURL = '/api/v1/images';
-//******************Unsplash API/
 
+//******************Unsplash API/
 function getUnsplash() {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`https://api.unsplash.com/photos/random/?client_id=${"48xo5zkXZ6Sh8EYO_etxPja_x05J4Zyhitdp7r7VH38"}&orientation=landscape`).then(res => {
     console.log(res.body);
@@ -4272,14 +4268,34 @@ async function defineUnsplash(query) {
     console.log('Err message: ' + err);
   }
 }
-function getAllImgs() {
+
+/***/ }),
+
+/***/ "./client/apis/uploadImgs.ts":
+/*!***********************************!*\
+  !*** ./client/apis/uploadImgs.ts ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createUpload": () => (/* binding */ createUpload),
+/* harmony export */   "delUpload": () => (/* binding */ delUpload),
+/* harmony export */   "getUploads": () => (/* binding */ getUploads)
+/* harmony export */ });
+/* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
+/* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
+
+const serverURL = '/api/v1/uploads';
+function getUploads() {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(serverURL).then(res => res.body);
 }
-function createNewImg(data) {
+function createUpload(data) {
   console.log(data);
-  return superagent__WEBPACK_IMPORTED_MODULE_0___default().post('/api/v1/images').send(data).then(res => res.body);
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().post(serverURL).send(data).then(res => res.body);
 }
-function delImg(id) {
+function delUpload(id) {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`${serverURL}/${id}`).then(res => {
     return res.body;
   });
@@ -4345,7 +4361,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _apiClient__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apiClient */ "./client/apiClient.ts");
+/* harmony import */ var _apis_srcUnsplash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/srcUnsplash */ "./client/apis/srcUnsplash.ts");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -4360,7 +4376,7 @@ function Define() {
   };
   const submitSearch = event => {
     event.preventDefault();
-    (0,_apiClient__WEBPACK_IMPORTED_MODULE_1__.defineUnsplash)(searchCategory).then(res => {
+    (0,_apis_srcUnsplash__WEBPACK_IMPORTED_MODULE_1__.defineUnsplash)(searchCategory).then(res => {
       setImages(res.results);
     }).catch(err => {
       console.log('Err message: ' + err);
@@ -4459,7 +4475,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Profiles": () => (/* binding */ Profiles)
 /* harmony export */ });
-/* harmony import */ var _apiClient__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../apiClient */ "./client/apiClient.ts");
+/* harmony import */ var _apis_uploadImgs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../apis/uploadImgs */ "./client/apis/uploadImgs.ts");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -4472,7 +4488,7 @@ function Profiles(_ref) {
   // const { users } = props
 
   const handleDel = async id => {
-    (0,_apiClient__WEBPACK_IMPORTED_MODULE_0__.delImg)(id).then(() => {
+    (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_0__.delUpload)(id).then(() => {
       refreshList();
     }).catch(err => alert(err.message));
   };
@@ -4481,7 +4497,7 @@ function Profiles(_ref) {
     children: users.map(u => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       className: "user",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
-        src: `data:image/jpg;base64,${u.src}`,
+        src: `data:image/jpg;base64,${u.image}`,
         alt: u.category
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
         children: u.category
@@ -4509,7 +4525,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _apiClient__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apiClient */ "./client/apiClient.ts");
+/* harmony import */ var _apis_srcUnsplash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/srcUnsplash */ "./client/apis/srcUnsplash.ts");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -4520,7 +4536,7 @@ function Unsplash() {
   //When you receive the response from the API, you can use the setRes function to update the state variable with the received UnsplashCharacter object.
   const [getRes, setRes] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    (0,_apiClient__WEBPACK_IMPORTED_MODULE_1__.getUnsplash)().then(res => {
+    (0,_apis_srcUnsplash__WEBPACK_IMPORTED_MODULE_1__.getUnsplash)().then(res => {
       setRes(res);
     }).catch(err => {
       console.log('Err message: ' + err);
@@ -4551,7 +4567,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var base64_arraybuffer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! base64-arraybuffer */ "./node_modules/base64-arraybuffer/dist/base64-arraybuffer.es5.js");
-/* harmony import */ var _apiClient__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../apiClient */ "./client/apiClient.ts");
+/* harmony import */ var _apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../apis/uploadImgs */ "./client/apis/uploadImgs.ts");
 /* harmony import */ var _Profile__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Profile */ "./client/components/Profile.tsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
@@ -4561,33 +4577,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function UploadToDb() {
-  const [url, setUrl] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [category, setCategory] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [file, setFile] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [users, setUsers] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    (0,_apiClient__WEBPACK_IMPORTED_MODULE_2__.getAllImgs)().then(data => {
+    (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.getUploads)().then(data => {
       setUsers(data);
     }).catch(err => alert(err.message));
   }, []);
   const refreshList = () => {
-    (0,_apiClient__WEBPACK_IMPORTED_MODULE_2__.getAllImgs)().then(data => {
+    (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.getUploads)().then(data => {
       setUsers(data);
     }).catch(err => alert(err.message));
   };
   const handleSubmit = async e => {
     e.preventDefault();
-    if (!url) return alert('please add a name');
     if (!category) return alert('please add a category');
     if (!file || !file.type.includes('image')) return alert('please add a picture');
     const fileAsBytes = await file.arrayBuffer();
     const newUser = {
-      url,
       category,
-      src: base64_arraybuffer__WEBPACK_IMPORTED_MODULE_1__.encode(fileAsBytes)
+      image: base64_arraybuffer__WEBPACK_IMPORTED_MODULE_1__.encode(fileAsBytes)
     };
-    (0,_apiClient__WEBPACK_IMPORTED_MODULE_2__.createNewImg)(newUser).then(data => setUsers([...users, data])).catch(err => console.error(err));
-    setUrl('');
+    (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.createUpload)(newUser).then(data => setUsers([...users, data])).catch(err => console.error(err));
     setCategory('');
     setFile(null);
   };
@@ -4604,28 +4616,19 @@ function UploadToDb() {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
-            htmlFor: "url",
-            children: "Url"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-            id: "url",
-            type: "text",
-            onChange: e => setUrl(e.target.value)
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
-            htmlFor: "cate",
+            htmlFor: "category",
             children: "Category"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-            id: "cate",
+            id: "category",
             type: "text",
             onChange: e => setCategory(e.target.value)
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
-            htmlFor: "src",
-            children: "Profile pic: (src)"
+            htmlFor: "image",
+            children: "Profile pic:"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-            id: "src",
+            id: "image",
             type: "file",
             onChange: updateFile
           })]

@@ -1,8 +1,6 @@
 import request from 'superagent'
-import * as Img from '../models/character'
-const serverURL = '/api/v1/images'
-//******************Unsplash API/
 
+//******************Unsplash API/
 export function getUnsplash() {
   return request
     .get(`https://api.unsplash.com/photos/random/?client_id=${process.env.UNSPLASH_KEY}&orientation=landscape`)
@@ -33,20 +31,3 @@ export async function defineUnsplash(query: string){
   }
 }
 
-export function getAllImgs(): Promise<Img.ImgSearch[]> {
-  return request.get(serverURL)
-    .then(res => res.body)
-}
-
-export function createNewImg(data:Img.ImgSearchData): Promise<Img.ImgSearch>{
-  console.log(data)
-  return request
-  .post('/api/v1/images')
-  .send(data)
-  .then(res => res.body)
-}
-
-export function delImg(id:number){
-  return request.delete(`${serverURL}/${id}`)
-  .then((res) => {return res.body})
-}

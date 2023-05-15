@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState, useEffect} from "react";
 import * as Base64 from "base64-arraybuffer";
-import { createNewImg, getAllImgs } from '../apiClient';
+import { getUploads, createUpload } from '../apis/uploadImgs';
 import { Profiles } from "./Profile";
 import * as Img from '../../models/character';
 
@@ -8,15 +8,14 @@ type InputChange = ChangeEvent<HTMLInputElement>;
 
 
 function UploadToDb() {
-  const [url, setUrl] = useState('')
   const [category, setCategory] = useState('')
   const [file, setFile] = useState(null as null | File)
-  const [users, setUsers] = useState([] as Img.ImgSearch[])
+  const [users, setUsers] = useState([] as Img.UploadImg[])
 
 
 
   useEffect(() => {
-    getAllImgs()
+    getUploads()
     .then((data) => {
       setUsers(data);
     })
@@ -24,7 +23,7 @@ function UploadToDb() {
   }, []);
 
   const refreshList = () => {
-    getAllImgs()
+    getUploads()
     .then((data) => {
       setUsers(data);
     })
@@ -34,22 +33,19 @@ function UploadToDb() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if (!url) return alert('please add a name')
-    if (!category) return alert('please add a category')
+      if (!category) return alert('please add a category')
     if (!file || !file.type.includes('image')) return alert('please add a picture')
 
     const fileAsBytes = await file.arrayBuffer()
     const newUser = {
-      url,
       category,
-      src: Base64.encode(fileAsBytes)
+      image: Base64.encode(fileAsBytes)
     }
 
-    createNewImg(newUser)
+    createUpload(newUser)
     .then(data => setUsers([...users, data]))
     .catch(err => console.error(err))
 
-    setUrl('')
     setCategory('')
     setFile(null)
   }
@@ -67,17 +63,13 @@ function UploadToDb() {
       <form onSubmit={handleSubmit}>
         <div>
           <div>
-            <label htmlFor='url'>Url</label>
-            <input id='url' type='text' onChange={(e: InputChange) => setUrl(e.target.value)} />
-          </div>
-          <div>
-            <label htmlFor='cate'>Category</label>
-            <input id='cate' type='text' onChange={(e: InputChange) => setCategory(e.target.value)} />
+            <label htmlFor='category'>Category</label>
+            <input id='category' type='text' onChange={(e: InputChange) => setCategory(e.target.value)} />
           </div>
 
           <div>
-            <label htmlFor='src'>Profile pic: (src)</label>
-            <input id='src' type='file' onChange={updateFile} />
+            <label htmlFor='image'>Profile pic:</label>
+            <input id='image' type='file' onChange={updateFile} />
           </div>
         </div>
 

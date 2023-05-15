@@ -15,6 +15,7 @@ export interface Urls {
   regular:string;
   small:  string;
 }
+
 export interface Links {
   html:  string;
 }
@@ -28,5 +29,16 @@ export interface ImgSearchData {
 }
 
 export interface ImgSearch extends ImgSearchData{
+  id:number;
+}
+
+
+//upload images to db
+export interface UploadImgData {
+  image:string;
+  category:string
+}
+
+export interface UploadImg extends UploadImgData{
   id:number;
 }

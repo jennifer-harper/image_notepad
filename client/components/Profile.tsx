@@ -1,8 +1,8 @@
 import * as Img from '../../models/character'
-import { delImg } from '../apiClient';
+import { delUpload } from '../apis/uploadImgs';
 
 type ProfilesProps = {
-  users: Img.ImgSearch[]
+  users: Img.UploadImg[]
   refreshList: () => void;
 }
 
@@ -10,7 +10,7 @@ export function Profiles({refreshList, users}: ProfilesProps) {
   // const { users } = props
 
   const handleDel = async (id:number) => {
-    delImg(id)
+    delUpload(id)
     .then(() => {
       refreshList();
     })
@@ -21,7 +21,7 @@ export function Profiles({refreshList, users}: ProfilesProps) {
     <div className='user__grid'>
       {users.map(u => (
         <div key={u.id} className='user'>
-          <img src={`data:image/jpg;base64,${u.src}`} alt={u.category} />
+          <img src={`data:image/jpg;base64,${u.image}`} alt={u.category} />
           <h3>{u.category}</h3>
           <button className="del_button" onClick={() => handleDel(u.id)}>Delete</button>
         </div>
