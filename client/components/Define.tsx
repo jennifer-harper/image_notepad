@@ -1,21 +1,21 @@
-import { useState, ChangeEvent, FormEvent} from 'react';
+import { useState, ChangeEvent, FormEvent, MouseEvent} from 'react';
 import { defineUnsplash } from '../apis/srcUnsplash';
-import { UnsplashCharacter } from '../../models/character';
+import { createImg } from '../apis/saveSearch'
+import { UnsplashCharacter} from '../../models/character';
 
 export function Define() {
 
-  const [images, setImages] = useState([] as UnsplashCharacter[]);
-  const [searchCategory, setSearchCategory] = useState('');
+  const [images, setImages] = useState([] as UnsplashCharacter[])
+  const [searchCategory, setSearchCategory] = useState('')
 
+  const [savedImageId, setSavedImageId] = useState<string | null>(null)
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchCategory(event.target.value)
   }
 
-
   const submitSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault() 
-
     defineUnsplash(searchCategory)
       .then((res) => {
         setImages(res.results);
@@ -24,6 +24,25 @@ export function Define() {
         console.log('Err message: ' + err)
       });
   }
+
+
+  const saveImageData = (image: UnsplashCharacter) => {
+    const data = {
+      src: image.urls.regular,
+      url: image.links.html,
+      category: searchCategory,
+    }
+
+    createImg(data)
+      .then(() => {
+        setSavedImageId(image.id)
+        console.log('Image data saved successfully!')
+      })
+      .catch((err) => {
+        console.log('Error saving image data: ' + err)
+      });
+  };
+
 
 
   return (
@@ -39,9 +58,6 @@ export function Define() {
       <button type="submit">Search</button>
     </form>
 
-
-
-
     <div className="image-grid">
       {images.map((image) => (
         <div key={image.id}>
@@ -52,6 +68,8 @@ export function Define() {
           />
           <p><a href={image.links.html}>Download here</a></p>
           <p>Category: {searchCategory}</p>    
+          <button onClick={() => saveImageData(image)}>Save Image</button>
+          {savedImageId === image.id && <p>Image saved!</p>}
         </div>
       ))}
     </div>

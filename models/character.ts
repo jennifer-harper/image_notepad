@@ -9,8 +9,8 @@ export interface UnsplashCharacter {
   alt_description:string;
   links:Links;
   total_pages:string;
-
 }
+
 export interface Urls {
   regular:string;
   small:  string;
@@ -21,7 +21,7 @@ export interface Links {
 }
 
 
-//db table
+//save sourced from unsplash
 export interface ImgSearchData {
   src:string;
   url:string;

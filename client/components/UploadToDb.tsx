@@ -34,9 +34,10 @@ function UploadToDb() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
       if (!category) return alert('please add a category')
-    if (!file || !file.type.includes('image')) return alert('please add a picture')
+      if (!file || !file.type.includes('image')) return alert('please add a picture')
 
     const fileAsBytes = await file.arrayBuffer()
+    
     const newUser = {
       category,
       image: Base64.encode(fileAsBytes)

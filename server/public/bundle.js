@@ -4231,6 +4231,38 @@ function getTargetMatch(matches, location) {
 
 /***/ }),
 
+/***/ "./client/apis/saveSearch.ts":
+/*!***********************************!*\
+  !*** ./client/apis/saveSearch.ts ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createImg": () => (/* binding */ createImg),
+/* harmony export */   "delImg": () => (/* binding */ delImg),
+/* harmony export */   "getAllImgs": () => (/* binding */ getAllImgs)
+/* harmony export */ });
+/* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
+/* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
+
+const serverURL = '/api/v1/images';
+function getAllImgs() {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(serverURL).then(res => res.body);
+}
+function createImg(data) {
+  console.log(data);
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().post(serverURL).send(data).then(res => res.body);
+}
+function delImg(id) {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`${serverURL}/${id}`).then(res => {
+    return res.body;
+  });
+}
+
+/***/ }),
+
 /***/ "./client/apis/srcUnsplash.ts":
 /*!************************************!*\
   !*** ./client/apis/srcUnsplash.ts ***!
@@ -4362,7 +4394,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _apis_srcUnsplash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/srcUnsplash */ "./client/apis/srcUnsplash.ts");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _apis_saveSearch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../apis/saveSearch */ "./client/apis/saveSearch.ts");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -4371,6 +4405,7 @@ __webpack_require__.r(__webpack_exports__);
 function Define() {
   const [images, setImages] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [searchCategory, setSearchCategory] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [savedImageId, setSavedImageId] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const handleInputChange = event => {
     setSearchCategory(event.target.value);
   };
@@ -4382,35 +4417,53 @@ function Define() {
       console.log('Err message: ' + err);
     });
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
+  const saveImageData = image => {
+    const data = {
+      src: image.urls.regular,
+      url: image.links.html,
+      category: searchCategory
+    };
+    (0,_apis_saveSearch__WEBPACK_IMPORTED_MODULE_2__.createImg)(data).then(() => {
+      setSavedImageId(image.id);
+      console.log('Image data saved successfully!');
+    }).catch(err => {
+      console.log('Error saving image data: ' + err);
+    });
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
       onSubmit: submitSearch,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
         htmlFor: "cat",
         children: "Search Category"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
         type: "text",
         id: "cat",
         value: searchCategory,
         onChange: handleInputChange
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
         type: "submit",
         children: "Search"
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "image-grid",
-      children: images.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+      children: images.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
           className: "unsplash",
           src: image.urls.regular,
           alt: image.alt_description
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
             href: image.links.html,
             children: "Download here"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
           children: ["Category: ", searchCategory]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          onClick: () => saveImageData(image),
+          children: "Save Image"
+        }), savedImageId === image.id && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          children: "Image saved!"
         })]
       }, image.id))
     })]
