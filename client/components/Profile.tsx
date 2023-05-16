@@ -12,9 +12,9 @@ export function Profiles({refreshList, users}: ProfilesProps) {
   const handleDel = async (id:number) => {
     delUpload(id)
     .then(() => {
-      refreshList();
+      refreshList()
     })
-    .catch((err) => alert(err.message));
+    .catch((err) => alert(err.message))
   }
 
   return (
@@ -25,7 +25,6 @@ export function Profiles({refreshList, users}: ProfilesProps) {
           <h3>{u.category}</h3>
           <button className="del_button" onClick={() => handleDel(u.id)}>Delete</button>
         </div>
-
       ))}
 
     </div>

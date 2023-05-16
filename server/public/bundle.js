@@ -4335,6 +4335,66 @@ function delUpload(id) {
 
 /***/ }),
 
+/***/ "./client/components/AllImgs.tsx":
+/*!***************************************!*\
+  !*** ./client/components/AllImgs.tsx ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AllImgs": () => (/* binding */ AllImgs)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _apis_saveSearch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/saveSearch */ "./client/apis/saveSearch.ts");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+function AllImgs() {
+  const [imageData, setImageData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const handleDelete = async id => {
+    try {
+      await (0,_apis_saveSearch__WEBPACK_IMPORTED_MODULE_1__.delImg)(id);
+      fetchData();
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    fetchData();
+  }, []);
+  const fetchData = async () => {
+    try {
+      const data = await (0,_apis_saveSearch__WEBPACK_IMPORTED_MODULE_1__.getAllImgs)();
+      setImageData(data);
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: "flex-wrapper",
+    children: imageData.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+        src: image.src,
+        alt: "description"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+        children: image.category
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+        onClick: () => handleDelete(image.id),
+        children: "Delete"
+      })]
+    }, image.id))
+  });
+}
+
+//to do - add category filter
+
+/***/ }),
+
 /***/ "./client/components/App.tsx":
 /*!***********************************!*\
   !*** ./client/components/App.tsx ***!
@@ -4348,12 +4408,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Nav */ "./client/components/Nav.tsx");
-/* harmony import */ var _Unsplash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Unsplash */ "./client/components/Unsplash.tsx");
-/* harmony import */ var _Define__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Define */ "./client/components/Define.tsx");
-/* harmony import */ var _UploadToDb__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UploadToDb */ "./client/components/UploadToDb.tsx");
+/* harmony import */ var _Define__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Define */ "./client/components/Define.tsx");
+/* harmony import */ var _UploadToDb__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UploadToDb */ "./client/components/UploadToDb.tsx");
+/* harmony import */ var _AllImgs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AllImgs */ "./client/components/AllImgs.tsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
+// import {Unsplash} from './Unsplash'
 
 
 
@@ -4365,13 +4426,13 @@ function App() {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Nav__WEBPACK_IMPORTED_MODULE_0__.Nav, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Routes, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
         path: "/",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Unsplash__WEBPACK_IMPORTED_MODULE_1__.Unsplash, {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_AllImgs__WEBPACK_IMPORTED_MODULE_3__.AllImgs, {})
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
         path: "/search",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Define__WEBPACK_IMPORTED_MODULE_2__.Define, {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Define__WEBPACK_IMPORTED_MODULE_1__.Define, {})
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
         path: "/db",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_UploadToDb__WEBPACK_IMPORTED_MODULE_3__["default"], {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_UploadToDb__WEBPACK_IMPORTED_MODULE_2__["default"], {})
       })]
     })]
   });
@@ -4560,47 +4621,6 @@ function Profiles(_ref) {
         children: "Delete"
       })]
     }, u.id))
-  });
-}
-
-/***/ }),
-
-/***/ "./client/components/Unsplash.tsx":
-/*!****************************************!*\
-  !*** ./client/components/Unsplash.tsx ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Unsplash": () => (/* binding */ Unsplash)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _apis_srcUnsplash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/srcUnsplash */ "./client/apis/srcUnsplash.ts");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-
-function Unsplash() {
-  //declaring a state variable called getRes that can either be an UnsplashCharacter object or null (expecting to receive a single image, not an array).
-  //When you receive the response from the API, you can use the setRes function to update the state variable with the received UnsplashCharacter object.
-  const [getRes, setRes] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    (0,_apis_srcUnsplash__WEBPACK_IMPORTED_MODULE_1__.getUnsplash)().then(res => {
-      setRes(res);
-    }).catch(err => {
-      console.log('Err message: ' + err);
-    });
-  }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-    children: getRes && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-      className: "unsplash",
-      src: getRes?.urls.regular,
-      alt: getRes?.alt_description
-    })
   });
 }
 
