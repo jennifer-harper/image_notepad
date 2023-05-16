@@ -29,11 +29,13 @@ export function AllImgs(){
       };
 
       return(
-        <div className="flex-wrapper">
+        <div className="user__grid">
         {imageData.map( image => (
             <div key={image.id}>
                 <img src={image.src} alt="description" />
-                <p>{image.category}</p>
+                <p>Category: {image.category}</p>
+                <p>Description: {image.description}</p>
+                <p><a href={image.url} target="_blank" rel="noreferrer">Download here</a></p>
                 <button onClick={() => handleDelete(image.id)}>Delete</button>
             </div>
         ))}

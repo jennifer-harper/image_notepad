@@ -31,6 +31,7 @@ export function Define() {
       src: image.urls.regular,
       url: image.links.html,
       category: searchCategory,
+      description:image.alt_description,
     }
 
     createImg(data)

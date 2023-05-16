@@ -26,6 +26,7 @@ export interface ImgSearchData {
   src:string;
   url:string;
   category:string
+  description:string
 }
 
 export interface ImgSearch extends ImgSearchData{

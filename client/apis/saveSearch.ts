@@ -5,7 +5,7 @@ const serverURL = '/api/v1/images'
 export function getAllImgs(): Promise<Img.ImgSearch[]> {
     return request.get(serverURL)
       .then(res => res.body)
-  }
+}
   
   export function createImg(data:Img.ImgSearchData): Promise<Img.ImgSearch>{
     console.log(data)
@@ -19,3 +19,8 @@ export function getAllImgs(): Promise<Img.ImgSearch[]> {
     return request.delete(`${serverURL}/${id}`)
     .then((res) => {return res.body})
   }
+
+  export function getAllCategories() {
+    return request.get(serverURL)
+      .then(res => res.body)
+}

@@ -15,3 +15,14 @@ export function createImgDB (data:Img.ImgSearchData){
     .returning('*')
 }
 
+export function getAllCategories() {
+    return dbCon('save-search')
+      .select('category', 'src as image')
+      .join('upload-img', 'save-search.id', 'upload-img.id')
+      .then(results => {
+        return results;
+      })
+      .catch(error => {
+        throw error;
+      });
+  }

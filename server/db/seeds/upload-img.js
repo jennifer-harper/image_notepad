@@ -7,3 +7,4 @@ exports.seed = (knex) => {
     {id: 1, image: 'x', category:'x'},
   ]);
 };
+

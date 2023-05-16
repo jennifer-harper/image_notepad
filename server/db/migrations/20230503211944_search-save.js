@@ -8,6 +8,7 @@ exports.up = function (knex) {
       table.string('src')
       table.string('url')
       table.string('category').defaultTo(null)
+      table.string('description')
     })
   }
   

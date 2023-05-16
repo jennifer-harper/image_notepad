@@ -4242,6 +4242,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createImg": () => (/* binding */ createImg),
 /* harmony export */   "delImg": () => (/* binding */ delImg),
+/* harmony export */   "getAllCategories": () => (/* binding */ getAllCategories),
 /* harmony export */   "getAllImgs": () => (/* binding */ getAllImgs)
 /* harmony export */ });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
@@ -4259,6 +4260,9 @@ function delImg(id) {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`${serverURL}/${id}`).then(res => {
     return res.body;
   });
+}
+function getAllCategories() {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(serverURL).then(res => res.body);
 }
 
 /***/ }),
@@ -4376,13 +4380,22 @@ function AllImgs() {
     }
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    className: "flex-wrapper",
+    className: "user__grid",
     children: imageData.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
         src: image.src,
         alt: "description"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+        children: ["Category: ", image.category]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+        children: ["Description: ", image.description]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-        children: image.category
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
+          href: image.url,
+          target: "_blank",
+          rel: "noreferrer",
+          children: "Download here"
+        })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
         onClick: () => handleDelete(image.id),
         children: "Delete"
@@ -4482,7 +4495,8 @@ function Define() {
     const data = {
       src: image.urls.regular,
       url: image.links.html,
-      category: searchCategory
+      category: searchCategory,
+      description: image.alt_description
     };
     (0,_apis_saveSearch__WEBPACK_IMPORTED_MODULE_2__.createImg)(data).then(() => {
       setSavedImageId(image.id);
@@ -4609,7 +4623,6 @@ function Profiles(_ref) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     className: "user__grid",
     children: users.map(u => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-      className: "user",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
         src: `data:image/jpg;base64,${u.image}`,
         alt: u.category
