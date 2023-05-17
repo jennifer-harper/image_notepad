@@ -1,16 +1,16 @@
-.flex-wrapper,
+/* .flex-wrapper,
 .comp-wrapper{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     flex-wrap: wrap;
-}
+} */
 .user__grid{
     display: flex;
     flex-wrap: wrap;
 }
 
-.user__grid div{
+.user__grid > div{
     max-width: 25%;
     min-width: 300px;
     padding: 30px;

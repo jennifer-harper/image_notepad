@@ -51,13 +51,20 @@ export function AllCombined(){
         <div className="user__grid">
         {imageData.map( image => (
             <div key={image.id}>            
-              {image.image && <img src={`data:image/jpg;base64,${image.image}`} alt={image.category} />}
-              {!image.image && image.src && <img src={image.src} alt={image.category} /> }           
-              <p>Category: {image.category}</p>  
-
-              {image.image && <button onClick={() => handleDeleteUpload(image.upload_img_id)}>Delete</button>}
-              {!image.image && image.src &&  <button onClick={() => handleDelete(image.save_search_id)}>Delete</button>} 
-
+              {image.image && 
+                <div>
+                  <img src={`data:image/jpg;base64,${image.image}`} alt={image.category} />
+                  <button onClick={() => handleDeleteUpload(image.upload_img_id)}>Delete</button>
+                </div> 
+              }
+              {!image.image && image.src && 
+                <div>
+                  <img src={image.src} alt={image.category} />
+                  <p><a href={image.url} target="_blank" rel="noreferrer">Download here</a></p>
+                  <button onClick={() => handleDelete(image.save_search_id)}>Delete</button>
+                </div> 
+              } 
+              <p>Category: {image.category}</p>          
             </div>
         ))}
         </div>
