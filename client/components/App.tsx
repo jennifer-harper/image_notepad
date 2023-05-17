@@ -3,6 +3,7 @@ import {Nav} from './Nav'
 // import {Unsplash} from './Unsplash'
 import {Define} from './Define'
 import UploadToDb from "./UploadToDb"
+import { AllCombined } from './AllCombined'
 import { AllImgs } from './AllImgs'
 
 function App() {
@@ -10,10 +11,10 @@ function App() {
     <>
     <Nav/>
     <Routes>
-      {/* <Route path='/' element={<Unsplash />} /> */}
-      <Route path='/' element={<AllImgs />} />
+      <Route path='/' element={<AllCombined />} />
       <Route path='/search' element={<Define />} />
       <Route path='/db' element={<UploadToDb />} />
+      <Route path='/all' element={<AllImgs />} />
     </Routes>
   </>
   )

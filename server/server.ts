@@ -5,6 +5,7 @@ const server = express()
 
 import savedSearch from './routes/savedImgs'
 import uploadImgs from './routes/uploadImgs'
+// import combinedImg from './routes/combinedImgs'
 
 server.use(express.json())
 server.use(express.static(join(__dirname, './public')))
@@ -12,6 +13,8 @@ server.use(express.static(join(__dirname, './public')))
 
 server.use('/api/v1/images', savedSearch)
 server.use('/api/v1/uploads', uploadImgs)
+// server.use('/api/v1/combined', combinedImg)
+
 
 // This is the BrowserRouter config
 server.get('*', (req, res) => {

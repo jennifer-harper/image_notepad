@@ -20,7 +20,8 @@ export function getAllImgs(): Promise<Img.ImgSearch[]> {
     .then((res) => {return res.body})
   }
 
-  export function getAllCategories() {
+
+  export function combinedImgs(): Promise<Img.Combined[]>{
     return request.get(serverURL)
-      .then(res => res.body)
+    .then(res => res.body)      
 }

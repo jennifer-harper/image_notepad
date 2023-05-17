@@ -15,14 +15,24 @@ export function createImgDB (data:Img.ImgSearchData){
     .returning('*')
 }
 
-export function getAllCategories() {
-    return dbCon('save-search')
-      .select('category', 'src as image')
-      .join('upload-img', 'save-search.id', 'upload-img.id')
-      .then(results => {
-        return results;
+export async function getAllCategories() {
+    try {
+      const saveSearchData = await dbCon('save-search')
+      .select('save-search.id as save_search_id','category')
+
+      const uploadImgData = await dbCon('upload-img')
+      .select('upload-img.id as upload_img_id','category')
+
+      const combinedData = [...saveSearchData, ...uploadImgData].map((data, index) => {
+        return { id: index + 1, ...data }
       })
-      .catch(error => {
-        throw error;
-      });
+
+      console.log('data')
+
+      return combinedData
+
+    } catch (error) {
+      console.error('Error retrieving data:', error)
+      throw error
+    }
   }

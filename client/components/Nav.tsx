@@ -7,6 +7,7 @@ export function Nav () {
         <Link to='/'><p>Home</p></Link>
         <Link to='/search'><p>Search</p></Link>
         <Link to='/db'><p>DB</p></Link>
+        <Link to='/all'><p>All</p></Link>
       </div>
     </>
   )

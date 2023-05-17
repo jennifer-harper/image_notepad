@@ -43,3 +43,13 @@ export interface UploadImgData {
 export interface UploadImg extends UploadImgData{
   id:number;
 }
+
+
+export interface Combined{
+  id:number;
+  save_search_id:string;
+  image:string;
+  category:string;
+  url:string;
+  description:string
+}

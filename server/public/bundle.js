@@ -4240,9 +4240,9 @@ function getTargetMatch(matches, location) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "combinedImgs": () => (/* binding */ combinedImgs),
 /* harmony export */   "createImg": () => (/* binding */ createImg),
 /* harmony export */   "delImg": () => (/* binding */ delImg),
-/* harmony export */   "getAllCategories": () => (/* binding */ getAllCategories),
 /* harmony export */   "getAllImgs": () => (/* binding */ getAllImgs)
 /* harmony export */ });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
@@ -4261,7 +4261,7 @@ function delImg(id) {
     return res.body;
   });
 }
-function getAllCategories() {
+function combinedImgs() {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(serverURL).then(res => res.body);
 }
 
@@ -4334,6 +4334,51 @@ function createUpload(data) {
 function delUpload(id) {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`${serverURL}/${id}`).then(res => {
     return res.body;
+  });
+}
+
+/***/ }),
+
+/***/ "./client/components/AllCombined.tsx":
+/*!*******************************************!*\
+  !*** ./client/components/AllCombined.tsx ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AllCombined": () => (/* binding */ AllCombined)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _apis_saveSearch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/saveSearch */ "./client/apis/saveSearch.ts");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+function AllCombined() {
+  const [imageData, setImageData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    fetchData();
+  }, []);
+  const fetchData = async () => {
+    try {
+      const data = await (0,_apis_saveSearch__WEBPACK_IMPORTED_MODULE_1__.combinedImgs)();
+      console.log('Data:', data);
+      setImageData(data);
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: "user__grid",
+    children: imageData.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+        children: ["Category: ", image.category]
+      })
+    }, image.id))
   });
 }
 
@@ -4419,12 +4464,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Nav */ "./client/components/Nav.tsx");
 /* harmony import */ var _Define__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Define */ "./client/components/Define.tsx");
 /* harmony import */ var _UploadToDb__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UploadToDb */ "./client/components/UploadToDb.tsx");
-/* harmony import */ var _AllImgs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AllImgs */ "./client/components/AllImgs.tsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _AllCombined__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AllCombined */ "./client/components/AllCombined.tsx");
+/* harmony import */ var _AllImgs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AllImgs */ "./client/components/AllImgs.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 // import {Unsplash} from './Unsplash'
@@ -4434,18 +4480,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function App() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Nav__WEBPACK_IMPORTED_MODULE_0__.Nav, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Routes, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Nav__WEBPACK_IMPORTED_MODULE_0__.Nav, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Routes, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
         path: "/",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_AllImgs__WEBPACK_IMPORTED_MODULE_3__.AllImgs, {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_AllCombined__WEBPACK_IMPORTED_MODULE_3__.AllCombined, {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
         path: "/search",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Define__WEBPACK_IMPORTED_MODULE_1__.Define, {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Define__WEBPACK_IMPORTED_MODULE_1__.Define, {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
         path: "/db",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_UploadToDb__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_UploadToDb__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+        path: "/all",
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_AllImgs__WEBPACK_IMPORTED_MODULE_4__.AllImgs, {})
       })]
     })]
   });
@@ -4582,6 +4632,11 @@ function Nav() {
         to: "/db",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
           children: "DB"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        to: "/all",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+          children: "All"
         })
       })]
     })
