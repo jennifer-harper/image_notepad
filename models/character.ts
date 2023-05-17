@@ -47,9 +47,11 @@ export interface UploadImg extends UploadImgData{
 
 export interface Combined{
   id:number;
-  save_search_id:string;
+  save_search_id:number;
+  upload_img_id:number;
   image:string;
   category:string;
   url:string;
-  description:string
+  description:string;
+  src:string;
 }

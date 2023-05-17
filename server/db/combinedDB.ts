@@ -4,10 +4,10 @@ import dbCon from './connections'
 export async function getAllCategories() {
     try {
       const saveSearchData = await dbCon('save-search')
-      .select('save-search.id as save_search_id','category')
+      .select('save-search.id as save_search_id','category', 'src')
 
       const uploadImgData = await dbCon('upload-img')
-      .select('upload-img.id as upload_img_id','category')
+      .select('upload-img.id as upload_img_id','category', 'image')
 
       const combinedData = [...saveSearchData, ...uploadImgData].map((data, index) => {
         return { id: index + 1, ...data }
@@ -19,3 +19,4 @@ export async function getAllCategories() {
       throw error
     }
   }
+  

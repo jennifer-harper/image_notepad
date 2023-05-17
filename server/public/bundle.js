@@ -4375,13 +4375,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _apis_combinedImg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/combinedImg */ "./client/apis/combinedImg.ts");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _apis_saveSearch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../apis/saveSearch */ "./client/apis/saveSearch.ts");
+/* harmony import */ var _apis_uploadImgs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../apis/uploadImgs */ "./client/apis/uploadImgs.ts");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
 
 function AllCombined() {
   const [imageData, setImageData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     fetchData();
   }, []);
@@ -4390,16 +4395,50 @@ function AllCombined() {
       const data = await (0,_apis_combinedImg__WEBPACK_IMPORTED_MODULE_1__.combinedImgs)();
       console.log('Data:', data);
       setImageData(data);
+      setLoading(false);
     } catch (err) {
       alert(err.message);
     }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+  const handleDelete = async id => {
+    try {
+      await (0,_apis_saveSearch__WEBPACK_IMPORTED_MODULE_2__.delImg)(id);
+      fetchData();
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+  const handleDeleteUpload = async id => {
+    try {
+      await (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_3__.delUpload)(id);
+      fetchData();
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+  if (loading) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      children: "Loading..."
+    });
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
     className: "user__grid",
-    children: imageData.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+    children: imageData.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      children: [image.image && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+        src: `data:image/jpg;base64,${image.image}`,
+        alt: image.category
+      }), !image.image && image.src && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+        src: image.src,
+        alt: image.category
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
         children: ["Category: ", image.category]
-      })
+      }), image.image && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+        onClick: () => handleDeleteUpload(image.upload_img_id),
+        children: "Delete"
+      }), !image.image && image.src && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+        onClick: () => handleDelete(image.save_search_id),
+        children: "Delete"
+      })]
     }, image.id))
   });
 }
