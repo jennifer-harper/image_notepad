@@ -1,0 +1,5 @@
+      // Retrieve unique categories from the imageData array
+      const uniqueCategories = [...new Set(imageData.map((image) => image.category))]
+      //The Set is a built-in JavaScript object that allows you to store unique values (automatically removes any duplicate)
+      //new Set(...) creates a Set object
+      //spread operator (...) is used to convert the Set object back into an array

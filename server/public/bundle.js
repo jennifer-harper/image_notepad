@@ -4388,20 +4388,13 @@ __webpack_require__.r(__webpack_exports__);
 function AllCombined() {
   const [imageData, setImageData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
-
-  // Retrieve unique categories from the imageData array
-  const uniqueCategories = [...new Set(imageData.map(image => image.category))];
-  //The Set is a built-in JavaScript object that allows you to store unique values (automatically removes any duplicate)
-  //new Set(...) creates a Set object
-  //spread operator (...) is used to convert the Set object back into an array
-
+  const [selectedCategory, setSelectedCategory] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     fetchData();
   }, []);
   const fetchData = async () => {
     try {
       const data = await (0,_apis_combinedImg__WEBPACK_IMPORTED_MODULE_1__.combinedImgs)();
-      console.log('Data:', data);
       setImageData(data);
       setLoading(false);
     } catch (err) {
@@ -4429,17 +4422,26 @@ function AllCombined() {
       children: "Loading..."
     });
   }
+
+  // Retrieve unique categories from the imageData array so they do not repeat in the dropdown list
+  const uniqueCategories = [...new Set(imageData.map(image => image.category))];
+  //Filter the imageData array based on the selected category
+  const filteredImageData = selectedCategory === "" ? imageData : imageData.filter(image => image.category === selectedCategory);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("select", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("select", {
       name: "menu",
       id: "menu",
-      children: uniqueCategories.map(category => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
+      onChange: e => setSelectedCategory(e.target.value),
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
+        value: "",
+        children: "Show all"
+      }), uniqueCategories.map(category => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
         value: category,
         children: category
-      }, category))
+      }, category))]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "user__grid",
-      children: imageData.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      children: filteredImageData.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         children: [image.image && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
             src: `data:image/jpg;base64,${image.image}`,
