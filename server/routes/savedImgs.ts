@@ -5,14 +5,14 @@ import * as db from '../db/searchImgDB'
 const router = express.Router()
 
 
-// router.get('/', async (req, res) => {
-//     try{
-//         const data = await db.getAllImgsDB()
-//         res.json(data)
-//     }catch (e) {
-//         res.status(500).json({ msg: (e as Error).message })
-//     }
-// })
+router.get('/', async (req, res) => {
+    try{
+        const data = await db.getAllImgsDB()
+        res.json(data)
+    }catch (e) {
+        res.status(500).json({ msg: (e as Error).message })
+    }
+})
 
 //*******************Delete existing
 
@@ -37,14 +37,7 @@ router.post('/', async  (req, res) => {
     }
 })
 
-router.get('/', async (req, res) => {
-    try{
-        const data = await db.getAllCategories()
-        res.json(data)
-    }catch (e) {
-        res.status(500).json({ msg: (e as Error).message })
-    }
-})
+
 
 
 

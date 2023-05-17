@@ -21,7 +21,7 @@ export function getAllImgs(): Promise<Img.ImgSearch[]> {
   }
 
 
-  export function combinedImgs(): Promise<Img.Combined[]>{
-    return request.get(serverURL)
-    .then(res => res.body)      
-}
+//   export function combinedImgs(): Promise<Img.Combined[]>{
+//     return request.get(serverURL)
+//     .then(res => res.body)      
+// }

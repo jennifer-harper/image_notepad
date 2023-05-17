@@ -1,6 +1,6 @@
 import { useEffect, useState} from 'react'
 import * as Imgs from '../../models/character'
-import {combinedImgs } from '../apis/saveSearch'
+import {combinedImgs } from '../apis/combinedImg'
 
 export function AllCombined(){
     const [imageData, setImageData] = useState([] as Imgs.Combined[])

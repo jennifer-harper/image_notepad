@@ -4231,6 +4231,27 @@ function getTargetMatch(matches, location) {
 
 /***/ }),
 
+/***/ "./client/apis/combinedImg.ts":
+/*!************************************!*\
+  !*** ./client/apis/combinedImg.ts ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "combinedImgs": () => (/* binding */ combinedImgs)
+/* harmony export */ });
+/* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
+/* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
+
+const serverURL = '/api/v1/combinedImg';
+function combinedImgs() {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(serverURL).then(res => res.body);
+}
+
+/***/ }),
+
 /***/ "./client/apis/saveSearch.ts":
 /*!***********************************!*\
   !*** ./client/apis/saveSearch.ts ***!
@@ -4240,7 +4261,6 @@ function getTargetMatch(matches, location) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "combinedImgs": () => (/* binding */ combinedImgs),
 /* harmony export */   "createImg": () => (/* binding */ createImg),
 /* harmony export */   "delImg": () => (/* binding */ delImg),
 /* harmony export */   "getAllImgs": () => (/* binding */ getAllImgs)
@@ -4261,9 +4281,11 @@ function delImg(id) {
     return res.body;
   });
 }
-function combinedImgs() {
-  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(serverURL).then(res => res.body);
-}
+
+//   export function combinedImgs(): Promise<Img.Combined[]>{
+//     return request.get(serverURL)
+//     .then(res => res.body)      
+// }
 
 /***/ }),
 
@@ -4352,7 +4374,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _apis_saveSearch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/saveSearch */ "./client/apis/saveSearch.ts");
+/* harmony import */ var _apis_combinedImg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/combinedImg */ "./client/apis/combinedImg.ts");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -4365,7 +4387,7 @@ function AllCombined() {
   }, []);
   const fetchData = async () => {
     try {
-      const data = await (0,_apis_saveSearch__WEBPACK_IMPORTED_MODULE_1__.combinedImgs)();
+      const data = await (0,_apis_combinedImg__WEBPACK_IMPORTED_MODULE_1__.combinedImgs)();
       console.log('Data:', data);
       setImageData(data);
     } catch (err) {
