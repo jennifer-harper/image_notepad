@@ -4340,6 +4340,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createUpload": () => (/* binding */ createUpload),
 /* harmony export */   "delUpload": () => (/* binding */ delUpload),
+/* harmony export */   "editUpload": () => (/* binding */ editUpload),
 /* harmony export */   "getUploads": () => (/* binding */ getUploads)
 /* harmony export */ });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
@@ -4350,11 +4351,15 @@ function getUploads() {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(serverURL).then(res => res.body);
 }
 function createUpload(data) {
-  console.log(data);
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().post(serverURL).send(data).then(res => res.body);
 }
 function delUpload(id) {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`${serverURL}/${id}`).then(res => {
+    return res.body;
+  });
+}
+function editUpload(id, data) {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().patch(`${serverURL}/${id}`).send(data).then(res => {
     return res.body;
   });
 }
@@ -4377,7 +4382,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _apis_combinedImg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/combinedImg */ "./client/apis/combinedImg.ts");
 /* harmony import */ var _apis_saveSearch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../apis/saveSearch */ "./client/apis/saveSearch.ts");
 /* harmony import */ var _apis_uploadImgs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../apis/uploadImgs */ "./client/apis/uploadImgs.ts");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -4449,11 +4456,16 @@ function AllCombined() {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
             onClick: () => handleDeleteUpload(image.upload_img_id),
             children: "Delete"
-          })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+            to: `/upload/${image.id}`,
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+              children: "Update"
+            })
+          }, image.id)]
         }), !image.image && image.src && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
             src: image.src,
-            alt: image.category
+            alt: image.description
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
               href: image.url,
@@ -4475,75 +4487,6 @@ function AllCombined() {
 
 /***/ }),
 
-/***/ "./client/components/AllImgs.tsx":
-/*!***************************************!*\
-  !*** ./client/components/AllImgs.tsx ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AllImgs": () => (/* binding */ AllImgs)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _apis_saveSearch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/saveSearch */ "./client/apis/saveSearch.ts");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-
-function AllImgs() {
-  const [imageData, setImageData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const handleDelete = async id => {
-    try {
-      await (0,_apis_saveSearch__WEBPACK_IMPORTED_MODULE_1__.delImg)(id);
-      fetchData();
-    } catch (err) {
-      alert(err.message);
-    }
-  };
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    fetchData();
-  }, []);
-  const fetchData = async () => {
-    try {
-      const data = await (0,_apis_saveSearch__WEBPACK_IMPORTED_MODULE_1__.getAllImgs)();
-      setImageData(data);
-    } catch (err) {
-      alert(err.message);
-    }
-  };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    className: "user__grid",
-    children: imageData.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-        src: image.src,
-        alt: "description"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-        children: ["Category: ", image.category]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-        children: ["Description: ", image.description]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
-          href: image.url,
-          target: "_blank",
-          rel: "noreferrer",
-          children: "Download here"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-        onClick: () => handleDelete(image.id),
-        children: "Delete"
-      })]
-    }, image.id))
-  });
-}
-
-//to do - add category filter
-
-/***/ }),
-
 /***/ "./client/components/App.tsx":
 /*!***********************************!*\
   !*** ./client/components/App.tsx ***!
@@ -4560,11 +4503,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Define__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Define */ "./client/components/Define.tsx");
 /* harmony import */ var _UploadToDb__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UploadToDb */ "./client/components/UploadToDb.tsx");
 /* harmony import */ var _AllCombined__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AllCombined */ "./client/components/AllCombined.tsx");
-/* harmony import */ var _AllImgs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AllImgs */ "./client/components/AllImgs.tsx");
+/* harmony import */ var _EditUpload__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EditUpload */ "./client/components/EditUpload.tsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
-// import {Unsplash} from './Unsplash'
 
 
 
@@ -4585,8 +4527,8 @@ function App() {
         path: "/db",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_UploadToDb__WEBPACK_IMPORTED_MODULE_2__["default"], {})
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
-        path: "/all",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_AllImgs__WEBPACK_IMPORTED_MODULE_4__.AllImgs, {})
+        path: "/upload/:id",
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_EditUpload__WEBPACK_IMPORTED_MODULE_4__.EditUpload, {})
       })]
     })]
   });
@@ -4688,6 +4630,27 @@ function Define() {
 
 /***/ }),
 
+/***/ "./client/components/EditUpload.tsx":
+/*!******************************************!*\
+  !*** ./client/components/EditUpload.tsx ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EditUpload": () => (/* binding */ EditUpload)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+function EditUpload() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+    children: "Hi"
+  });
+}
+
+/***/ }),
+
 /***/ "./client/components/Nav.tsx":
 /*!***********************************!*\
   !*** ./client/components/Nav.tsx ***!
@@ -4712,22 +4675,17 @@ function Nav() {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-          children: "Home"
+          children: "See All Images"
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/search",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-          children: "Search"
+          children: "Find UnSplash Images"
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/db",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-          children: "DB"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/all",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-          children: "All"
+          children: "Upload Images"
         })
       })]
     })
@@ -4759,8 +4717,6 @@ function Profiles(_ref) {
     refreshList,
     users
   } = _ref;
-  // const { users } = props
-
   const handleDel = async id => {
     (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_0__.delUpload)(id).then(() => {
       refreshList();

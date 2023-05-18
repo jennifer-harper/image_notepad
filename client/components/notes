@@ -1,5 +1,151 @@
-      // Retrieve unique categories from the imageData array
-      const uniqueCategories = [...new Set(imageData.map((image) => image.category))]
-      //The Set is a built-in JavaScript object that allows you to store unique values (automatically removes any duplicate)
-      //new Set(...) creates a Set object
-      //spread operator (...) is used to convert the Set object back into an array
+//       // Retrieve unique categories from the imageData array
+//       //const uniqueCategories = [...new Set(imageData.map((image) => image.category))]
+//       //The Set is a built-in JavaScript object that allows you to store unique values (automatically removes any duplicate)
+//       //new Set(...) creates a Set object
+//       //spread operator (...) is used to convert the Set object back into an array
+
+//       // export function updateAWidgetCS(id:number, obj:WidgetData): Promise<Widget> {
+// //   console.log(request)
+// //   return request
+// //     .patch(`/api/v1/widgets/${id}`)
+// //     .send(obj)
+// //     .then((res) => {
+// //       return res.body;
+// //     })
+// // }
+
+
+
+// import { useEffect, useState, ChangeEvent, FormEvent} from 'react'
+// import * as Models from '../../models/Widget'
+// import { getAWidgetsCS, updateAWidgetCS, delWidgetsCS} from '../apiClient'
+// import { useParams } from 'react-router-dom'
+
+
+
+// export function UpDateWidget() {
+
+//   const { id } = useParams()
+//   const [widget, setWidget] = useState(null as Models.Widget | null)  
+
+
+//   ////GET THE WIDGET//////
+//   useEffect(() => {
+//     getAWidgetsCS(Number(id))
+//       .then((widgetObj) => {
+//         setWidget(widgetObj)
+//       })
+//       .catch((err) => alert(err.message))
+//   }, [id])
+    
+
+//   ////UPDATE WIDGET//////
+//   //this pulls in the data to use in the form
+//   //is there a better way to get this state?
+//   const [widgetForm, setWidgetForm] = useState<{
+//     name: string
+//     price: number
+//     mfg: string
+//     inStock: number
+//   }>({
+//     name: '',
+//     price: 0,
+//     mfg: '',
+//     inStock: 0,
+//   })
+
+//   //this fills out the form fields with the current data (and changes being made)
+//   useEffect(() => {
+//     if (widget) {
+//     setWidgetForm({
+//         name: widget.name,
+//         price: widget.price,
+//         mfg: widget.mfg,
+//         inStock: widget.inStock,
+//       })
+//     }
+//   }, [widget])
+
+//   // this allows user to change current state of form fields
+//   const handleUpdate = (e: ChangeEvent<HTMLInputElement>) => {
+//     setWidgetForm({
+//       ...widgetForm,
+//       [e.target.name]: e.target.value,
+//     })
+//   }
+
+//   //submit the data
+//   const handleSubmit = (evt: FormEvent) => {
+//     evt.preventDefault()
+//     updateAWidgetCS(Number(id), widgetForm)
+//     console.log(widgetForm)
+//     // .then((x) => {
+//     //     setWidget([x,  ...widget])
+//     //   })
+//     //   .catch((err) => alert(err.message))
+// }
+
+
+// //// DELETE WIDGET///
+// const handleDelete = () => {
+//   if (widget) {
+//     delWidgetsCS(widget.id);
+//   }
+// }
+
+
+    
+// // {//////////////////////////////////////}
+//       if (!widget) {
+//         return <div>Loading...</div>
+//       }
+    
+//        return (
+//         <>
+//         {/* <form onSubmit={handleSubmit}></form> */}
+//         <form onSubmit={handleSubmit}>
+//             <label htmlFor='name'>Name</label>
+//             <input 
+//             type='text'
+//             name='name'
+//             value={widgetForm.name}
+//             onChange={handleUpdate}
+//             />
+
+//             <label htmlFor='price'>Price</label>
+//             <input 
+//             type='number'
+//             name='price'
+//             value={widgetForm.price}
+//             onChange={handleUpdate}
+//             />
+
+//             <label htmlFor='mfg'>MFG</label>
+//             <input 
+//             type='text'
+//             name='mfg'
+//             value={widgetForm.mfg}
+//             onChange={handleUpdate}
+//             />
+
+//             <label htmlFor='inStock'>In stock</label>
+//             <input 
+//             type='number'
+//             name='inStock'
+//             value={widgetForm.inStock}
+//             onChange={handleUpdate}
+//             />
+//             <button type='submit'>Update</button> 
+//             <button onClick={handleDelete}>Delete me</button>   
+//         </form>
+
+//         <div>
+        
+//         </div>
+//         </>
+
+//     )
+// }
+
+  
+

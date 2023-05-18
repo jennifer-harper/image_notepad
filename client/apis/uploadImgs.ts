@@ -9,7 +9,6 @@ export function getUploads(): Promise<Img.UploadImg[]> {
   }
   
   export function createUpload(data:Img.UploadImgData): Promise<Img.UploadImg>{
-    console.log(data)
     return request
     .post(serverURL)
     .send(data)
@@ -19,4 +18,13 @@ export function getUploads(): Promise<Img.UploadImg[]> {
   export function delUpload(id:number){
     return request.delete(`${serverURL}/${id}`)
     .then((res) => {return res.body})
+  }
+
+  export function editUpload(id:number, data:Img.UploadImgData): Promise<Img.UploadImg>{
+    return request
+      .patch(`${serverURL}/${id}`)
+      .send(data)
+      .then((res) => {
+        return res.body;
+      })
   }

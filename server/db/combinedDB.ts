@@ -4,7 +4,7 @@ import dbCon from './connections'
 export async function getAllCategories() {
     try {
       const saveSearchData = await dbCon('save-search')
-      .select('save-search.id as save_search_id','category', 'src', 'url')
+      .select('save-search.id as save_search_id','category', 'src', 'url', "description")
 
       const uploadImgData = await dbCon('upload-img')
       .select('upload-img.id as upload_img_id','category', 'image')

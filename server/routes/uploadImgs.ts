@@ -1,6 +1,7 @@
 import express from 'express'
 import * as db from '../db/uploadImgsDB'
 // import * as Img from '../../models/character'
+import { useParams } from 'react-router-dom'
 const router = express.Router()
 
 
@@ -35,6 +36,26 @@ router.post('/', async  (req, res) => {
         res.status(500).json({ msg: (e as Error).message })
     }
 })
+
+router.get('/:id', async (req, res) => {
+    try{
+        const data = await db.getIdUploadDB(+req.params.id)
+        res.json(data)
+    }catch (e) {
+        res.status(500).json({ msg: (e as Error).message })
+    }
+})
+
+router.patch('/:id', async (req, res) => {        
+    try{
+        const data = await db.editUploadDB(+req.params.id, req.body)
+        res.json(data)
+    }catch (e) {
+        res.status(500).json({ msg: (e as Error).message })
+    }
+})
+
+
 
 
 export default router

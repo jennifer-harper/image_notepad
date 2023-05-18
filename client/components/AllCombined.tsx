@@ -4,6 +4,8 @@ import {combinedImgs } from '../apis/combinedImg'
 import { delImg } from '../apis/saveSearch'
 import { delUpload } from '../apis/uploadImgs'
 
+import {Link} from 'react-router-dom'
+
 export function AllCombined(){
   const [imageData, setImageData] = useState([] as Imgs.Combined[])
   const [loading, setLoading] = useState(true)
@@ -67,11 +69,12 @@ export function AllCombined(){
             <div>
               <img src={`data:image/jpg;base64,${image.image}`} alt={image.category} />
               <button onClick={() => handleDeleteUpload(image.upload_img_id)}>Delete</button>
+              <Link to={`/upload/${image.id}`} key={image.id}><button>Update</button></Link>
             </div> 
           }
           {!image.image && image.src && 
             <div>
-              <img src={image.src} alt={image.category} />
+              <img src={image.src} alt={image.description} />
               <p><a href={image.url} target="_blank" rel="noreferrer">Download here</a></p>
               <button onClick={() => handleDelete(image.save_search_id)}>Delete</button>
             </div> 

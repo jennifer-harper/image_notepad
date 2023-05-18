@@ -7,8 +7,6 @@ type ProfilesProps = {
 }
 
 export function Profiles({refreshList, users}: ProfilesProps) {
-  // const { users } = props
-
   const handleDel = async (id:number) => {
     delUpload(id)
     .then(() => {
@@ -26,7 +24,6 @@ export function Profiles({refreshList, users}: ProfilesProps) {
           <button className="del_button" onClick={() => handleDel(u.id)}>Delete</button>
         </div>
       ))}
-
     </div>
   )
 }
