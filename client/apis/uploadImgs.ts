@@ -4,8 +4,9 @@ const serverURL = '/api/v1/uploads'
 
 
 export function getUploads(): Promise<Img.UploadImg[]> {
-    return request.get(serverURL)
-      .then(res => res.body)
+    return request
+    .get(serverURL)
+    .then(res => res.body)
   }
   
   export function createUpload(data:Img.UploadImgData): Promise<Img.UploadImg>{
@@ -16,8 +17,17 @@ export function getUploads(): Promise<Img.UploadImg[]> {
   }
   
   export function delUpload(id:number){
-    return request.delete(`${serverURL}/${id}`)
+    return request
+    .delete(`${serverURL}/${id}`)
     .then((res) => {return res.body})
+  }
+
+
+  export function getIdUpload(id:number){
+    return request
+    .get(`${serverURL}/${id}`)
+    .then(res => res.body)
+
   }
 
   export function editUpload(id:number, data:Img.UploadImgData): Promise<Img.UploadImg>{

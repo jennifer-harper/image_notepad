@@ -36,11 +36,19 @@ export interface ImgSearch extends ImgSearchData{
 
 //upload images to db
 export interface UploadImgData {
-  image:string;
+  // image:string;
   category:string
 }
 
 export interface UploadImg extends UploadImgData{
+  id:number;
+}
+
+export interface UploadTestData {
+  category:string
+}
+
+export interface UploadTest extends UploadTestData{
   id:number;
 }
 
