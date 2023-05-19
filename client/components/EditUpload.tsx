@@ -34,13 +34,6 @@ export function EditUpload(){
         }
       }, [imgData])
 
-      //allow users to change data fields
-      const handleUpdate = (e: ChangeEvent<HTMLInputElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        })
-      }
 
       const handleSubmit = (evt: FormEvent) => {
         evt.preventDefault()
@@ -58,7 +51,7 @@ export function EditUpload(){
             type='text'
             name='category'
             value={formData.category}
-            onChange={handleUpdate}
+            onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
             />
 
             {/* <label htmlFor='image'>Image</label>

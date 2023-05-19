@@ -4686,14 +4686,6 @@ function EditUpload() {
       });
     }
   }, [imgData]);
-
-  //allow users to change data fields
-  const handleUpdate = e => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
   const handleSubmit = evt => {
     evt.preventDefault();
     console.log(formData); // Move console.log(formData) here
@@ -4708,7 +4700,10 @@ function EditUpload() {
       type: "text",
       name: "category",
       value: formData.category,
-      onChange: handleUpdate
+      onChange: e => setFormData({
+        ...formData,
+        [e.target.name]: e.target.value
+      })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
       type: "submit",
       children: "Update"
