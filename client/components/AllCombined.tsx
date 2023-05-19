@@ -66,9 +66,7 @@ export function AllCombined(){
       {filteredImageData.map( image => (
         <div key={image.id}>            
           {image.image && 
-            <div>
-              <p>image id: {image.id}</p>
-              <p>correct id: {image.upload_img_id}</p>
+            <div id={String(image.id)}>
               <img src={`data:image/jpg;base64,${image.image}`} alt={image.category} />
               <button onClick={() => handleDeleteUpload(image.upload_img_id)}>Delete</button>
               <Link to={`/upload/${image.upload_img_id}`}><button>Update</button></Link>

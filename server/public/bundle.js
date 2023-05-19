@@ -4454,11 +4454,8 @@ function AllCombined() {
       className: "user__grid",
       children: filteredImageData.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         children: [image.image && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
-            children: ["image id: ", image.id]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
-            children: ["correct id: ", image.upload_img_id]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+          id: String(image.id),
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
             src: `data:image/jpg;base64,${image.image}`,
             alt: image.category
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
@@ -4652,19 +4649,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _apis_uploadImgs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/uploadImgs */ "./client/apis/uploadImgs.ts");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var base64_arraybuffer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! base64-arraybuffer */ "./node_modules/base64-arraybuffer/dist/base64-arraybuffer.es5.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
-// import * as Base64 from 'base64-arraybuffer' 
+
+
 
 
 function EditUpload() {
   const {
     id
-  } = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useParams)();
-  const [imgData, setImgData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  } = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useParams)();
+  const [imgData, setImgData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(undefined);
+  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useNavigate)();
 
   //get the id data item
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -4675,28 +4675,49 @@ function EditUpload() {
 
   //get the data to pre populate the form
   const [formData, setFormData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    category: ''
+    category: '',
+    image: undefined
   });
 
   // fill out those fields and accept changes
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (imgData) {
       setFormData({
-        category: imgData.category
+        category: imgData.category,
+        image: imgData.image
       });
     }
   }, [imgData]);
-  const handleSubmit = evt => {
-    evt.preventDefault();
-    console.log(formData); // Move console.log(formData) here
-    (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_1__.editUpload)(Number(id), formData);
+  const updateFile = e => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onload = () => {
+        setFormData({
+          ...formData,
+          image: base64_arraybuffer__WEBPACK_IMPORTED_MODULE_2__.encode(reader.result)
+        });
+      };
+    } else {
+      console.error('No file selected.');
+    }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
+  const handleSubmit = async evt => {
+    evt.preventDefault();
+    try {
+      await (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_1__.editUpload)(Number(id), formData);
+      navigate('/');
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
     onSubmit: handleSubmit,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
       htmlFor: "category",
       children: "Name"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
       type: "text",
       name: "category",
       value: formData.category,
@@ -4704,7 +4725,16 @@ function EditUpload() {
         ...formData,
         [e.target.name]: e.target.value
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+      htmlFor: "image",
+      children: "Image"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+      type: "file",
+      name: "image",
+      id: "image",
+      accept: "image/*",
+      onChange: updateFile
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
       type: "submit",
       children: "Update"
     })]

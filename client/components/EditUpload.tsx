@@ -2,11 +2,13 @@ import { useEffect, useState, ChangeEvent, FormEvent} from 'react'
 import * as Img from '../../models/character'
 import { editUpload, getIdUpload } from '../apis/uploadImgs'
 import { useParams } from 'react-router-dom'
-// import * as Base64 from 'base64-arraybuffer' 
+import * as Base64 from 'base64-arraybuffer' 
+import { useNavigate } from 'react-router-dom';
 
 export function EditUpload(){
-    const { id } = useParams()
-    const [imgData, setImgData] = useState(null as Img.UploadTestData | null)
+    const { id} = useParams()
+    const [imgData, setImgData] = useState<Img.UploadImgData| undefined>(undefined)
+    const navigate = useNavigate()
 
     //get the id data item
     useEffect(() => {
@@ -19,51 +21,66 @@ export function EditUpload(){
 
 
     //get the data to pre populate the form
-    const [formData, setFormData] = useState<Img.UploadTestData>({
-        category:''
-    })
-
-      
+    const [formData, setFormData] = useState<Img.UploadImgData>({
+        category:'',
+        image:undefined
+    })      
 
     // fill out those fields and accept changes
-      useEffect(() => {
-        if (imgData) {
+    useEffect(() => {
+    if (imgData) {
+        setFormData({
+            category:imgData.category,
+            image:imgData.image
+        })
+    }
+    }, [imgData])
+
+    const updateFile = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length > 0) {
+            const file = e.target.files[0]
+            const reader = new FileReader()
+            reader.readAsArrayBuffer(file)
+            reader.onload = () => {
             setFormData({
-                category:imgData.category,
+                ...formData,
+                image: Base64.encode(reader.result as ArrayBuffer),
             })
+            }
+        } else {
+            console.error('No file selected.')
         }
-      }, [imgData])
+    }
 
+    const handleSubmit = async (evt: FormEvent) => {
+    evt.preventDefault()
+    try {
+        await editUpload(Number(id), formData);
+        navigate('/')
 
-      const handleSubmit = (evt: FormEvent) => {
-        evt.preventDefault()
-        console.log(formData) // Move console.log(formData) here
-        editUpload(Number(id), formData)
-      }
-
-
+        } catch (err) {
+        alert((err as Error).message);
+        }
+    }
 
     return(
-        <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
+        <label htmlFor='category'>Name</label>
+        <input 
+        type='text'
+        name='category'
+        value={formData.category}
+        onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}/>
 
-            <label htmlFor='category'>Name</label>
-            <input 
-            type='text'
-            name='category'
-            value={formData.category}
-            onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
-            />
-
-            {/* <label htmlFor='image'>Image</label>
-            <input 
-            type='file'
-            name='image'
-            value={formData.image}
-            onChange={handleUpdate}
-            /> */}
-            <button type='submit'>Update</button> 
- 
-        </form>
+        <label htmlFor='image'>Image</label>
+        <input
+            type="file"
+            name="image"
+            id="image"
+            accept="image/*"
+            onChange={updateFile}/>
+        <button type='submit'>Update</button>  
+    </form>
     )
 }
 

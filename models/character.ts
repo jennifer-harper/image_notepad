@@ -36,7 +36,7 @@ export interface ImgSearch extends ImgSearchData{
 
 //upload images to db
 export interface UploadImgData {
-  // image:string;
+  image:string | undefined;
   category:string
 }
 
