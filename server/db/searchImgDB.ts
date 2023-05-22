@@ -15,3 +15,19 @@ export function createImgDB (data:Img.ImgSearchData){
     .returning('*')
 }
 
+
+//*******************Get and edit based on id
+export function getIdDB(id:number){
+    return dbCon('save-search')
+    .select("*")
+    .where ('id', id)
+    .first()
+}
+
+//create database function
+export function editDB(id: number, data:Img.EditSearchData){
+    return dbCon('save-search')
+    .where('id', id)
+    .update(data)
+    .returning('*')
+ }

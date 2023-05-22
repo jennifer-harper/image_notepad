@@ -1,7 +1,6 @@
 //routes
 import express from 'express'
 import * as db from '../db/searchImgDB'
-// import * as Img from '../../models/character'
 const router = express.Router()
 
 
@@ -37,6 +36,26 @@ router.post('/', async  (req, res) => {
     }
 })
 
+
+//******************* existing existing
+
+router.get('/:id', async (req, res) => {
+    try{
+        const data = await db.getIdDB(+req.params.id)
+        res.json(data)
+    }catch (e) {
+        res.status(500).json({ msg: (e as Error).message })
+    }
+})
+
+router.patch('/:id', async (req, res) => {        
+    try{
+        const data = await db.editDB(+req.params.id, req.body)
+        res.json(data)
+    }catch (e) {
+        res.status(500).json({ msg: (e as Error).message })
+    }
+})
 
 
 

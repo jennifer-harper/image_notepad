@@ -4,11 +4,13 @@ import { getUploads, createUpload } from '../apis/uploadImgs';
 import { Profiles } from "./Profile";
 import * as Img from '../../models/character';
 
-type InputChange = ChangeEvent<HTMLInputElement>;
+type InputChange = ChangeEvent<HTMLInputElement>
+// type AreaChange = ChangeEvent<HTMLTextAreaElement>;
 
 
 function UploadToDb() {
   const [category, setCategory] = useState('')
+  // const [notes, setNotes] = useState('')
   const [file, setFile] = useState(null as null | File)
   const [users, setUsers] = useState([] as Img.UploadImg[])
 
@@ -40,6 +42,7 @@ function UploadToDb() {
     
     const newUser = {
       category,
+      // notes,
       image: Base64.encode(fileAsBytes)
     }
 
@@ -47,6 +50,7 @@ function UploadToDb() {
     .then(data => setUsers([...users, data]))
     .catch(err => console.error(err))
 
+    // setNotes('')
     setCategory('')
     setFile(null)
   }
@@ -69,14 +73,18 @@ function UploadToDb() {
           </div>
 
           <div>
-            <label htmlFor='image'>Profile pic:</label>
+            <label htmlFor='image'>Select Image</label>
             <input id='image' type='file' onChange={updateFile} />
           </div>
         </div>
 
+        {/* <div>
+        <label htmlFor='notes'>Notes</label>
+            <textarea rows={5}  id="notes" onChange={(e: AreaChange) => setNotes(e.target.value)}/>
+        </div> */}
+
         <div className='temp_profile'>
           <img src={tempUrl} alt={file ? 'chosen picture' : 'profile icon'} />
-          <h3>{category ? category : 'no one'}</h3>
         </div>
 
         <button>Add</button>

@@ -20,6 +20,7 @@ export function Profiles({refreshList, users}: ProfilesProps) {
       {users.map(u => (
         <div key={u.id}>
           <img src={`data:image/jpg;base64,${u.image}`} alt={u.category} />
+          {/* <p>{u.notes}</p> */}
           <h3>{u.category}</h3>
           <button className="del_button" onClick={() => handleDel(u.id)}>Delete</button>
         </div>

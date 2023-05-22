@@ -9,6 +9,7 @@ export interface UnsplashCharacter {
   alt_description:string;
   links:Links;
   total_pages:string;
+  notes:string;
 }
 
 export interface Urls {
@@ -25,9 +26,16 @@ export interface Links {
 export interface ImgSearchData {
   src:string;
   url:string;
-  category:string
-  description:string
+  category:string;
+  description:string;
+  notes:string
 }
+
+export interface EditSearchData{
+  category:string
+  notes:string
+}
+
 
 export interface ImgSearch extends ImgSearchData{
   id:number;
@@ -37,7 +45,8 @@ export interface ImgSearch extends ImgSearchData{
 //upload images to db
 export interface UploadImgData {
   image:string | undefined;
-  category:string
+  category:string;
+  // notes:string
 }
 
 export interface UploadImg extends UploadImgData{
@@ -62,4 +71,5 @@ export interface Combined{
   url:string;
   description:string;
   src:string;
+  notes:string
 }

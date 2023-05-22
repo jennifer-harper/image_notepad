@@ -20,8 +20,17 @@ export function getAllImgs(): Promise<Img.ImgSearch[]> {
     .then((res) => {return res.body})
   }
 
+  export function getIdImg(id:number){
+    return request
+    .get(`${serverURL}/${id}`)
+    .then(res => res.body)
+  }
 
-//   export function combinedImgs(): Promise<Img.Combined[]>{
-//     return request.get(serverURL)
-//     .then(res => res.body)      
-// }
+  export function editImg(id:number, data:Img.EditSearchData): Promise<Img.ImgSearch>{
+    return request
+      .patch(`${serverURL}/${id}`)
+      .send(data)
+      .then((res) => {
+        return res.body;
+      })
+  }

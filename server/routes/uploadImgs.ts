@@ -1,7 +1,6 @@
 import express from 'express'
 import * as db from '../db/uploadImgsDB'
-// import * as Img from '../../models/character'
-import { useParams } from 'react-router-dom'
+
 const router = express.Router()
 
 
@@ -26,7 +25,8 @@ router.delete('/:id', async (req, res) => {
 })
 
 
-//*******************Create existing
+//******************* create existing
+
 router.post('/', async  (req, res) => {
     try{
         const newImg = req.body
@@ -36,6 +36,8 @@ router.post('/', async  (req, res) => {
         res.status(500).json({ msg: (e as Error).message })
     }
 })
+
+//******************* existing existing
 
 router.get('/:id', async (req, res) => {
     try{

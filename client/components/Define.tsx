@@ -1,18 +1,20 @@
-import { useState, ChangeEvent, FormEvent, MouseEvent} from 'react';
+import { useState, ChangeEvent, FormEvent} from 'react';
 import { defineUnsplash } from '../apis/srcUnsplash';
 import { createImg } from '../apis/saveSearch'
 import { UnsplashCharacter} from '../../models/character';
 
 export function Define() {
 
+
+  type InputChange = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+
   const [images, setImages] = useState([] as UnsplashCharacter[])
   const [searchCategory, setSearchCategory] = useState('')
+  const [addNotes, setAddNotes] = useState('')
 
   const [savedImageId, setSavedImageId] = useState<string | null>(null)
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchCategory(event.target.value)
-  }
+
 
   const submitSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault() 
@@ -32,18 +34,17 @@ export function Define() {
       url: image.links.html,
       category: searchCategory,
       description:image.alt_description,
+      notes:addNotes
     }
 
     createImg(data)
       .then(() => {
         setSavedImageId(image.id)
-        console.log('Image data saved successfully!')
       })
       .catch((err) => {
         console.log('Error saving image data: ' + err)
-      });
-  };
-
+      })
+  }
 
 
   return (
@@ -54,7 +55,7 @@ export function Define() {
         type="text"
         id="cat"
         value={searchCategory}
-        onChange={handleInputChange}
+        onChange={(e: InputChange) => setSearchCategory(e.target.value)}
       />
       <button type="submit">Search</button>
     </form>
@@ -67,6 +68,11 @@ export function Define() {
             src={image.urls.regular}
             alt={image.alt_description}
           />
+          <form>
+            <label htmlFor='notes'>Notes</label>
+            <textarea rows={5}  id="notes" onChange={(e: InputChange) => setAddNotes(e.target.value)}/>
+          </form>
+
           <p><a href={image.links.html}>Download here</a></p>
           <p>Category: {searchCategory}</p>    
           <button onClick={() => saveImageData(image)}>Save Image</button>

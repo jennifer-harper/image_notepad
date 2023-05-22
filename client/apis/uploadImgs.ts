@@ -27,7 +27,6 @@ export function getUploads(): Promise<Img.UploadImg[]> {
     return request
     .get(`${serverURL}/${id}`)
     .then(res => res.body)
-
   }
 
   export function editUpload(id:number, data:Img.UploadImgData): Promise<Img.UploadImg>{

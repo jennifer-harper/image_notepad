@@ -16,6 +16,8 @@ export function createUploadDB (data:Img.UploadImgData){
     .returning('*')
 }
 
+
+//*******************Get and edit based on id
 export function getIdUploadDB(id:number){
     return dbCon('upload-img')
     .select("*")

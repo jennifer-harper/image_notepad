@@ -4263,7 +4263,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createImg": () => (/* binding */ createImg),
 /* harmony export */   "delImg": () => (/* binding */ delImg),
-/* harmony export */   "getAllImgs": () => (/* binding */ getAllImgs)
+/* harmony export */   "editImg": () => (/* binding */ editImg),
+/* harmony export */   "getAllImgs": () => (/* binding */ getAllImgs),
+/* harmony export */   "getIdImg": () => (/* binding */ getIdImg)
 /* harmony export */ });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
@@ -4281,11 +4283,14 @@ function delImg(id) {
     return res.body;
   });
 }
-
-//   export function combinedImgs(): Promise<Img.Combined[]>{
-//     return request.get(serverURL)
-//     .then(res => res.body)      
-// }
+function getIdImg(id) {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`${serverURL}/${id}`).then(res => res.body);
+}
+function editImg(id, data) {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().patch(`${serverURL}/${id}`).send(data).then(res => {
+    return res.body;
+  });
+}
 
 /***/ }),
 
@@ -4454,29 +4459,35 @@ function AllCombined() {
       className: "user__grid",
       children: filteredImageData.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         children: [image.image && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-          id: String(image.id),
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
             src: `data:image/jpg;base64,${image.image}`,
             alt: image.category
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-            onClick: () => handleDeleteUpload(image.upload_img_id),
-            children: "Delete"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
             to: `/upload/${image.upload_img_id}`,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
               children: "Update"
             })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            onClick: () => handleDeleteUpload(image.upload_img_id),
+            children: "Delete"
           })]
         }), !image.image && image.src && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
             src: image.src,
             alt: image.description
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+            children: image.notes
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
               href: image.url,
               target: "_blank",
               rel: "noreferrer",
               children: "Download here"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+            to: `/img/${image.save_search_id}`,
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+              children: "Update"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
             onClick: () => handleDelete(image.save_search_id),
@@ -4503,13 +4514,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Nav */ "./client/components/Nav.tsx");
 /* harmony import */ var _Define__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Define */ "./client/components/Define.tsx");
 /* harmony import */ var _UploadToDb__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UploadToDb */ "./client/components/UploadToDb.tsx");
 /* harmony import */ var _AllCombined__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AllCombined */ "./client/components/AllCombined.tsx");
 /* harmony import */ var _EditUpload__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EditUpload */ "./client/components/EditUpload.tsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _EditImg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./EditImg */ "./client/components/EditImg.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -4520,20 +4533,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function App() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Nav__WEBPACK_IMPORTED_MODULE_0__.Nav, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Routes, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Nav__WEBPACK_IMPORTED_MODULE_0__.Nav, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Routes, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_AllCombined__WEBPACK_IMPORTED_MODULE_3__.AllCombined, {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_AllCombined__WEBPACK_IMPORTED_MODULE_3__.AllCombined, {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/search",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Define__WEBPACK_IMPORTED_MODULE_1__.Define, {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Define__WEBPACK_IMPORTED_MODULE_1__.Define, {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/db",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_UploadToDb__WEBPACK_IMPORTED_MODULE_2__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_UploadToDb__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/upload/:id",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_EditUpload__WEBPACK_IMPORTED_MODULE_4__.EditUpload, {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_EditUpload__WEBPACK_IMPORTED_MODULE_4__.EditUpload, {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+        path: "/img/:id",
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_EditImg__WEBPACK_IMPORTED_MODULE_5__.EditImg, {})
       })]
     })]
   });
@@ -4567,10 +4583,8 @@ __webpack_require__.r(__webpack_exports__);
 function Define() {
   const [images, setImages] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [searchCategory, setSearchCategory] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [addNotes, setAddNotes] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [savedImageId, setSavedImageId] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
-  const handleInputChange = event => {
-    setSearchCategory(event.target.value);
-  };
   const submitSearch = event => {
     event.preventDefault();
     (0,_apis_srcUnsplash__WEBPACK_IMPORTED_MODULE_1__.defineUnsplash)(searchCategory).then(res => {
@@ -4584,11 +4598,11 @@ function Define() {
       src: image.urls.regular,
       url: image.links.html,
       category: searchCategory,
-      description: image.alt_description
+      description: image.alt_description,
+      notes: addNotes
     };
     (0,_apis_saveSearch__WEBPACK_IMPORTED_MODULE_2__.createImg)(data).then(() => {
       setSavedImageId(image.id);
-      console.log('Image data saved successfully!');
     }).catch(err => {
       console.log('Error saving image data: ' + err);
     });
@@ -4603,7 +4617,7 @@ function Define() {
         type: "text",
         id: "cat",
         value: searchCategory,
-        onChange: handleInputChange
+        onChange: e => setSearchCategory(e.target.value)
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
         type: "submit",
         children: "Search"
@@ -4615,6 +4629,15 @@ function Define() {
           className: "unsplash",
           src: image.urls.regular,
           alt: image.alt_description
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+            htmlFor: "notes",
+            children: "Notes"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
+            rows: 5,
+            id: "notes",
+            onChange: e => setAddNotes(e.target.value)
+          })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
             href: image.links.html,
@@ -4629,6 +4652,100 @@ function Define() {
           children: "Image saved!"
         })]
       }, image.id))
+    })]
+  });
+}
+
+/***/ }),
+
+/***/ "./client/components/EditImg.tsx":
+/*!***************************************!*\
+  !*** ./client/components/EditImg.tsx ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EditImg": () => (/* binding */ EditImg)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _apis_saveSearch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/saveSearch */ "./client/apis/saveSearch.ts");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+function EditImg() {
+  const {
+    id
+  } = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useParams)();
+  const [imgData, setImgData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(undefined);
+  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
+
+  //get the id data item
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    (0,_apis_saveSearch__WEBPACK_IMPORTED_MODULE_1__.getIdImg)(Number(id)).then(data => {
+      setImgData(data);
+    }).catch(err => alert(err.message));
+  }, [id]);
+
+  //get the data to pre populate the form
+  const [formData, setFormData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    category: '',
+    notes: ''
+  });
+
+  // fill out those fields and accept changes
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (imgData) {
+      setFormData({
+        category: imgData.category,
+        notes: imgData.notes
+      });
+    }
+  }, [imgData]);
+  const handleSubmit = async evt => {
+    evt.preventDefault();
+    try {
+      await (0,_apis_saveSearch__WEBPACK_IMPORTED_MODULE_1__.editImg)(Number(id), formData);
+      navigate('/');
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
+    onSubmit: handleSubmit,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+      htmlFor: "category",
+      children: "Name"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+      type: "text",
+      name: "category",
+      value: formData.category,
+      onChange: e => setFormData({
+        ...formData,
+        [e.target.name]: e.target.value
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+      htmlFor: "notes",
+      children: "Notes"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
+      rows: 5,
+      id: "notes",
+      name: "notes",
+      value: formData.notes,
+      onChange: e => setFormData({
+        ...formData,
+        [e.target.name]: e.target.value
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+      type: "submit",
+      children: "Update"
     })]
   });
 }
@@ -4676,6 +4793,7 @@ function EditUpload() {
   //get the data to pre populate the form
   const [formData, setFormData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     category: '',
+    notes: '',
     image: undefined
   });
 
@@ -4684,7 +4802,8 @@ function EditUpload() {
     if (imgData) {
       setFormData({
         category: imgData.category,
-        image: imgData.image
+        image: imgData.image,
+        notes: imgData.notes
       });
     }
   }, [imgData]);
@@ -4721,6 +4840,18 @@ function EditUpload() {
       type: "text",
       name: "category",
       value: formData.category,
+      onChange: e => setFormData({
+        ...formData,
+        [e.target.name]: e.target.value
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+      htmlFor: "notes",
+      children: "Notes"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
+      rows: 5,
+      id: "notes",
+      name: "notes",
+      value: formData.notes,
       onChange: e => setFormData({
         ...formData,
         [e.target.name]: e.target.value
@@ -4856,8 +4987,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// type AreaChange = ChangeEvent<HTMLTextAreaElement>;
+
 function UploadToDb() {
   const [category, setCategory] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  // const [notes, setNotes] = useState('')
   const [file, setFile] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [users, setUsers] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -4877,9 +5011,12 @@ function UploadToDb() {
     const fileAsBytes = await file.arrayBuffer();
     const newUser = {
       category,
+      // notes,
       image: base64_arraybuffer__WEBPACK_IMPORTED_MODULE_1__.encode(fileAsBytes)
     };
     (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.createUpload)(newUser).then(data => setUsers([...users, data])).catch(err => console.error(err));
+
+    // setNotes('')
     setCategory('');
     setFile(null);
   };
@@ -4906,21 +5043,19 @@ function UploadToDb() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             htmlFor: "image",
-            children: "Profile pic:"
+            children: "Select Image"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
             id: "image",
             type: "file",
             onChange: updateFile
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "temp_profile",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
           src: tempUrl,
           alt: file ? 'chosen picture' : 'profile icon'
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
-          children: category ? category : 'no one'
-        })]
+        })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
         children: "Add"
       })]

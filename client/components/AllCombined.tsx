@@ -52,7 +52,6 @@ export function AllCombined(){
   //Filter the imageData array based on the selected category
   const filteredImageData = selectedCategory === "" ? imageData : imageData.filter((image) => image.category === selectedCategory)
 
-
   
   return(
   <>
@@ -66,16 +65,18 @@ export function AllCombined(){
       {filteredImageData.map( image => (
         <div key={image.id}>            
           {image.image && 
-            <div id={String(image.id)}>
-              <img src={`data:image/jpg;base64,${image.image}`} alt={image.category} />
-              <button onClick={() => handleDeleteUpload(image.upload_img_id)}>Delete</button>
+            <div>
+              <img src={`data:image/jpg;base64,${image.image}`} alt={image.category}/>
               <Link to={`/upload/${image.upload_img_id}`}><button>Update</button></Link>
+              <button onClick={() => handleDeleteUpload(image.upload_img_id)}>Delete</button>
             </div> 
           }
           {!image.image && image.src && 
-            <div>
+             <div>
               <img src={image.src} alt={image.description} />
+              <p>{image.notes}</p>
               <p><a href={image.url} target="_blank" rel="noreferrer">Download here</a></p>
+              <Link to={`/img/${image.save_search_id}`}><button>Update</button></Link>
               <button onClick={() => handleDelete(image.save_search_id)}>Delete</button>
             </div> 
           } 

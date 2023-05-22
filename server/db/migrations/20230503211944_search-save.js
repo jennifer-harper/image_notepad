@@ -9,6 +9,7 @@ exports.up = function (knex) {
       table.string('url')
       table.string('category').defaultTo(null)
       table.string('description')
+      table.string('notes')
     })
   }
   

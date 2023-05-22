@@ -23,6 +23,7 @@ export function EditUpload(){
     //get the data to pre populate the form
     const [formData, setFormData] = useState<Img.UploadImgData>({
         category:'',
+        notes:'',
         image:undefined
     })      
 
@@ -31,7 +32,8 @@ export function EditUpload(){
     if (imgData) {
         setFormData({
             category:imgData.category,
-            image:imgData.image
+            image:imgData.image,
+            notes:imgData.notes
         })
     }
     }, [imgData])
@@ -70,6 +72,11 @@ export function EditUpload(){
         type='text'
         name='category'
         value={formData.category}
+        onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}/>
+
+        <label htmlFor='notes'>Notes</label>
+        <textarea rows={5}  id="notes" name="notes"
+        value={formData.notes}
         onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}/>
 
         <label htmlFor='image'>Image</label>
