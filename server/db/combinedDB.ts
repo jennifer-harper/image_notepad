@@ -7,7 +7,7 @@ export async function getAllCategories() {
       .select('save-search.id as save_search_id','category', 'src', 'url', "description", "notes")
 
       const uploadImgData = await dbCon('upload-img')
-      .select('upload-img.id as upload_img_id','category', 'image')
+      .select('upload-img.id as upload_img_id','category', 'image',' notes')
 
       const combinedData = [...saveSearchData, ...uploadImgData].map((data, index) => {
         return { id: index + 1, ...data }

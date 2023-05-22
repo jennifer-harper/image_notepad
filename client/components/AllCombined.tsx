@@ -67,6 +67,7 @@ export function AllCombined(){
           {image.image && 
             <div>
               <img src={`data:image/jpg;base64,${image.image}`} alt={image.category}/>
+              <p>Notes: {image.notes}</p>
               <Link to={`/upload/${image.upload_img_id}`}><button>Update</button></Link>
               <button onClick={() => handleDeleteUpload(image.upload_img_id)}>Delete</button>
             </div> 

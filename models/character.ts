@@ -46,7 +46,7 @@ export interface ImgSearch extends ImgSearchData{
 export interface UploadImgData {
   image:string | undefined;
   category:string;
-  // notes:string
+  notes:string
 }
 
 export interface UploadImg extends UploadImgData{

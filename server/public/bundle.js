@@ -4462,6 +4462,8 @@ function AllCombined() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
             src: `data:image/jpg;base64,${image.image}`,
             alt: image.category
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+            children: ["Notes: ", image.notes]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
             to: `/upload/${image.upload_img_id}`,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
@@ -4951,6 +4953,8 @@ function Profiles(_ref) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
         src: `data:image/jpg;base64,${u.image}`,
         alt: u.category
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+        children: u.notes
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
         children: u.category
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
@@ -4987,11 +4991,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// type AreaChange = ChangeEvent<HTMLTextAreaElement>;
-
 function UploadToDb() {
   const [category, setCategory] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  // const [notes, setNotes] = useState('')
+  const [notes, setNotes] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [file, setFile] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [users, setUsers] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -5011,12 +5013,11 @@ function UploadToDb() {
     const fileAsBytes = await file.arrayBuffer();
     const newUser = {
       category,
-      // notes,
+      notes,
       image: base64_arraybuffer__WEBPACK_IMPORTED_MODULE_1__.encode(fileAsBytes)
     };
     (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.createUpload)(newUser).then(data => setUsers([...users, data])).catch(err => console.error(err));
-
-    // setNotes('')
+    setNotes('');
     setCategory('');
     setFile(null);
   };
@@ -5049,6 +5050,15 @@ function UploadToDb() {
             type: "file",
             onChange: updateFile
           })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+          htmlFor: "notes",
+          children: "Notes"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("textarea", {
+          rows: 5,
+          id: "notes",
+          onChange: e => setNotes(e.target.value)
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "temp_profile",
