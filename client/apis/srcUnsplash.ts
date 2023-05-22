@@ -14,7 +14,7 @@ export function getUnsplash() {
     })
 }
 
-export async function defineUnsplash(query: string){
+export async function SearchSaveUnsplash(query: string){
   try {
     const res1 = await request
     .get(`https://api.unsplash.com/search/photos?client_id=${process.env.UNSPLASH_KEY}&per_page=12&orientation=landscape&query=${query}`)

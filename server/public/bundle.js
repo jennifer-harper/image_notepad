@@ -4303,7 +4303,7 @@ function editImg(id, data) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "defineUnsplash": () => (/* binding */ defineUnsplash),
+/* harmony export */   "SearchSaveUnsplash": () => (/* binding */ SearchSaveUnsplash),
 /* harmony export */   "getUnsplash": () => (/* binding */ getUnsplash)
 /* harmony export */ });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
@@ -4319,7 +4319,7 @@ function getUnsplash() {
     console.log('Err message: ' + err);
   });
 }
-async function defineUnsplash(query) {
+async function SearchSaveUnsplash(query) {
   try {
     const res1 = await superagent__WEBPACK_IMPORTED_MODULE_0___default().get(`https://api.unsplash.com/search/photos?client_id=${"48xo5zkXZ6Sh8EYO_etxPja_x05J4Zyhitdp7r7VH38"}&per_page=12&orientation=landscape&query=${query}`);
     const totalPages = res1.body.total_pages;
@@ -4518,7 +4518,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Nav */ "./client/components/Nav.tsx");
-/* harmony import */ var _Define__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Define */ "./client/components/Define.tsx");
+/* harmony import */ var _SearchSaveImg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SearchSaveImg */ "./client/components/SearchSaveImg.tsx");
 /* harmony import */ var _UploadToDb__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UploadToDb */ "./client/components/UploadToDb.tsx");
 /* harmony import */ var _AllCombined__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AllCombined */ "./client/components/AllCombined.tsx");
 /* harmony import */ var _EditUpload__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EditUpload */ "./client/components/EditUpload.tsx");
@@ -4542,7 +4542,7 @@ function App() {
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_AllCombined__WEBPACK_IMPORTED_MODULE_3__.AllCombined, {})
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/search",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Define__WEBPACK_IMPORTED_MODULE_1__.Define, {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_SearchSaveImg__WEBPACK_IMPORTED_MODULE_1__.SearchSaveImg, {})
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/db",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_UploadToDb__WEBPACK_IMPORTED_MODULE_2__["default"], {})
@@ -4557,106 +4557,6 @@ function App() {
   });
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
-
-/***/ }),
-
-/***/ "./client/components/Define.tsx":
-/*!**************************************!*\
-  !*** ./client/components/Define.tsx ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Define": () => (/* binding */ Define)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _apis_srcUnsplash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/srcUnsplash */ "./client/apis/srcUnsplash.ts");
-/* harmony import */ var _apis_saveSearch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../apis/saveSearch */ "./client/apis/saveSearch.ts");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-
-
-
-function Define() {
-  const [images, setImages] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const [searchCategory, setSearchCategory] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [addNotes, setAddNotes] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [savedImageId, setSavedImageId] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
-  const submitSearch = event => {
-    event.preventDefault();
-    (0,_apis_srcUnsplash__WEBPACK_IMPORTED_MODULE_1__.defineUnsplash)(searchCategory).then(res => {
-      setImages(res.results);
-    }).catch(err => {
-      console.log('Err message: ' + err);
-    });
-  };
-  const saveImageData = image => {
-    const data = {
-      src: image.urls.regular,
-      url: image.links.html,
-      category: searchCategory,
-      description: image.alt_description,
-      notes: addNotes
-    };
-    (0,_apis_saveSearch__WEBPACK_IMPORTED_MODULE_2__.createImg)(data).then(() => {
-      setSavedImageId(image.id);
-    }).catch(err => {
-      console.log('Error saving image data: ' + err);
-    });
-  };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
-      onSubmit: submitSearch,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-        htmlFor: "cat",
-        children: "Search Category"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-        type: "text",
-        id: "cat",
-        value: searchCategory,
-        onChange: e => setSearchCategory(e.target.value)
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-        type: "submit",
-        children: "Search"
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-      className: "image-grid",
-      children: images.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-          className: "unsplash",
-          src: image.urls.regular,
-          alt: image.alt_description
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-            htmlFor: "notes",
-            children: "Notes"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
-            rows: 5,
-            id: "notes",
-            onChange: e => setAddNotes(e.target.value)
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
-            href: image.links.html,
-            children: "Download here"
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
-          children: ["Category: ", searchCategory]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-          onClick: () => saveImageData(image),
-          children: "Save Image"
-        }), savedImageId === image.id && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-          children: "Image saved!"
-        })]
-      }, image.id))
-    })]
-  });
-}
 
 /***/ }),
 
@@ -4963,6 +4863,106 @@ function Profiles(_ref) {
         children: "Delete"
       })]
     }, u.id))
+  });
+}
+
+/***/ }),
+
+/***/ "./client/components/SearchSaveImg.tsx":
+/*!*********************************************!*\
+  !*** ./client/components/SearchSaveImg.tsx ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SearchSaveImg": () => (/* binding */ SearchSaveImg)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _apis_srcUnsplash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/srcUnsplash */ "./client/apis/srcUnsplash.ts");
+/* harmony import */ var _apis_saveSearch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../apis/saveSearch */ "./client/apis/saveSearch.ts");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+function SearchSaveImg() {
+  const [images, setImages] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [searchCategory, setSearchCategory] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [addNotes, setAddNotes] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [savedImageId, setSavedImageId] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const submitSearch = event => {
+    event.preventDefault();
+    (0,_apis_srcUnsplash__WEBPACK_IMPORTED_MODULE_1__.SearchSaveUnsplash)(searchCategory).then(res => {
+      setImages(res.results);
+    }).catch(err => {
+      console.log('Err message: ' + err);
+    });
+  };
+  const saveImageData = image => {
+    const data = {
+      src: image.urls.regular,
+      url: image.links.html,
+      category: searchCategory,
+      description: image.alt_description,
+      notes: addNotes
+    };
+    (0,_apis_saveSearch__WEBPACK_IMPORTED_MODULE_2__.createImg)(data).then(() => {
+      setSavedImageId(image.id);
+    }).catch(err => {
+      console.log('Error saving image data: ' + err);
+    });
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+      onSubmit: submitSearch,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+        htmlFor: "cat",
+        children: "Search Category"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+        type: "text",
+        id: "cat",
+        value: searchCategory,
+        onChange: e => setSearchCategory(e.target.value)
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        type: "submit",
+        children: "Search"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "image-grid",
+      children: images.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+          className: "unsplash",
+          src: image.urls.regular,
+          alt: image.alt_description
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+            htmlFor: "notes",
+            children: "Notes"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
+            rows: 5,
+            id: "notes",
+            onChange: e => setAddNotes(e.target.value)
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+            href: image.links.html,
+            children: "Download here"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+          children: ["Category: ", searchCategory]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          onClick: () => saveImageData(image),
+          children: "Save Image"
+        }), savedImageId === image.id && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          children: "Image saved!"
+        })]
+      }, image.id))
+    })]
   });
 }
 

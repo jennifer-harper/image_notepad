@@ -1,9 +1,9 @@
 import { useState, ChangeEvent, FormEvent} from 'react';
-import { defineUnsplash } from '../apis/srcUnsplash';
+import { SearchSaveUnsplash } from '../apis/srcUnsplash';
 import { createImg } from '../apis/saveSearch'
 import { UnsplashCharacter} from '../../models/character';
 
-export function Define() {
+export function SearchSaveImg() {
 
 
   type InputChange = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -18,7 +18,7 @@ export function Define() {
 
   const submitSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault() 
-    defineUnsplash(searchCategory)
+    SearchSaveUnsplash(searchCategory)
       .then((res) => {
         setImages(res.results);
       })

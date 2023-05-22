@@ -1,6 +1,4 @@
-export interface Welcome {
-  statement: string
-}
+
 
 // unsplash
 export interface UnsplashCharacter {
@@ -36,7 +34,6 @@ export interface EditSearchData{
   notes:string
 }
 
-
 export interface ImgSearch extends ImgSearchData{
   id:number;
 }
@@ -53,15 +50,9 @@ export interface UploadImg extends UploadImgData{
   id:number;
 }
 
-export interface UploadTestData {
-  category:string
-}
-
-export interface UploadTest extends UploadTestData{
-  id:number;
-}
 
 
+//combined data table
 export interface Combined{
   id:number;
   save_search_id:number;

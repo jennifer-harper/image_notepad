@@ -1,12 +1,14 @@
 import { join } from 'node:path'
 import express from 'express'
-// import request from 'superagent'
+import fileUpload from 'express-fileupload'
 const server = express()
 
 import savedSearch from './routes/savedImgs'
 import combinedSave from './routes/combinedImg'
 import uploadImgs from './routes/uploadImgs'
 
+server.use(fileUpload())
+server.use(express.json({ limit: '10mb' }))
 
 server.use(express.json())
 server.use(express.static(join(__dirname, './public')))
