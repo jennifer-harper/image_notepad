@@ -11,7 +11,8 @@ export function delImgDB (id:number){
 }
 
 export function createImgDB (data:Img.ImgSearchData){
-    return dbCon('save-search').insert(data)
+    return dbCon('save-search')
+    .insert(data)
     .returning('*')
 }
 

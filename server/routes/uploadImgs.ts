@@ -25,7 +25,7 @@ router.delete('/:id', async (req, res) => {
 })
 
 
-//******************* create existing
+//******************* create new
 
 router.post('/', async  (req, res) => {
     try{

@@ -1,5 +1,14 @@
 
+//user
+export interface UserData{
+  email:string;
+  password: string;
+  username:string;
+}
 
+export interface User{
+  id:number
+}
 // unsplash
 export interface UnsplashCharacter {
   urls:Urls;
