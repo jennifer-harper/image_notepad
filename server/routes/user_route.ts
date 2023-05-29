@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     try{
-        const data = await db.getUserDB(req.body.password, req.body.username)
+        const data = await db.getUserDB(req.body)
         res.json(data)
     }catch (e) {
         res.status(500).json({ msg: (e as Error).message })

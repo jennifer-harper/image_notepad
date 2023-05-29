@@ -4375,6 +4375,29 @@ function editUpload(id, data) {
 
 /***/ }),
 
+/***/ "./client/apis/user_api.ts":
+/*!*********************************!*\
+  !*** ./client/apis/user_api.ts ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getUser": () => (/* binding */ getUser)
+/* harmony export */ });
+/* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
+/* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
+
+const serverURL = '/api/v1/user';
+function getUser(data) {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().post(`${serverURL}/login`).send(data).then(res => res.body).catch(error => {
+    throw error.response.body.msg;
+  });
+}
+
+/***/ }),
+
 /***/ "./client/components/AllCombined.tsx":
 /*!*******************************************!*\
   !*** ./client/components/AllCombined.tsx ***!
@@ -4792,11 +4815,72 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Login": () => (/* binding */ Login)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _apis_user_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/user_api */ "./client/apis/user_api.ts");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+// import { addWidgets } from '../apiClient'
+
+
+
+
 
 function Login() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-    children: "hi"
+  const [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [formData, setFormUser] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    email: '',
+    password: ''
+  });
+  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
+  const handleChange = e => {
+    // console.log(e.target.id)
+    setFormUser({
+      ...formData,
+      [e.target.id]: e.target.value
+    });
+  };
+  const handleSubmitAdd = evt => {
+    evt.preventDefault();
+    (0,_apis_user_api__WEBPACK_IMPORTED_MODULE_1__.getUser)(formData).then(response => {
+      // Check if the response indicates a successful login
+      if (response) {
+        setUser([response, ...user]);
+        navigate('/');
+      } else {
+        // Handle incorrect email/password case
+        navigate('/search');
+      }
+    }).catch(error => {
+      // Handle other errors
+      console.log(error);
+    });
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
+    onSubmit: handleSubmitAdd,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+      children: "Enter login details"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+      htmlFor: "email",
+      children: "Email"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+      type: "text",
+      id: "email",
+      value: formData.email,
+      onChange: handleChange
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+      htmlFor: "password",
+      children: "Password"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+      type: "text",
+      id: "password",
+      value: formData.password,
+      onChange: handleChange
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+      type: "submit",
+      children: "Login"
+    })]
   });
 }
 

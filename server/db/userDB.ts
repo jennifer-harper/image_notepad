@@ -1,14 +1,14 @@
 import dbCon from './connections'
-import { UserData } from '../../models/character'
+import { UserData, Login } from '../../models/character'
 
 export function getAllUserDB(){
     return dbCon('user-login')
 }
 
-export function getUserDB(password:string, username:string){
+export function getUserDB(data:Login){
     return dbCon('user-login')
     .select("*")
-    .where ({password: password, username:username})
+    .where (data)
     .first()
 }
 

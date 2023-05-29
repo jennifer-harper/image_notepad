@@ -6,6 +6,12 @@ export interface UserData{
   username:string;
 }
 
+export interface Login{
+  email:string;
+  password: string;
+}
+
+
 export interface User{
   id:number
 }
@@ -72,4 +78,10 @@ export interface Combined{
   description:string;
   src:string;
   notes:string
+}
+
+export interface Login {
+  password:string;
+  // username:string;
+  email:string
 }
