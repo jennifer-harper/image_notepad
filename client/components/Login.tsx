@@ -12,7 +12,6 @@ export function Login() {
 
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    // console.log(e.target.id)
     setFormUser({
       ...formData,
       [e.target.id]: e.target.value,

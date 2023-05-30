@@ -13,3 +13,10 @@ export function getUser(data:Login){
       throw error.response.body.msg
     })
 }
+
+export function signUp(data:Login){
+  return request
+  .post(`${serverURL}/signup`)
+  .send(data)
+  .then(res => res.body)
+}
