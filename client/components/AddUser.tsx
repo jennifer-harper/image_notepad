@@ -17,7 +17,7 @@ export function AddUser(){
   const navigate = useNavigate()
 
   const isValidEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return emailRegex.test(email);
   }
 
@@ -78,7 +78,6 @@ export function AddUser(){
         return
       }
     } catch (error) {
-
       console.log(error)
     }
   }
@@ -123,8 +122,7 @@ export function AddUser(){
     <input
     type="text"
     id="password"
-    onChange={(e: InputChange) => setUserPassword(e.target.value)} />
-  
+    onChange={(e: InputChange) => setUserPassword(e.target.value)} />  
 
     <button type="submit">Sign up</button>
   </form>
