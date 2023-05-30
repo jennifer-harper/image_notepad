@@ -4931,6 +4931,7 @@ function Login() {
     password: ''
   });
   const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
+  const [error, setErrors] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const handleChange = e => {
     setFormUser({
       ...formData,
@@ -4939,6 +4940,9 @@ function Login() {
   };
   const handleSubmitAdd = evt => {
     evt.preventDefault();
+
+    // Clear any previous error messages
+    setErrors('');
     (0,_apis_user_api__WEBPACK_IMPORTED_MODULE_1__.getUser)(formData).then(response => {
       // Check if the response indicates a successful login
       if (response) {
@@ -4946,11 +4950,10 @@ function Login() {
         navigate('/');
       } else {
         // Handle incorrect email/password case
-        navigate('/search');
+        setErrors('Incorrect username or password');
       }
-    }).catch(error => {
-      // Handle other errors
-      console.log(error);
+    }).catch(() => {
+      setErrors('Incorrect username or password');
     });
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
@@ -4973,6 +4976,8 @@ function Login() {
       id: "password",
       value: formData.password,
       onChange: handleChange
+    }), error && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+      children: error
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
       type: "submit",
       children: "Login"

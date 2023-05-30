@@ -10,6 +10,8 @@ export function Login() {
   const [formData, setFormUser] = useState({ email: '', password: '' } as UserData)
   const navigate = useNavigate()
 
+  const [error, setErrors] = useState('')
+
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormUser({
@@ -20,6 +22,11 @@ export function Login() {
 
   const handleSubmitAdd = (evt: FormEvent) => {
     evt.preventDefault()
+
+    // Clear any previous error messages
+    setErrors('')
+
+
     getUser(formData)
     .then((response) => {
         // Check if the response indicates a successful login
@@ -28,12 +35,11 @@ export function Login() {
           navigate('/')
         } else {
           // Handle incorrect email/password case
-          navigate('/search')
+          setErrors('Incorrect username or password')
         }
       })
-      .catch((error) => {
-        // Handle other errors
-        console.log(error)
+      .catch(() => {
+        setErrors('Incorrect username or password')
       })
   }
 
@@ -57,9 +63,13 @@ export function Login() {
         onChange={handleChange}
       />
 
+      {error && <p>{error}</p>}
+      
       <button type="submit">
         Login
       </button>
     </form>
+
+    
   )
 }
