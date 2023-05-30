@@ -20,3 +20,11 @@ export function signUp(data:Login){
   .send(data)
   .then(res => res.body)
 }
+
+export function getAllUsers(){
+  return request
+  .get(serverURL)
+  .then(res => res.body)
+}
+
+

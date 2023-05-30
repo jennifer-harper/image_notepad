@@ -1,3 +1,9 @@
+export interface FormErrors {
+  username?: string;
+  email?: string;
+  password?: string;
+}
+
 
 //user
 export interface UserData{

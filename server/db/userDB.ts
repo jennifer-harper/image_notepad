@@ -1,5 +1,5 @@
 import dbCon from './connections'
-import { UserData, Login } from '../../models/character'
+import { UserData} from '../../models/character'
 
 export function getAllUserDB(){
     return dbCon('user-login')
@@ -20,4 +20,8 @@ export async function createUserDB(data:UserData){
     .returning('*')
 }
 
+export async function delUserDB(id:number){
+    return dbCon('user-login')
+    .delete().where('id', id)
+}
 

@@ -4384,6 +4384,7 @@ function editUpload(id, data) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getAllUsers": () => (/* binding */ getAllUsers),
 /* harmony export */   "getUser": () => (/* binding */ getUser),
 /* harmony export */   "signUp": () => (/* binding */ signUp)
 /* harmony export */ });
@@ -4398,6 +4399,9 @@ function getUser(data) {
 }
 function signUp(data) {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().post(`${serverURL}/signup`).send(data).then(res => res.body);
+}
+function getAllUsers() {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(serverURL).then(res => res.body);
 }
 
 /***/ }),
@@ -4424,66 +4428,125 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function AddUser() {
+  const [email, setUserEmail] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [username, setUserName] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [password, setUserPassword] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const [formData, setFormUser] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    email: '',
-    password: '',
-    username: ''
-  });
+  const [usernameError, setUsernameError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [emailError, setEmailError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [passwordError, setPasswordError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
-  const handleChange = e => {
-    setFormUser({
-      ...formData,
-      [e.target.id]: e.target.value
-    });
+  const isValidEmail = email => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
-  const handleSubmitAdd = evt => {
+  const checkExistingEmail = email => {
+    const existingUser = user.find(user => user.email === email);
+    return existingUser !== undefined;
+  };
+  const validateUsername = username => {
+    const minL = 4;
+    const maxL = 20;
+    const usernameRegex = /^[a-zA-Z0-9_]+$/;
+    return username.length >= minL && username.length <= maxL && usernameRegex.test(username);
+  };
+  const validatePassword = password => {
+    const minL = 8;
+    const ucRegex = /[A-Z]/;
+    const lcRegex = /[a-z]/;
+    const digitRegex = /[0-9]/;
+    return password.length >= minL && ucRegex.test(password) && lcRegex.test(password) && digitRegex.test(password);
+  };
+  const handleSubmitAdd = async evt => {
     evt.preventDefault();
-    (0,_apis_user_api__WEBPACK_IMPORTED_MODULE_1__.signUp)(formData).then(response => {
-      // Check if the response indicates a successful login
+    setUsernameError('');
+    setEmailError('');
+    setPasswordError('');
+    if (!isValidEmail(email)) {
+      setEmailError('Please enter a valid email address.');
+      return;
+    }
+    if (checkExistingEmail(email)) {
+      setEmailError("This email address is already registered.");
+      return;
+    }
+    if (!validateUsername(username)) {
+      setUsernameError("Please enter a valid username");
+      return;
+    }
+    if (!validatePassword(password)) {
+      setPasswordError("Please enter a valid password");
+      return;
+    }
+    const newUser = {
+      email,
+      username,
+      password
+    };
+    try {
+      const response = await (0,_apis_user_api__WEBPACK_IMPORTED_MODULE_1__.signUp)(newUser);
       if (response) {
         setUser([response, ...user]);
         navigate('/login');
-      } else {
-        // Handle incorrect email/password case
-        navigate('/');
+        return;
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Fetch all users on component mount
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    (0,_apis_user_api__WEBPACK_IMPORTED_MODULE_1__.getAllUsers)().then(users => {
+      setUser(users);
     }).catch(error => {
-      // Handle other errors
       console.log(error);
     });
-  };
+  }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
+    className: "other",
     onSubmit: handleSubmitAdd,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-      children: "Enter login details"
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+      children: "Create your account"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
       htmlFor: "username",
       children: "Username"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+      children: "Username must be between 4-20 alphanumeric and underscore characters long"
+    }), usernameError && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+      className: "error-message",
+      children: usernameError
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
       type: "text",
       id: "username",
-      value: formData.username,
-      onChange: handleChange
+      onChange: e => setUserName(e.target.value)
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
       htmlFor: "email",
       children: "Email"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+      children: "Emails must include @"
+    }), emailError && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+      className: "error-message",
+      children: emailError
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
       type: "email",
       id: "email",
-      value: formData.email,
-      onChange: handleChange
+      onChange: e => setUserEmail(e.target.value)
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
       htmlFor: "password",
       children: "Password"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+      children: "Username must be at least 8 characters, including upper, lowercase and numbers"
+    }), passwordError && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+      className: "error-message",
+      children: passwordError
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
       type: "text",
       id: "password",
-      value: formData.password,
-      onChange: handleChange
+      onChange: e => setUserPassword(e.target.value)
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
       type: "submit",
-      children: "Login"
+      children: "Sign up"
     })]
   });
 }
@@ -4940,18 +5003,10 @@ function Login() {
   };
   const handleSubmitAdd = evt => {
     evt.preventDefault();
-
-    // Clear any previous error messages
     setErrors('');
     (0,_apis_user_api__WEBPACK_IMPORTED_MODULE_1__.getUser)(formData).then(response => {
-      // Check if the response indicates a successful login
-      if (response) {
-        setUser([response, ...user]);
-        navigate('/');
-      } else {
-        // Handle incorrect email/password case
-        setErrors('Incorrect username or password');
-      }
+      setUser([response, ...user]);
+      navigate('/');
     }).catch(() => {
       setErrors('Incorrect username or password');
     });

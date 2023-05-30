@@ -20,3 +20,18 @@
 .user__grid img{
     width: 100%;
 }
+
+
+form.other{
+    display: flex;
+    flex-direction: column;
+}
+form.other p{
+    margin: 0;
+}
+form.other input{
+    margin-bottom: 30px;
+}
+.error-message{
+    color:red
+}

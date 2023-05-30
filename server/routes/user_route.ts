@@ -60,4 +60,14 @@ router.post('/login', async (req, res) => {
     }
 })
 
+
+router.delete('/:id', async (req, res) => {
+    try{
+        await db.delUserDB(+req.params.id)
+        res.sendStatus(200)
+    } catch (e) {
+        res.status(500).json({ msg: (e as Error).message })
+    }
+})
+
 export default router

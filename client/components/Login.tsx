@@ -22,21 +22,12 @@ export function Login() {
 
   const handleSubmitAdd = (evt: FormEvent) => {
     evt.preventDefault()
-
-    // Clear any previous error messages
     setErrors('')
 
-
-    getUser(formData)
+    getUser(formData) 
     .then((response) => {
-        // Check if the response indicates a successful login
-        if (response) {
           setUser([response, ...user])
           navigate('/')
-        } else {
-          // Handle incorrect email/password case
-          setErrors('Incorrect username or password')
-        }
       })
       .catch(() => {
         setErrors('Incorrect username or password')
@@ -64,7 +55,7 @@ export function Login() {
       />
 
       {error && <p>{error}</p>}
-      
+
       <button type="submit">
         Login
       </button>
