@@ -14,5 +14,7 @@ dotenv.config({ path: envPath })
 const port = process.env.PORT || 3000
 
 server.listen(port, function () {
-  // console.log('unsplash: ', process.env.UNSPLASH_KEY)
+  console.log('listening')
 })
+
+
