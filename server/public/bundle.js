@@ -4375,184 +4375,6 @@ function editUpload(id, data) {
 
 /***/ }),
 
-/***/ "./client/apis/user_api.ts":
-/*!*********************************!*\
-  !*** ./client/apis/user_api.ts ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getAllUsers": () => (/* binding */ getAllUsers),
-/* harmony export */   "getUser": () => (/* binding */ getUser),
-/* harmony export */   "signUp": () => (/* binding */ signUp)
-/* harmony export */ });
-/* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
-/* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
-
-const serverURL = '/api/v1/user';
-function getUser(data) {
-  return superagent__WEBPACK_IMPORTED_MODULE_0___default().post(`${serverURL}/login`).send(data).then(res => res.body).catch(error => {
-    throw error.response.body.msg;
-  });
-}
-function signUp(data) {
-  return superagent__WEBPACK_IMPORTED_MODULE_0___default().post(`${serverURL}/signup`).send(data).then(res => res.body);
-}
-function getAllUsers() {
-  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get(serverURL).then(res => res.body);
-}
-
-/***/ }),
-
-/***/ "./client/components/AddUser.tsx":
-/*!***************************************!*\
-  !*** ./client/components/AddUser.tsx ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AddUser": () => (/* binding */ AddUser)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _apis_user_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/user_api */ "./client/apis/user_api.ts");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-
-
-function AddUser() {
-  const [email, setUserEmail] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [username, setUserName] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [password, setUserPassword] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const [usernameError, setUsernameError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [emailError, setEmailError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [passwordError, setPasswordError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
-  const isValidEmail = email => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-  const checkExistingEmail = email => {
-    const existingUser = user.find(user => user.email === email);
-    return existingUser !== undefined;
-  };
-  const validateUsername = username => {
-    const minL = 4;
-    const maxL = 20;
-    const usernameRegex = /^[a-zA-Z0-9_]+$/;
-    return username.length >= minL && username.length <= maxL && usernameRegex.test(username);
-  };
-  const validatePassword = password => {
-    const minL = 8;
-    const ucRegex = /[A-Z]/;
-    const lcRegex = /[a-z]/;
-    const digitRegex = /[0-9]/;
-    return password.length >= minL && ucRegex.test(password) && lcRegex.test(password) && digitRegex.test(password);
-  };
-  const handleSubmitAdd = async evt => {
-    evt.preventDefault();
-    setUsernameError('');
-    setEmailError('');
-    setPasswordError('');
-    if (!isValidEmail(email)) {
-      setEmailError('Please enter a valid email address.');
-      return;
-    }
-    if (checkExistingEmail(email)) {
-      setEmailError("This email address is already registered.");
-      return;
-    }
-    if (!validateUsername(username)) {
-      setUsernameError("Please enter a valid username");
-      return;
-    }
-    if (!validatePassword(password)) {
-      setPasswordError("Please enter a valid password");
-      return;
-    }
-    const newUser = {
-      email,
-      username,
-      password
-    };
-    try {
-      const response = await (0,_apis_user_api__WEBPACK_IMPORTED_MODULE_1__.signUp)(newUser);
-      if (response) {
-        setUser([response, ...user]);
-        navigate('/login');
-        return;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // Fetch all users on component mount
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    (0,_apis_user_api__WEBPACK_IMPORTED_MODULE_1__.getAllUsers)().then(users => {
-      setUser(users);
-    }).catch(error => {
-      console.log(error);
-    });
-  }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
-    className: "other",
-    onSubmit: handleSubmitAdd,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
-      children: "Create your account"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-      htmlFor: "username",
-      children: "Username"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-      children: "Username must be between 4-20 alphanumeric and underscore characters long"
-    }), usernameError && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-      className: "error-message",
-      children: usernameError
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-      type: "text",
-      id: "username",
-      onChange: e => setUserName(e.target.value)
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-      htmlFor: "email",
-      children: "Email"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-      children: "Emails must include @"
-    }), emailError && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-      className: "error-message",
-      children: emailError
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-      type: "email",
-      id: "email",
-      onChange: e => setUserEmail(e.target.value)
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-      htmlFor: "password",
-      children: "Password"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-      children: "Username must be at least 8 characters, including upper, lowercase and numbers"
-    }), passwordError && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-      className: "error-message",
-      children: passwordError
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-      type: "text",
-      id: "password",
-      onChange: e => setUserPassword(e.target.value)
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-      type: "submit",
-      children: "Sign up"
-    })]
-  });
-}
-
-/***/ }),
-
 /***/ "./client/components/AllCombined.tsx":
 /*!*******************************************!*\
   !*** ./client/components/AllCombined.tsx ***!
@@ -4694,16 +4516,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Nav */ "./client/components/Nav.tsx");
 /* harmony import */ var _SearchSaveImg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SearchSaveImg */ "./client/components/SearchSaveImg.tsx");
 /* harmony import */ var _UploadToDb__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UploadToDb */ "./client/components/UploadToDb.tsx");
 /* harmony import */ var _AllCombined__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AllCombined */ "./client/components/AllCombined.tsx");
 /* harmony import */ var _EditUpload__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EditUpload */ "./client/components/EditUpload.tsx");
 /* harmony import */ var _EditImg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./EditImg */ "./client/components/EditImg.tsx");
-/* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Login */ "./client/components/Login.tsx");
-/* harmony import */ var _AddUser__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./AddUser */ "./client/components/AddUser.tsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -4711,35 +4531,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
+// import {Login} from './Login'
+// import { AddUser } from './AddUser'
 
 
 
 function App() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Nav__WEBPACK_IMPORTED_MODULE_0__.Nav, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Routes, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Nav__WEBPACK_IMPORTED_MODULE_0__.Nav, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Routes, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_AllCombined__WEBPACK_IMPORTED_MODULE_3__.AllCombined, {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_AllCombined__WEBPACK_IMPORTED_MODULE_3__.AllCombined, {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/search",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_SearchSaveImg__WEBPACK_IMPORTED_MODULE_1__.SearchSaveImg, {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_SearchSaveImg__WEBPACK_IMPORTED_MODULE_1__.SearchSaveImg, {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/db",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_UploadToDb__WEBPACK_IMPORTED_MODULE_2__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_UploadToDb__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/upload/:id",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_EditUpload__WEBPACK_IMPORTED_MODULE_4__.EditUpload, {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_EditUpload__WEBPACK_IMPORTED_MODULE_4__.EditUpload, {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/img/:id",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_EditImg__WEBPACK_IMPORTED_MODULE_5__.EditImg, {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
-        path: "/login",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Login__WEBPACK_IMPORTED_MODULE_6__.Login, {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
-        path: "/signup",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_AddUser__WEBPACK_IMPORTED_MODULE_7__.AddUser, {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_EditImg__WEBPACK_IMPORTED_MODULE_5__.EditImg, {})
       })]
     })]
   });
@@ -4964,84 +4778,6 @@ function EditUpload() {
 
 /***/ }),
 
-/***/ "./client/components/Login.tsx":
-/*!*************************************!*\
-  !*** ./client/components/Login.tsx ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Login": () => (/* binding */ Login)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _apis_user_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/user_api */ "./client/apis/user_api.ts");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-// import { addWidgets } from '../apiClient'
-
-
-
-
-
-function Login() {
-  const [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const [formData, setFormUser] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    email: '',
-    password: ''
-  });
-  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
-  const [error, setErrors] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const handleChange = e => {
-    setFormUser({
-      ...formData,
-      [e.target.id]: e.target.value
-    });
-  };
-  const handleSubmitAdd = evt => {
-    evt.preventDefault();
-    setErrors('');
-    (0,_apis_user_api__WEBPACK_IMPORTED_MODULE_1__.getUser)(formData).then(response => {
-      setUser([response, ...user]);
-      navigate('/');
-    }).catch(() => {
-      setErrors('Incorrect username or password');
-    });
-  };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
-    onSubmit: handleSubmitAdd,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-      children: "Enter login details"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-      htmlFor: "email",
-      children: "Email"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-      type: "text",
-      id: "email",
-      value: formData.email,
-      onChange: handleChange
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-      htmlFor: "password",
-      children: "Password"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-      type: "text",
-      id: "password",
-      value: formData.password,
-      onChange: handleChange
-    }), error && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-      children: error
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-      type: "submit",
-      children: "Login"
-    })]
-  });
-}
-
-/***/ }),
-
 /***/ "./client/components/Nav.tsx":
 /*!***********************************!*\
   !*** ./client/components/Nav.tsx ***!
@@ -5077,16 +4813,6 @@ function Nav() {
         to: "/db",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
           children: "Upload Images"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/login",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-          children: "Login"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/signup",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-          children: "Sign Up"
         })
       })]
     })
