@@ -6,7 +6,7 @@ const server = express()
 import savedSearch from './routes/savedImgs'
 import combinedSave from './routes/combinedImg'
 import uploadImgs from './routes/uploadImgs'
-// import userRoute from './routes/user_route'
+
 
 
 server.use(fileUpload())
@@ -18,7 +18,7 @@ server.use(express.static(join(__dirname, './public')))
 server.use('/api/v1/images', savedSearch)
 server.use('/api/v1/combinedImg', combinedSave)
 server.use('/api/v1/uploads', uploadImgs)
-// server.use('/api/v1/user',userRoute)
+
 
 
 // This is the BrowserRouter config
