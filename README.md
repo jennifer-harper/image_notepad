@@ -5,7 +5,7 @@ The idea behind this repo it to create an app where you can search for images by
 To do/ stretch options
 - [x] add random pic to home page
 - [x] add search page and search functionality
-- [x] Add click option to save image to database
-- [x] save category used to search, with image, to database
-- [x] create page to display all images
-- [x] add filter search for categories on display page
+- [ ] Add click option to save image to database
+- [ ] save category used to search, with image, to database
+- [ ] create page to display all images
+- [ ] add filter search for categories on display page
