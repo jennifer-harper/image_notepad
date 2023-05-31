@@ -4,12 +4,12 @@
  */
 exports.up = function (knex) {
     return knex.schema.createTable('save-search', (table) => {
-      table.increments('id').primary()
-      table.string('src')
-      table.string('url')
+      table.increments('id').primary('id')
+      table.text('src')
+      table.text('url')
       table.string('category').defaultTo(null)
-      table.string('description')
-      table.string('notes')
+      table.text('description')
+      table.text('notes')
     })
   }
   
