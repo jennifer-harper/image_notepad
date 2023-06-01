@@ -56,14 +56,12 @@ h1{
     display:flex;
     padding: 20px;
 }
-
-
-
-.form-wrapper form{
+form{
     max-width: 400px;
     margin-right: 20px;
 }
-.form-wrapper form label{
+
+form label{
     margin-bottom: 8px;
 }
 

@@ -4394,44 +4394,54 @@ function EditUpload() {
       alert(err.message);
     }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
-    onSubmit: handleSubmit,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-      htmlFor: "category",
-      children: "Name"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-      type: "text",
-      name: "category",
-      value: formData.category,
-      onChange: e => setFormData({
-        ...formData,
-        [e.target.name]: e.target.value
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-      htmlFor: "notes",
-      children: "Notes"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
-      rows: 5,
-      id: "notes",
-      name: "notes",
-      value: formData.notes,
-      onChange: e => setFormData({
-        ...formData,
-        [e.target.name]: e.target.value
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-      htmlFor: "image",
-      children: "Image"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-      type: "file",
-      name: "image",
-      id: "image",
-      accept: "image/*",
-      onChange: updateFile
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-      type: "submit",
-      children: "Update"
-    })]
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    className: "flex-wrapper",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+      onSubmit: handleSubmit,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          htmlFor: "category",
+          children: "Name"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          id: "category",
+          type: "text",
+          name: "category",
+          value: formData.category,
+          onChange: e => setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          htmlFor: "notes",
+          children: "Notes"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
+          rows: 5,
+          id: "notes",
+          name: "notes",
+          value: formData.notes,
+          onChange: e => setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          htmlFor: "image",
+          children: "Image"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          type: "file",
+          name: "image",
+          id: "image",
+          accept: "image/*",
+          onChange: updateFile
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        type: "submit",
+        children: "Update"
+      })]
+    })
   });
 }
 
@@ -4584,6 +4594,7 @@ function UploadToDb() {
   const [notes, setNotes] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [file, setFile] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [graphic, setGraphic] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const formRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.getUploads)().then(data => {
       setGraphic(data);
@@ -4604,10 +4615,13 @@ function UploadToDb() {
       notes,
       image: base64_arraybuffer__WEBPACK_IMPORTED_MODULE_1__.encode(fileAsBytes)
     };
-    (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.createUpload)(newUser).then(data => setGraphic([...graphic, data])).catch(err => console.error(err));
-    setNotes('');
-    setCategory('');
-    setFile(null);
+    (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.createUpload)(newUser).then(data => {
+      setGraphic([...graphic, data]);
+      setCategory('');
+      setNotes('');
+      setFile(null);
+      formRef.current?.reset();
+    }).catch(err => console.error(err));
   };
   const updateFile = e => {
     const fileArr = e.target.files;

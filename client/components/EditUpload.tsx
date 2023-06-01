@@ -66,28 +66,37 @@ export function EditUpload(){
     }
 
     return(
+    <div className="flex-wrapper">
     <form onSubmit={handleSubmit}>
-        <label htmlFor='category'>Name</label>
-        <input 
-        type='text'
-        name='category'
-        value={formData.category}
-        onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}/>
+            <div>
+                <label htmlFor='category'>Name</label>
+                <input 
+                id="category"
+                type='text'
+                name='category'
+                value={formData.category}
+                onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}/>
+            </div>
 
-        <label htmlFor='notes'>Notes</label>
-        <textarea rows={5}  id="notes" name="notes"
-        value={formData.notes}
-        onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}/>
+            <div>
+                <label htmlFor='notes'>Notes</label>
+                <textarea rows={5}  id="notes" name="notes"
+                value={formData.notes}
+                onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}/>
+            </div>
 
-        <label htmlFor='image'>Image</label>
-        <input
-            type="file"
-            name="image"
-            id="image"
-            accept="image/*"
-            onChange={updateFile}/>
-        <button type='submit'>Update</button>  
-    </form>
+            <div>
+                <label htmlFor='image'>Image</label>
+                <input
+                type="file"
+                name="image"
+                id="image"
+                accept="image/*"
+                onChange={updateFile}/>
+            </div>
+            <button type='submit'>Update</button>  
+        </form>
+    </div>
     )
 }
 

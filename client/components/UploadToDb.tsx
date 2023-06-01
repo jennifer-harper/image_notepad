@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState, useEffect} from "react";
+import { ChangeEvent, FormEvent, useState, useEffect, useRef} from "react";
 import * as Base64 from "base64-arraybuffer";
 import { getUploads, createUpload } from '../apis/uploadImgs';
 import { Profiles } from "./Profile";
@@ -13,8 +13,7 @@ function UploadToDb() {
   const [notes, setNotes] = useState('')
   const [file, setFile] = useState(null as null | File)
   const [graphic,  setGraphic] = useState([] as Img.UploadImg[])
-
-
+  const formRef = useRef<HTMLFormElement>(null)
 
   useEffect(() => {
     getUploads()
@@ -32,14 +31,12 @@ function UploadToDb() {
     .catch((err) => alert(err.message));
   }
 
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-      if (!category) return alert('please add a category')
-      if (!file || !file.type.includes('image')) return alert('please add a picture')
+    if (!category) return alert('please add a category')
+    if (!file || !file.type.includes('image')) return alert('please add a picture')
 
-    const fileAsBytes = await file.arrayBuffer()
-    
+    const fileAsBytes = await file.arrayBuffer()    
     const newUser = {
       category,
       notes,
@@ -47,12 +44,14 @@ function UploadToDb() {
     }
 
     createUpload(newUser)
-    .then(data =>  setGraphic([...graphic, data]))
+    .then(data => {
+      setGraphic([...graphic, data])
+      setCategory('')
+      setNotes('')
+      setFile(null)
+      formRef.current?.reset()
+    })
     .catch(err => console.error(err))
-
-    setNotes('')
-    setCategory('')
-    setFile(null)
   }
 
   const updateFile = (e: InputChange) => {
