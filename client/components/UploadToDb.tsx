@@ -63,34 +63,28 @@ function UploadToDb() {
   const tempUrl = file ? URL.createObjectURL(file) : 'https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png'
 
   return (
-    <section>
-      <h2>Upload to db</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <div>
-            <label htmlFor='category'>Category</label>
-            <input id='category' type='text' onChange={(e: InputChange) => setCategory(e.target.value)} />
-          </div>
-
+    <section className="flex-wrapper">
+      <div className="form-wrapper">
+        <h1>Upload image and notes</h1>
+        <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor='image'>Select Image</label>
             <input id='image' type='file' onChange={updateFile} />
           </div>
-        </div>
-
-         <div>
-        <label htmlFor='notes'>Notes</label>
+          <div>
+            <label htmlFor='category'>Category</label>
+            <input id='category' type='text' onChange={(e: InputChange) => setCategory(e.target.value)} />
+          </div>
+          <div>
+            <label htmlFor='notes'>Notes</label>
             <textarea rows={5}  id="notes" onChange={(e: AreaChange) => setNotes(e.target.value)}/>
-        </div>  
-
-        <div className='temp_profile'>
-          <img src={tempUrl} alt={file ? 'chosen picture' : 'profile icon'} />
-        </div>
-
-        <button>Add</button>
-      </form>
-
-      {/* Render Profiles component and pass graphic data as a prop */}
+          </div>
+          <button>Add</button>
+          <div className='temp_profile'>
+            <img src={tempUrl} alt={file ? 'chosen picture' : 'profile icon'} />
+          </div>          
+        </form>
+      </div>
       <Profiles graphic={graphic} refreshList={refreshList}/>
     </section>
   )

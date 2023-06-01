@@ -11,27 +11,27 @@ type ProfilesProps = {
 
 export function Profiles({ refreshList, graphic }: ProfilesProps) {
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [filteredGraphic, setFilteredGraphic] = useState(graphic);
+  const [filteredGraphic, setFilteredGraphic] = useState(graphic)
 
   useEffect(() => {
     const filteredData = selectedCategory === ""
       ? graphic
-      : graphic.filter((data) => data.category === selectedCategory);
+      : graphic.filter((data) => data.category === selectedCategory)
 
-    setFilteredGraphic(filteredData);
-  }, [selectedCategory, graphic]);
+    setFilteredGraphic(filteredData)
+  }, [selectedCategory, graphic])
 
   const handleDel = async (id: number) => {
     delUpload(id)
       .then(() => {
-        refreshList();
+        refreshList()
       })
       .catch((err) => alert(err.message));
   };
 
   return (
     <>
-    <div>
+    <div className="gallery-wrapper">
     <select
       value={selectedCategory}
       onChange={(e) => setSelectedCategory(e.target.value)}
@@ -44,9 +44,8 @@ export function Profiles({ refreshList, graphic }: ProfilesProps) {
         </option>
       ))}
     </select>
-    </div>
+    
     <div className="img__grid">
-
       {filteredGraphic.map((u) => (
         <div key={u.id} >
           <img src={`data:image/jpg;base64,${u.image}`} alt={u.category} />
@@ -60,6 +59,7 @@ export function Profiles({ refreshList, graphic }: ProfilesProps) {
           </Link>
         </div>
       ))}
+    </div>
     </div>
     </>
   )
