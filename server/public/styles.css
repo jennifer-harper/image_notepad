@@ -1,9 +1,20 @@
+*{
+    box-sizing: border-box;
+}
 body {
     position: relative;
     height: 100%;
     margin: 0;
     max-width: 2000px;
-    overflow-x: hidden; 
+    overflow-x: hidden;
+    font-family: monospace; 
+}
+nav{
+    display: flex;
+    padding-left: 20px;
+}
+nav a{
+    margin-right: 14px;
 }
   
 ::-webkit-scrollbar {
@@ -13,6 +24,14 @@ body {
     /* Optional: just make scrollbar invisible */ 
 }
 
+button,
+input,
+select,
+input::file-selector-button,
+input[type=text]{
+    font-family: monospace;
+}
+
 
 .img__grid{
     display: flex;
@@ -20,10 +39,9 @@ body {
 }
 
 .img__grid > div{
-    max-width: 25%;
+    max-width: 33.33%;
     min-width: 300px;
     padding: 30px;
-    box-sizing: border-box;
 }
 
 .img__grid img{
@@ -38,6 +56,8 @@ h1{
     display:flex;
     padding: 20px;
 }
+
+
 
 .form-wrapper form{
     max-width: 400px;

@@ -3,9 +3,10 @@ import {Link} from 'react-router-dom'
 export function Nav () {
   return (
     <>
-      <div className='nav'>
+      <nav className='nav'>
+        <Link to='/'><p>Home</p></Link>
         <Link to='/db'><p>Upload Images</p></Link>
-      </div>
+      </nav>
     </>
   )
 }

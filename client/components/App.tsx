@@ -12,6 +12,7 @@ function App() {
     <>
     <Nav/>
     <Routes>
+      <Route path='/' element={'homepage'} />
       <Route path='/db' element={<UploadToDb />} />
       <Route path='/upload/:id' element={<EditUpload />} />
     </Routes>
