@@ -4401,7 +4401,7 @@ function EditUpload() {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
           htmlFor: "category",
-          children: "Name"
+          children: "Category"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
           id: "category",
           type: "text",
@@ -4607,7 +4607,6 @@ function UploadToDb() {
   };
   const handleSubmit = async e => {
     e.preventDefault();
-    if (!category) return alert('please add a category');
     if (!file || !file.type.includes('image')) return alert('please add a picture');
     const fileAsBytes = await file.arrayBuffer();
     const newUser = {
@@ -4616,7 +4615,7 @@ function UploadToDb() {
       image: base64_arraybuffer__WEBPACK_IMPORTED_MODULE_1__.encode(fileAsBytes)
     };
     (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.createUpload)(newUser).then(data => {
-      setGraphic([...graphic, data]);
+      setGraphic([data, ...graphic]);
       setCategory('');
       setNotes('');
       setFile(null);
@@ -4635,6 +4634,7 @@ function UploadToDb() {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
         children: "Upload image and notes"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
+        ref: formRef,
         onSubmit: handleSubmit,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {

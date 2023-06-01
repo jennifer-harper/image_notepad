@@ -26,14 +26,14 @@ function UploadToDb() {
   const refreshList = () => {
     getUploads()
     .then((data) => {
-       setGraphic(data);
+       setGraphic(data)
     })
     .catch((err) => alert(err.message));
   }
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if (!category) return alert('please add a category')
+
     if (!file || !file.type.includes('image')) return alert('please add a picture')
 
     const fileAsBytes = await file.arrayBuffer()    
@@ -45,7 +45,7 @@ function UploadToDb() {
 
     createUpload(newUser)
     .then(data => {
-      setGraphic([...graphic, data])
+      setGraphic([data, ...graphic])
       setCategory('')
       setNotes('')
       setFile(null)
@@ -65,7 +65,7 @@ function UploadToDb() {
     <section className="flex-wrapper">
       <div className="form-wrapper">
         <h1>Upload image and notes</h1>
-        <form onSubmit={handleSubmit}>
+        <form ref={formRef} onSubmit={handleSubmit}>
           <div>
             <label htmlFor='image'>Select Image</label>
             <input id='image' type='file' onChange={updateFile} />

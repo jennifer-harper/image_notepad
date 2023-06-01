@@ -6,7 +6,7 @@ import * as Base64 from 'base64-arraybuffer'
 import { useNavigate } from 'react-router-dom';
 
 export function EditUpload(){
-    const { id} = useParams()
+    const {id} = useParams()
     const [imgData, setImgData] = useState<Img.UploadImgData| undefined>(undefined)
     const navigate = useNavigate()
 
@@ -55,21 +55,20 @@ export function EditUpload(){
     }
 
     const handleSubmit = async (evt: FormEvent) => {
-    evt.preventDefault()
-    try {
-        await editUpload(Number(id), formData);
-        navigate('/db')
-
+        evt.preventDefault()
+        try {
+            await editUpload(Number(id), formData);
+            navigate('/db')
         } catch (err) {
-        alert((err as Error).message);
+            alert((err as Error).message);
         }
     }
 
     return(
     <div className="flex-wrapper">
-    <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
-                <label htmlFor='category'>Name</label>
+                <label htmlFor='category'>Category</label>
                 <input 
                 id="category"
                 type='text'
@@ -77,14 +76,12 @@ export function EditUpload(){
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}/>
             </div>
-
             <div>
                 <label htmlFor='notes'>Notes</label>
                 <textarea rows={5}  id="notes" name="notes"
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}/>
             </div>
-
             <div>
                 <label htmlFor='image'>Image</label>
                 <input
