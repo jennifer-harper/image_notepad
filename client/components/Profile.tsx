@@ -1,5 +1,6 @@
 import * as Img from '../../models/character'
 import { delUpload } from '../apis/uploadImgs';
+import {Link} from 'react-router-dom'
 
 type ProfilesProps = {
   users: Img.UploadImg[]
@@ -23,6 +24,7 @@ export function Profiles({refreshList, users}: ProfilesProps) {
           <p>{u.notes}</p>
           <h3>{u.category}</h3>
           <button className="del_button" onClick={() => handleDel(u.id)}>Delete</button>
+          <Link to={`/upload/${u.id}`}><button>Update</button></Link>
         </div>
       ))}
     </div>

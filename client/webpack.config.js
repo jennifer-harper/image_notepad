@@ -1,6 +1,6 @@
 const { join } = require('node:path')
 // NEW for .env file
-const Dotenv = require('dotenv-webpack')
+// const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   entry: join(__dirname, 'index.tsx'),
@@ -19,12 +19,12 @@ module.exports = {
     ],
   },
   // NEW snippet to use .env in client side
-  plugins: [
-    // !!! NEW for .env file
-    new Dotenv({
-      path: join(__dirname, '../.env'),
-    }),
-  ],
+  // plugins: [
+  //   // !!! NEW for .env file
+  //   new Dotenv({
+  //     path: join(__dirname, '../.env'),
+  //   }),
+  // ],
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },

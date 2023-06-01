@@ -58,7 +58,7 @@ export function EditUpload(){
     evt.preventDefault()
     try {
         await editUpload(Number(id), formData);
-        navigate('/')
+        navigate('/db')
 
         } catch (err) {
         alert((err as Error).message);
