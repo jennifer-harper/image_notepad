@@ -5,33 +5,20 @@
     justify-content: space-around;
     flex-wrap: wrap;
 } */
-.user__grid{
+.img__grid{
     display: flex;
     flex-wrap: wrap;
 }
 
-.user__grid > div{
+.img__grid > div{
     max-width: 25%;
     min-width: 300px;
     padding: 30px;
     box-sizing: border-box;
 }
 
-.user__grid img{
+.img__grid img{
     width: 100%;
 }
 
 
-form.other{
-    display: flex;
-    flex-direction: column;
-}
-form.other p{
-    margin: 0;
-}
-form.other input{
-    margin-bottom: 30px;
-}
-.error-message{
-    color:red
-}

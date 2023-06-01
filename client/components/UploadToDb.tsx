@@ -12,14 +12,14 @@ function UploadToDb() {
   const [category, setCategory] = useState('')
   const [notes, setNotes] = useState('')
   const [file, setFile] = useState(null as null | File)
-  const [users, setUsers] = useState([] as Img.UploadImg[])
+  const [graphic,  setGraphic] = useState([] as Img.UploadImg[])
 
 
 
   useEffect(() => {
     getUploads()
     .then((data) => {
-      setUsers(data);
+       setGraphic(data);
     })
     .catch((err) => alert(err.message));
   }, []);
@@ -27,7 +27,7 @@ function UploadToDb() {
   const refreshList = () => {
     getUploads()
     .then((data) => {
-      setUsers(data);
+       setGraphic(data);
     })
     .catch((err) => alert(err.message));
   }
@@ -47,7 +47,7 @@ function UploadToDb() {
     }
 
     createUpload(newUser)
-    .then(data => setUsers([...users, data]))
+    .then(data =>  setGraphic([...graphic, data]))
     .catch(err => console.error(err))
 
     setNotes('')
@@ -90,8 +90,8 @@ function UploadToDb() {
         <button>Add</button>
       </form>
 
-      {/* Render Profiles component and pass users data as a prop */}
-      <Profiles users={users} refreshList={refreshList}/>
+      {/* Render Profiles component and pass graphic data as a prop */}
+      <Profiles graphic={graphic} refreshList={refreshList}/>
     </section>
   )
 }
