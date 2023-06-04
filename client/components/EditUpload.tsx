@@ -1,5 +1,5 @@
 import { useEffect, useState, ChangeEvent, FormEvent} from 'react'
-import * as Img from '../../models/character'
+import * as Img from '../../models/uploads'
 import { editUpload, getIdUpload } from '../apis/uploadImgs'
 import { useParams } from 'react-router-dom'
 import * as Base64 from 'base64-arraybuffer' 

@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState, useEffect, useRef} from "react";
 import * as Base64 from "base64-arraybuffer";
 import { getUploads, createUpload } from '../apis/uploadImgs';
 import { Profiles } from "./Profile";
-import * as Img from '../../models/character';
+import * as Img from '../../models/uploads';
 
 type InputChange = ChangeEvent<HTMLInputElement>
 type AreaChange = ChangeEvent<HTMLTextAreaElement>;

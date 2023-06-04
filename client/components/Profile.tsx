@@ -1,4 +1,4 @@
-import * as Img from '../../models/character'
+import * as Img from '../../models/uploads'
 import { delUpload } from '../apis/uploadImgs';
 import {Link} from 'react-router-dom'
 import { useState, useEffect} from "react";

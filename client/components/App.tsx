@@ -1,22 +1,18 @@
-import {Routes, Route} from 'react-router-dom'
-import {Nav} from './Nav'
+import { Routes, Route } from 'react-router-dom'
+import Nav from './Nav'
 import UploadToDb from "./UploadToDb"
 import {EditUpload } from './EditUpload'
 
-
-
-
-
 function App() {
-  return(
+  return (
     <>
-    <Nav/>
-    <Routes>
-      <Route path='/' element={'homepage'} />
-      <Route path='/db' element={<UploadToDb />} />
-      <Route path='/upload/:id' element={<EditUpload />} />
-    </Routes>
-  </>
+      <Nav />
+      <Routes>
+        <Route path="/" element={'Welcome Home'} />
+        <Route path='/db' element={<UploadToDb />} />
+        <Route path='/upload/:id' element={<EditUpload />} />
+      </Routes>
+    </>
   )
 }
 
