@@ -1,19 +1,22 @@
-import { ChangeEvent, FormEvent, useState, useEffect, useRef} from "react";
+import { ChangeEvent, FormEvent, useState, useEffect} from "react";
 import * as Base64 from "base64-arraybuffer";
 import { getUploads, createUpload } from '../apis/uploadImgs';
 import { Profiles } from "./Profile";
-import * as Img from '../../models/uploads';
+import * as Img from '../../models/uploads'
+import { useAuth0 } from '@auth0/auth0-react' 
 
 type InputChange = ChangeEvent<HTMLInputElement>
 type AreaChange = ChangeEvent<HTMLTextAreaElement>;
 
 
 function UploadToDb() {
+
+  const { getAccessTokenSilently} = useAuth0()
+
   const [category, setCategory] = useState('')
   const [notes, setNotes] = useState('')
   const [file, setFile] = useState(null as null | File)
   const [graphic,  setGraphic] = useState([] as Img.UploadImg[])
-  const formRef = useRef<HTMLFormElement>(null)
 
   useEffect(() => {
     getUploads()
@@ -43,13 +46,12 @@ function UploadToDb() {
       image: Base64.encode(fileAsBytes)
     }
 
-    createUpload(newUser)
+    const token = await getAccessTokenSilently()    
+    createUpload(newUser, token)
     .then(data => {
       setGraphic([data, ...graphic])
       setCategory('')
       setNotes('')
-      setFile(null)
-      formRef.current?.reset()
     })
     .catch(err => console.error(err))
   }
@@ -65,7 +67,7 @@ function UploadToDb() {
     <section className="flex-wrapper">
       <div className="form-wrapper">
         <h1>Upload image and notes</h1>
-        <form ref={formRef} onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor='image'>Select Image</label>
             <input id='image' type='file' onChange={updateFile} />

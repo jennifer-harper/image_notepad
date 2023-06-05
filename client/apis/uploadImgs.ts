@@ -1,5 +1,5 @@
 import request from 'superagent'
-import * as Img from '../../models/character'
+import * as Img from '../../models/uploads'
 const serverURL = '/api/v1/uploads'
 
 
@@ -9,9 +9,10 @@ export function getUploads(): Promise<Img.UploadImg[]> {
     .then(res => res.body)
   }
   
-  export function createUpload(data:Img.UploadImgData): Promise<Img.UploadImg>{
+  export function createUpload(data:Img.UploadImgData, token:string): Promise<Img.UploadImg>{
     return request
     .post(serverURL)
+    .set('Authorization', `Bearer ${token}`)
     .send(data)
     .then(res => res.body)
   }
