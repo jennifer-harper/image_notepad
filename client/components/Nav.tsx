@@ -1,15 +1,10 @@
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import { useAuth0 } from "@auth0/auth0-react";
-import {Link} from 'react-router-dom'
 
 function Nav() {
-  const {user, logout, loginWithRedirect } = useAuth0() 
+  const {user, logout} = useAuth0() 
   const handleSignOut = () => {
     logout()
-  }
-
-  const handleSignIn = () => {
-    loginWithRedirect()
   }
 
   return (
@@ -17,15 +12,7 @@ function Nav() {
     <IfAuthenticated>
       <button onClick={handleSignOut}>Sign out</button>
       {user && <p>Signed in as: {user?.nickname}</p>}
-      <nav className='nav'>
-      <Link to='/'><p>Home</p></Link>
-      <Link to='/db'><p>Upload Images</p></Link>
-    </nav>
     </IfAuthenticated>
-    {/* <IfNotAuthenticated>
-    <Link to='/'><p>Home</p></Link>
-    <button onClick={handleSignIn}>Sign in</button>
-    </IfNotAuthenticated> */}
     </>
   )
 }

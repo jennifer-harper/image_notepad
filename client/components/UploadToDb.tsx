@@ -70,7 +70,7 @@ function UploadToDb() {
     loginWithRedirect()
   }
 
-
+  
   return (
     <>
     <IfAuthenticated>
