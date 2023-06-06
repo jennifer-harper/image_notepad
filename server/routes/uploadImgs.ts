@@ -26,47 +26,17 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-//********************** */
-// router.post('/', checkJwt, async (req: JwtRequest, res) => {
-//     try {
-//       const { title, description, category, link, image } = req.body;
-//       const auth0Id = req.auth?.sub;
-  
-//       if (!auth0Id) {
-//         console.error('No auth0Id');
-//         return res.status(401).send('Unauthorized');
-//       }
-  
-//       const newNote: UserData = {
-//         title,
-//         description,
-//         link,
-//         image,
-//         category,
-//         added_by_user: auth0Id,
-//       };
-  
-//       const data = await db.createNewNoteDB(newNote);
-//       res.json(data);
-//     } catch (err) {
-//       res.status(500).send(err.message);
-//     }
-//   });
-
 //******************* create new
 
 router.post('/', checkJwt, async (req: JwtRequest, res) => {
     try{
         const auth0Id = req.auth?.sub
         const {category, notes, image} = req.body
-
         if (!auth0Id) {
             console.error('No auth0Id')
             return res.status(401).send('Unauthorized')
         }
-
         const newImg = {category, notes, image, user_id: auth0Id}
-
         const imgArr = await db.createUploadDB(newImg)
         res.json(imgArr[0])
     }catch (e) {

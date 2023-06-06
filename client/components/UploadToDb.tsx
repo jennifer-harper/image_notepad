@@ -16,7 +16,7 @@ function UploadToDb() {
   const [category, setCategory] = useState('')
   const [notes, setNotes] = useState('')
   const [file, setFile] = useState(null as null | File)
-  const [graphic,  setGraphic] = useState([] as Img.UploadImg[])
+  const [graphic,  setGraphic] = useState([] as Img.UploadUser[])
 
   useEffect(() => {
     getUploads()

@@ -3,13 +3,13 @@ import * as Img from '../../models/uploads'
 const serverURL = '/api/v1/uploads'
 
 
-export function getUploads(): Promise<Img.UploadImg[]> {
+export function getUploads(): Promise<Img.UploadUser[]> {
     return request
     .get(serverURL)
     .then(res => res.body)
   }
   
-  export function createUpload(data:Img.UploadImgData, token:string): Promise<Img.UploadImg>{
+  export function createUpload(data:Img.UploadImgData, token:string): Promise<Img.UploadUser>{
     return request
     .post(serverURL)
     .set('Authorization', `Bearer ${token}`)

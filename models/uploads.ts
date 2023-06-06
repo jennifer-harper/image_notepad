@@ -11,4 +11,5 @@ export interface UploadImgData {
   
   export interface UploadUser extends UploadImgData{
     user_id:string
+    id:number
   }
