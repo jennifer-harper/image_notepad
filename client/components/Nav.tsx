@@ -22,11 +22,11 @@ function Nav() {
       <Link to='/db'><p>Upload Images</p></Link>
     </nav>
     </IfAuthenticated>
-    <IfNotAuthenticated>
-      <button onClick={handleSignIn}>Sign in</button>
-    </IfNotAuthenticated>
-
-  </>
+    {/* <IfNotAuthenticated>
+    <Link to='/'><p>Home</p></Link>
+    <button onClick={handleSignIn}>Sign in</button>
+    </IfNotAuthenticated> */}
+    </>
   )
 }
 

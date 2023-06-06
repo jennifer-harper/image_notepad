@@ -4,6 +4,8 @@ import { getUploads, createUpload } from '../apis/uploadImgs';
 import { Profiles } from "./Profile";
 import * as Img from '../../models/uploads'
 import { useAuth0 } from '@auth0/auth0-react' 
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+import {Link} from 'react-router-dom'
 
 type InputChange = ChangeEvent<HTMLInputElement>
 type AreaChange = ChangeEvent<HTMLTextAreaElement>;
@@ -11,7 +13,7 @@ type AreaChange = ChangeEvent<HTMLTextAreaElement>;
 
 function UploadToDb() {
 
-  const { getAccessTokenSilently} = useAuth0()
+  const { getAccessTokenSilently, loginWithRedirect } = useAuth0()
 
   const [category, setCategory] = useState('')
   const [notes, setNotes] = useState('')
@@ -63,7 +65,15 @@ function UploadToDb() {
 
   const tempUrl = file ? URL.createObjectURL(file) : 'https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png'
 
+
+  const handleSignIn = () => {
+    loginWithRedirect()
+  }
+
+
   return (
+    <>
+    <IfAuthenticated>
     <section className="flex-wrapper">
       <div className="form-wrapper">
         <h1>Upload image and notes</h1>
@@ -88,6 +98,14 @@ function UploadToDb() {
       </div>
       <Profiles graphic={graphic} refreshList={refreshList}/>
     </section>
+    </IfAuthenticated>
+
+    <IfNotAuthenticated>
+      <h1>You must be signed in to use this site. Please sign in or register</h1>
+      <Link to='/'><p>Home</p></Link>
+    <button onClick={handleSignIn}>Sign in</button>
+    </IfNotAuthenticated>
+    </>
   )
 }
 

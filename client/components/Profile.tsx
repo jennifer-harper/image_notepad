@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import { useState, useEffect} from "react";
 import { useAuth0 } from "@auth0/auth0-react"
 
+
 type ProfilesProps = {
   graphic: Img.UploadUser[]
   refreshList: () => void;
