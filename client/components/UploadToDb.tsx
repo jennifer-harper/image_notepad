@@ -13,7 +13,7 @@ type AreaChange = ChangeEvent<HTMLTextAreaElement>;
 
 function UploadToDb() {
 
-  const { getAccessTokenSilently, loginWithRedirect } = useAuth0()
+  const { getAccessTokenSilently, loginWithRedirect, isLoading } = useAuth0()
 
   const [category, setCategory] = useState('')
   const [notes, setNotes] = useState('')
@@ -21,12 +21,14 @@ function UploadToDb() {
   const [graphic,  setGraphic] = useState([] as Img.UploadUser[])
 
   useEffect(() => {
-    getUploads()
-    .then((data) => {
-       setGraphic(data);
-    })
-    .catch((err) => alert(err.message));
-  }, []);
+    if (!isLoading) {
+      getUploads()
+        .then((data) => {
+          setGraphic(data)
+        })
+        .catch((err) => alert(err.message))
+    }
+  }, [isLoading])
 
   const refreshList = () => {
     getUploads()
@@ -69,7 +71,9 @@ function UploadToDb() {
   const handleSignIn = () => {
     loginWithRedirect()
   }
-
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   
   return (
     <>

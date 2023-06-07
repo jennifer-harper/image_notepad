@@ -5062,7 +5062,7 @@ function HomePage() {
   } = (0,_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__.useAuth0)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (isAuthenticated) {
-      window.location.href = '/db'; // Redirect using window.location.href
+      window.location.href = '/db';
     }
   }, [isAuthenticated]);
   const handleSignIn = () => {
@@ -5073,9 +5073,8 @@ function HomePage() {
     });
   };
   if (isAuthenticated) {
-    return null; // Render nothing until redirection
+    return null;
   }
-
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
       children: "Welcome to the Homepage"
@@ -5250,17 +5249,20 @@ __webpack_require__.r(__webpack_exports__);
 function UploadToDb() {
   const {
     getAccessTokenSilently,
-    loginWithRedirect
+    loginWithRedirect,
+    isLoading
   } = (0,_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_4__.useAuth0)();
   const [category, setCategory] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [notes, setNotes] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [file, setFile] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [graphic, setGraphic] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.getUploads)().then(data => {
-      setGraphic(data);
-    }).catch(err => alert(err.message));
-  }, []);
+    if (!isLoading) {
+      (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.getUploads)().then(data => {
+        setGraphic(data);
+      }).catch(err => alert(err.message));
+    }
+  }, [isLoading]);
   const refreshList = () => {
     (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.getUploads)().then(data => {
       setGraphic(data);
@@ -5290,6 +5292,11 @@ function UploadToDb() {
   const handleSignIn = () => {
     loginWithRedirect();
   };
+  if (isLoading) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      children: "Loading..."
+    });
+  }
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Authenticated__WEBPACK_IMPORTED_MODULE_5__.IfAuthenticated, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("section", {
@@ -47718,10 +47725,16 @@ __webpack_require__.r(__webpack_exports__);
 
 document.addEventListener('DOMContentLoaded', () => {
   (0,react_dom_client__WEBPACK_IMPORTED_MODULE_0__.createRoot)(document.getElementById('app')).render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__.Auth0Provider, {
-    domain: "kahu-jennifer.au.auth0.com",
-    clientId: "wSXyLTeM8M5tPaa3aXOL5GHzZqA8E3je",
-    redirectUri: window.location.origin,
-    audience: "https://image-pad/api",
+    domain: "kahu-jennifer.au.auth0.com"
+    // image notepad
+    // clientId="wSXyLTeM8M5tPaa3aXOL5GHzZqA8E3je" 
+    //fruits
+    ,
+    clientId: "HZM1FKSsrKBdv0d58YsLG12sPXVoszAW",
+    redirectUri: window.location.origin
+    // audience="https://image-pad/api"
+    ,
+    audience: "https://fruits/api",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.BrowserRouter, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_App__WEBPACK_IMPORTED_MODULE_2__["default"], {})
     })

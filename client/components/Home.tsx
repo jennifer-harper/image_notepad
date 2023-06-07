@@ -6,7 +6,7 @@ function HomePage() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      window.location.href = '/db'; // Redirect using window.location.href
+      window.location.href = '/db'
     }
   }, [isAuthenticated]);
 
@@ -17,7 +17,7 @@ function HomePage() {
   };
 
   if (isAuthenticated) {
-    return null; // Render nothing until redirection
+    return null
   }
 
   return (
