@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
       //fruits
       clientId="HZM1FKSsrKBdv0d58YsLG12sPXVoszAW" 
       redirectUri={window.location.origin}
-      // audience="https://image-pad/api"
-      audience="https://fruits/api"
+      audience="https://image-pad/api"
+      // audience="https://fruits/api"
     >
       <Router>
         <App />

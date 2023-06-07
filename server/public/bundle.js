@@ -5184,7 +5184,7 @@ function Profiles(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
           value: "",
           children: "All"
-        }), [...new Set(graphic.map(data => data.category))].map(category => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+        }), [...new Set(filteredGraphic.map(data => data.category))].map(category => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
           value: category,
           children: category
         }, category))]
@@ -47731,10 +47731,10 @@ document.addEventListener('DOMContentLoaded', () => {
     //fruits
     ,
     clientId: "HZM1FKSsrKBdv0d58YsLG12sPXVoszAW",
-    redirectUri: window.location.origin
-    // audience="https://image-pad/api"
+    redirectUri: window.location.origin,
+    audience: "https://image-pad/api"
+    // audience="https://fruits/api"
     ,
-    audience: "https://fruits/api",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.BrowserRouter, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_App__WEBPACK_IMPORTED_MODULE_2__["default"], {})
     })

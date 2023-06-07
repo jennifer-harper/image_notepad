@@ -26,10 +26,6 @@ export function Profiles({ refreshList, graphic }: ProfilesProps) {
     setFilteredGraphic(filteredData)
   }, [selectedCategory, graphic, user?.sub])
 
-
-
-
-
   const handleDel = async (id: number) => {
     delUpload(id)
       .then(() => {
@@ -46,8 +42,7 @@ export function Profiles({ refreshList, graphic }: ProfilesProps) {
       onChange={(e) => setSelectedCategory(e.target.value)}
     >
       <option value="">All</option>
-
-      {[...new Set(graphic.map((data) => data.category))].map((category) => (
+      {[...new Set(filteredGraphic.map((data) => data.category))].map((category) => (
         <option key={category} value={category}>
           {category}
         </option>
