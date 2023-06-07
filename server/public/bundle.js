@@ -5294,6 +5294,7 @@ function UploadToDb() {
   };
   if (isLoading) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      className: "loading",
       children: "Loading..."
     });
   }
