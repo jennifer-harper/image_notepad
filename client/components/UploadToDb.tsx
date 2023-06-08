@@ -7,8 +7,6 @@ import * as Img from '../../models/uploads'
 import { useAuth0 } from '@auth0/auth0-react' 
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
-
-
 type InputChange = ChangeEvent<HTMLInputElement>
 type AreaChange = ChangeEvent<HTMLTextAreaElement>;
 
@@ -38,7 +36,7 @@ function UploadToDb() {
     if (!isLoading) {
       getUploads()
         .then((data) => {
-          setGraphic(data)
+          setGraphic(data.reverse())
         })
         .catch((err) => alert(err.message))
     }
@@ -47,7 +45,7 @@ function UploadToDb() {
   const refreshList = () => {
     getUploads()
     .then((data) => {
-       setGraphic(data)
+       setGraphic(data.reverse())
     })
     .catch((err) => alert(err.message));
   }
@@ -77,8 +75,8 @@ function UploadToDb() {
 
         // reset file input field value
     const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement 
-    fileInput.value = ''
-    setFile(null)
+      fileInput.value = ''
+      setFile(null)
     })
     
     .catch(err => console.error(err))

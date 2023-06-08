@@ -5245,13 +5245,13 @@ function UploadToDb() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (!isLoading) {
       (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.getUploads)().then(data => {
-        setGraphic(data);
+        setGraphic(data.reverse());
       }).catch(err => alert(err.message));
     }
   }, [isLoading]);
   const refreshList = () => {
     (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.getUploads)().then(data => {
-      setGraphic(data);
+      setGraphic(data.reverse());
     }).catch(err => alert(err.message));
   };
   const handleSubmit = async e => {
