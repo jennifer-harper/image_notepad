@@ -1,11 +1,13 @@
 import { ChangeEvent, FormEvent, useState, useEffect} from "react";
 import * as Base64 from "base64-arraybuffer";
 import { getUploads, createUpload } from '../apis/uploadImgs';
+import {Home} from './Home'
 import { Profiles } from "./Profile";
 import * as Img from '../../models/uploads'
 import { useAuth0 } from '@auth0/auth0-react' 
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
-import {Link} from 'react-router-dom'
+
+
 
 type InputChange = ChangeEvent<HTMLInputElement>
 type AreaChange = ChangeEvent<HTMLTextAreaElement>;
@@ -13,10 +15,22 @@ type AreaChange = ChangeEvent<HTMLTextAreaElement>;
 
 function UploadToDb() {
 
-  const { getAccessTokenSilently, loginWithRedirect, isLoading } = useAuth0()
+  const { getAccessTokenSilently, isLoading } = useAuth0()
 
-  const [category, setCategory] = useState('')
-  const [notes, setNotes] = useState('')
+  const [dataForm, setDataForm] = useState({
+    category:'',
+    notes:'',
+    image:''
+  } as Img.UploadImgData)
+
+  const handleUpdate = (
+    e: InputChange | AreaChange
+  ) => {
+    setDataForm({
+      ...dataForm,
+      [e.target.name]: e.target.value,
+    }) 
+  } 
   const [file, setFile] = useState(null as null | File)
   const [graphic,  setGraphic] = useState([] as Img.UploadUser[])
 
@@ -45,18 +59,28 @@ function UploadToDb() {
 
     const fileAsBytes = await file.arrayBuffer()    
     const newUser = {
-      category,
-      notes,
-      image: Base64.encode(fileAsBytes)
+      category: dataForm.category,
+      notes: dataForm.notes,
+      image: Base64.encode(fileAsBytes),
     }
 
-    const token = await getAccessTokenSilently()    
+    const token = await getAccessTokenSilently() 
+
     createUpload(newUser, token)
     .then(data => {
       setGraphic([data, ...graphic])
-      setCategory('')
-      setNotes('')
+      setDataForm({
+        category: '',
+        notes: '',
+        image: '',
+      }) 
+
+        // reset file input field value
+    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement 
+    fileInput.value = ''
+    setFile(null)
     })
+    
     .catch(err => console.error(err))
   }
 
@@ -67,10 +91,6 @@ function UploadToDb() {
 
   const tempUrl = file ? URL.createObjectURL(file) : 'https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png'
 
-
-  const handleSignIn = () => {
-    loginWithRedirect()
-  }
   if (isLoading) {
     return <div className="loading">Loading...</div>
   }
@@ -88,11 +108,23 @@ function UploadToDb() {
           </div>
           <div>
             <label htmlFor='category'>Category</label>
-            <input id='category' type='text' onChange={(e: InputChange) => setCategory(e.target.value)} />
+            <input
+              type="text"
+              name="category"
+              value={dataForm.category}
+              onChange={handleUpdate}
+            />
+            {/* <input id='category' type='text' onChange={(e: InputChange) => setCategory(e.target.value)} /> */}
           </div>
           <div>
             <label htmlFor='notes'>Notes</label>
-            <textarea rows={5}  id="notes" onChange={(e: AreaChange) => setNotes(e.target.value)}/>
+            <textarea
+              rows={5}
+              name="notes"
+              value={dataForm.notes}
+              onChange={handleUpdate}
+          />
+            {/* <textarea rows={5}  id="notes" onChange={(e: AreaChange) => setNotes(e.target.value)}/> */}
           </div>
           <button>Add</button>
           <div className='temp_profile'>
@@ -105,9 +137,7 @@ function UploadToDb() {
     </IfAuthenticated>
 
     <IfNotAuthenticated>
-      <h1>You must be signed in to use this site. Please sign in or register</h1>
-      <Link to='/'><p>Home</p></Link>
-    <button onClick={handleSignIn}>Sign in</button>
+      <Home />
     </IfNotAuthenticated>
     </>
   )
