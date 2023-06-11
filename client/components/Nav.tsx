@@ -1,5 +1,6 @@
-import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+import { IfAuthenticated} from './Authenticated'
 import { useAuth0 } from "@auth0/auth0-react";
+
 
 function Nav() {
   const {user, logout} = useAuth0() 

@@ -3,7 +3,8 @@ import * as Img from '../../models/uploads'
 import { editUpload, getIdUpload } from '../apis/uploadImgs'
 import { useParams } from 'react-router-dom'
 import * as Base64 from 'base64-arraybuffer' 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'
+
 
 export function EditUpload(){
     const {id} = useParams()
@@ -65,7 +66,9 @@ export function EditUpload(){
     }
 
     return(
-    <div className="flex-wrapper">
+    <>
+    <Link to="/">Back </Link>
+    <div className="flex-wrapper">              
         <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor='category'>Category</label>
@@ -94,9 +97,10 @@ export function EditUpload(){
             <button type='submit'>Update</button>  
         </form>
         <div className="imgRecap">
-            <img src={`data:image/jpg;base64,${imgData?.image}`} alt={imgData?.category} />
+        <img src={`data:image/jpg;base64,${imgData?.image}`} alt={imgData?.category} />
         </div>
     </div>
+    </>
     )
 }
 
