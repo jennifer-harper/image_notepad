@@ -93,6 +93,9 @@ export function EditUpload(){
             </div>
             <button type='submit'>Update</button>  
         </form>
+        <div className="imgRecap">
+            <img src={`data:image/jpg;base64,${imgData?.image}`} alt={imgData?.category} />
+        </div>
     </div>
     )
 }

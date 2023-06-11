@@ -4978,9 +4978,9 @@ function EditUpload() {
       alert(err.message);
     }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "flex-wrapper",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
       onSubmit: handleSubmit,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
@@ -5025,7 +5025,13 @@ function EditUpload() {
         type: "submit",
         children: "Update"
       })]
-    })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "imgRecap",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+        src: `data:image/jpg;base64,${imgData?.image}`,
+        alt: imgData?.category
+      })
+    })]
   });
 }
 
@@ -5258,13 +5264,13 @@ function UploadToDb() {
     e.preventDefault();
     if (!file || !file.type.includes('image')) return alert('please add a picture');
     const fileAsBytes = await file.arrayBuffer();
-    const newUser = {
+    const newData = {
       category: dataForm.category,
       notes: dataForm.notes,
       image: base64_arraybuffer__WEBPACK_IMPORTED_MODULE_1__.encode(fileAsBytes)
     };
     const token = await getAccessTokenSilently();
-    (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.createUpload)(newUser, token).then(data => {
+    (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.createUpload)(newData, token).then(data => {
       setGraphic([data, ...graphic]);
       setDataForm({
         category: '',
@@ -5305,6 +5311,7 @@ function UploadToDb() {
                 children: "Select Image"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
                 id: "image",
+                name: "image",
                 type: "file",
                 onChange: updateFile
               })]
@@ -5314,6 +5321,7 @@ function UploadToDb() {
                 children: "Category"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
                 type: "text",
+                id: "category",
                 name: "category",
                 value: dataForm.category,
                 onChange: handleUpdate
@@ -5325,6 +5333,7 @@ function UploadToDb() {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("textarea", {
                 rows: 5,
                 name: "notes",
+                id: "notes",
                 value: dataForm.notes,
                 onChange: handleUpdate
               })]

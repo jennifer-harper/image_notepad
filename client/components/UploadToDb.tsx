@@ -55,8 +55,9 @@ function UploadToDb() {
 
     if (!file || !file.type.includes('image')) return alert('please add a picture')
 
-    const fileAsBytes = await file.arrayBuffer()    
-    const newUser = {
+    const fileAsBytes = await file.arrayBuffer() 
+
+    const newData = {
       category: dataForm.category,
       notes: dataForm.notes,
       image: Base64.encode(fileAsBytes),
@@ -64,7 +65,7 @@ function UploadToDb() {
 
     const token = await getAccessTokenSilently() 
 
-    createUpload(newUser, token)
+    createUpload(newData, token)
     .then(data => {
       setGraphic([data, ...graphic])
       setDataForm({
@@ -73,12 +74,11 @@ function UploadToDb() {
         image: '',
       }) 
 
-        // reset file input field value
+    // reset file input field value
     const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement 
       fileInput.value = ''
       setFile(null)
-    })
-    
+    })    
     .catch(err => console.error(err))
   }
 
@@ -102,27 +102,15 @@ function UploadToDb() {
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor='image'>Select Image</label>
-            <input id='image' type='file' onChange={updateFile} />
+            <input id='image' name="image" type='file' onChange={updateFile} />
           </div>
           <div>
             <label htmlFor='category'>Category</label>
-            <input
-              type="text"
-              name="category"
-              value={dataForm.category}
-              onChange={handleUpdate}
-            />
-            {/* <input id='category' type='text' onChange={(e: InputChange) => setCategory(e.target.value)} /> */}
+            <input type="text" id="category" name="category" value={dataForm.category} onChange={handleUpdate}/>
           </div>
           <div>
             <label htmlFor='notes'>Notes</label>
-            <textarea
-              rows={5}
-              name="notes"
-              value={dataForm.notes}
-              onChange={handleUpdate}
-          />
-            {/* <textarea rows={5}  id="notes" onChange={(e: AreaChange) => setNotes(e.target.value)}/> */}
+            <textarea rows={5} name="notes" id="notes" value={dataForm.notes} onChange={handleUpdate}/>
           </div>
           <button>Add</button>
           <div className='temp_profile'>

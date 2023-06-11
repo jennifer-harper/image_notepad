@@ -83,3 +83,13 @@ form div{
     left: 0;
     top:0;
 }
+
+
+.imgRecap{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.imgRecap img{
+    max-height: 80vh;    
+}
