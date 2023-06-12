@@ -1,4 +1,7 @@
-bugs,
-
+bugs:
 category fileter only shows selected and all if category is selected.
 Edit note form shows current category and note but doesnt show image name.
+
+To do:
+Edit on one page? Dropdown options
+click on image, explan to full screen?
