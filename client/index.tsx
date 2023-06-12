@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     <Auth0Provider
       domain="kahu-jennifer.au.auth0.com"
       // image notepad
-      // clientId="wSXyLTeM8M5tPaa3aXOL5GHzZqA8E3je" 
+      clientId="wSXyLTeM8M5tPaa3aXOL5GHzZqA8E3je" 
       //fruits
-      clientId="HZM1FKSsrKBdv0d58YsLG12sPXVoszAW" 
+      // clientId="HZM1FKSsrKBdv0d58YsLG12sPXVoszAW" 
       redirectUri={window.location.origin}
       audience="https://image-pad/api"
       // audience="https://fruits/api"
