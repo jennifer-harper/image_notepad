@@ -1,98 +1,132 @@
 import { ChangeEvent, FormEvent, useState, useEffect} from "react";
 import * as Base64 from "base64-arraybuffer";
 import { getUploads, createUpload } from '../apis/uploadImgs';
+import {Home} from './Home'
 import { Profiles } from "./Profile";
-import * as Img from '../../models/character';
+import * as Img from '../../models/uploads'
+import { useAuth0 } from '@auth0/auth0-react' 
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
 type InputChange = ChangeEvent<HTMLInputElement>
 type AreaChange = ChangeEvent<HTMLTextAreaElement>;
 
 
 function UploadToDb() {
-  const [category, setCategory] = useState('')
-  const [notes, setNotes] = useState('')
+
+  const { getAccessTokenSilently, isLoading } = useAuth0()
+
+  const [dataForm, setDataForm] = useState({
+    category:'',
+    notes:'',
+    image:''
+  } as Img.UploadImgData)
+
+  const handleUpdate = (
+    e: InputChange | AreaChange
+  ) => {
+    setDataForm({
+      ...dataForm,
+      [e.target.name]: e.target.value,
+    }) 
+  } 
   const [file, setFile] = useState(null as null | File)
-  const [users, setUsers] = useState([] as Img.UploadImg[])
-
-
+  const [graphic,  setGraphic] = useState([] as Img.UploadUser[])
 
   useEffect(() => {
-    getUploads()
-    .then((data) => {
-      setUsers(data);
-    })
-    .catch((err) => alert(err.message));
-  }, []);
+    if (!isLoading) {
+      getUploads()
+        .then((data) => {
+          setGraphic(data.reverse())
+        })
+        .catch((err) => alert(err.message))
+    }
+  }, [isLoading])
 
   const refreshList = () => {
     getUploads()
     .then((data) => {
-      setUsers(data);
+       setGraphic(data.reverse())
     })
     .catch((err) => alert(err.message));
   }
 
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-      if (!category) return alert('please add a category')
-      if (!file || !file.type.includes('image')) return alert('please add a picture')
 
-    const fileAsBytes = await file.arrayBuffer()
-    
-    const newUser = {
-      category,
-      notes,
-      image: Base64.encode(fileAsBytes)
+    if (!file || !file.type.includes('image')) return alert('please add a picture')
+
+    const fileAsBytes = await file.arrayBuffer() 
+
+    const newData = {
+      category: dataForm.category,
+      notes: dataForm.notes,
+      image: Base64.encode(fileAsBytes),
     }
 
-    createUpload(newUser)
-    .then(data => setUsers([...users, data]))
-    .catch(err => console.error(err))
+    const token = await getAccessTokenSilently() 
 
-    setNotes('')
-    setCategory('')
-    setFile(null)
+    createUpload(newData, token)
+    .then(data => {
+      setGraphic([data, ...graphic])
+      setDataForm({
+        category: '',
+        notes: '',
+        image: '',
+      }) 
+
+    // reset file input field value
+    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement 
+      fileInput.value = ''
+      setFile(null)
+    })    
+    .catch(err => console.error(err))
   }
 
   const updateFile = (e: InputChange) => {
     const fileArr = e.target.files as FileList
-    setFile(fileArr[0])
-  }
+    const selectedFile = fileArr[0]
+    setFile(selectedFile)
+  }  
 
   const tempUrl = file ? URL.createObjectURL(file) : 'https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png'
 
+  if (isLoading) {
+    return <div className="loading">Loading...</div>
+  }
+  
   return (
-    <section>
-      <h2>Upload to db</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <div>
-            <label htmlFor='category'>Category</label>
-            <input id='category' type='text' onChange={(e: InputChange) => setCategory(e.target.value)} />
-          </div>
-
+    <>
+    <IfAuthenticated>
+    <section className="flex-wrapper">
+      <div className="form-wrapper">
+        <h1>Upload image and notes</h1>
+        <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor='image'>Select Image</label>
-            <input id='image' type='file' onChange={updateFile} />
+            <input id='image' name="image" type='file' onChange={updateFile} />
           </div>
-        </div>
-
-         <div>
-        <label htmlFor='notes'>Notes</label>
-            <textarea rows={5}  id="notes" onChange={(e: AreaChange) => setNotes(e.target.value)}/>
-        </div>  
-
-        <div className='temp_profile'>
-          <img src={tempUrl} alt={file ? 'chosen picture' : 'profile icon'} />
-        </div>
-
-        <button>Add</button>
-      </form>
-
-      {/* Render Profiles component and pass users data as a prop */}
-      <Profiles users={users} refreshList={refreshList}/>
+          <div>
+            <label htmlFor='category'>Category</label>
+            <input type="text" id="category" name="category" value={dataForm.category} onChange={handleUpdate}/>
+          </div>
+          <div>
+            <label htmlFor='notes'>Notes</label>
+            <textarea rows={5} name="notes" id="notes" value={dataForm.notes} onChange={handleUpdate}/>
+          </div>
+          <button>Add</button>
+          <div className='temp_profile'>
+            <img src={tempUrl} alt={file ? 'chosen picture' : 'profile icon'} />
+          </div>          
+        </form>
+      </div>
+      <Profiles graphic={graphic} refreshList={refreshList}/>
     </section>
+    </IfAuthenticated>
+
+    <IfNotAuthenticated>
+      <Home />
+    </IfNotAuthenticated>
+    </>
   )
 }
 

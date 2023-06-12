@@ -1,12 +1,13 @@
 import { useEffect, useState, ChangeEvent, FormEvent} from 'react'
-import * as Img from '../../models/character'
+import * as Img from '../../models/uploads'
 import { editUpload, getIdUpload } from '../apis/uploadImgs'
 import { useParams } from 'react-router-dom'
 import * as Base64 from 'base64-arraybuffer' 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'
+
 
 export function EditUpload(){
-    const { id} = useParams()
+    const {id} = useParams()
     const [imgData, setImgData] = useState<Img.UploadImgData| undefined>(undefined)
     const navigate = useNavigate()
 
@@ -55,39 +56,51 @@ export function EditUpload(){
     }
 
     const handleSubmit = async (evt: FormEvent) => {
-    evt.preventDefault()
-    try {
-        await editUpload(Number(id), formData);
-        navigate('/')
-
+        evt.preventDefault()
+        try {
+            await editUpload(Number(id), formData);
+            navigate('/')
         } catch (err) {
-        alert((err as Error).message);
+            alert((err as Error).message);
         }
     }
 
     return(
-    <form onSubmit={handleSubmit}>
-        <label htmlFor='category'>Name</label>
-        <input 
-        type='text'
-        name='category'
-        value={formData.category}
-        onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}/>
-
-        <label htmlFor='notes'>Notes</label>
-        <textarea rows={5}  id="notes" name="notes"
-        value={formData.notes}
-        onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}/>
-
-        <label htmlFor='image'>Image</label>
-        <input
-            type="file"
-            name="image"
-            id="image"
-            accept="image/*"
-            onChange={updateFile}/>
-        <button type='submit'>Update</button>  
-    </form>
+    <>
+    <Link to="/">Back </Link>
+    <div className="flex-wrapper">              
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label htmlFor='category'>Category</label>
+                <input 
+                id="category"
+                type='text'
+                name='category'
+                value={formData.category}
+                onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}/>
+            </div>
+            <div>
+                <label htmlFor='notes'>Notes</label>
+                <textarea rows={5}  id="notes" name="notes"
+                value={formData.notes}
+                onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}/>
+            </div>
+            <div>
+                <label htmlFor='image'>Image</label>
+                <input
+                type="file"
+                name="image"
+                id="image"
+                accept="image/*"
+                onChange={updateFile}/>
+            </div>
+            <button type='submit'>Update</button>  
+        </form>
+        <div className="imgRecap">
+        <img src={`data:image/jpg;base64,${imgData?.image}`} alt={imgData?.category} />
+        </div>
+    </div>
+    </>
     )
 }
 

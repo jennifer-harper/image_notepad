@@ -1,37 +1,96 @@
-/* .flex-wrapper,
-.comp-wrapper{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-wrap: wrap;
-} */
-.user__grid{
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.user__grid > div{
-    max-width: 25%;
-    min-width: 300px;
-    padding: 30px;
+*{
     box-sizing: border-box;
 }
+body {
+    position: relative;
+    height: 100%;
+    margin: 0;
+    max-width: 2000px;
+    overflow-x: hidden;
+    font-family: monospace; 
+}
+nav{
+    display: flex;
+    padding-left: 20px;
+}
+nav a{
+    margin-right: 14px;
+}
+  
+::-webkit-scrollbar {
+    width: 0;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */ 
+}
 
-.user__grid img{
+button,
+input,
+select,
+input::file-selector-button,
+input[type=text]{
+    font-family: monospace;
+}
+
+
+.img__grid{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.img__grid > div{
+    max-width: 33.33%;
+    min-width: 300px;
+    padding: 30px;
+}
+
+.img__grid img{
     width: 100%;
 }
 
+h1{
+    margin-top:0
+}
 
-form.other{
+.flex-wrapper{
+    display:flex;
+    padding: 20px;
+}
+form{
+    max-width: 400px;
+    margin-right: 20px;
+}
+
+form label{
+    margin-bottom: 8px;
+}
+
+form div{
     display: flex;
     flex-direction: column;
+    margin-bottom: 24px;
 }
-form.other p{
-    margin: 0;
+
+.gallery-wrapper{
+ background-color: #f2f2f2;
+ width: 100%;
 }
-form.other input{
-    margin-bottom: 30px;
+
+.loading{
+    position: absolute;
+    width: 100vw;
+    height:100vh;
+    background-color: #000;
+    left: 0;
+    top:0;
 }
-.error-message{
-    color:red
+
+
+.imgRecap{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.imgRecap img{
+    max-height: 80vh;    
 }

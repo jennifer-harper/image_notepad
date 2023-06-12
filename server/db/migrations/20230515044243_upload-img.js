@@ -8,6 +8,7 @@ exports.up = function (knex) {
       table.text('image')
       table.string('category').defaultTo(null)
       table.text('notes')
+      table.text('user_id')
     })
   }
   

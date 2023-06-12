@@ -1,5 +1,5 @@
-import dbCon from './connections'
-import * as Img from '../../models/character'
+import dbCon from './connection'
+import * as Img from '../../models/uploads'
 
 //*******************Get all
 export function getUploadsDB(){

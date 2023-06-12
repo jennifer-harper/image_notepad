@@ -1,14 +1,12 @@
 const { join } = require('node:path')
-// NEW for .env file
-const Dotenv = require('dotenv-webpack')
-
+// const Dotenv = require('dotenv-webpack')
 module.exports = {
+  mode: 'development',
   entry: join(__dirname, 'index.tsx'),
   output: {
     path: join(__dirname, '../server/public'),
     filename: 'bundle.js',
   },
-  mode: 'development',
   module: {
     rules: [
       {
@@ -18,13 +16,6 @@ module.exports = {
       },
     ],
   },
-  // NEW snippet to use .env in client side
-  plugins: [
-    // !!! NEW for .env file
-    new Dotenv({
-      path: join(__dirname, '../.env'),
-    }),
-  ],
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
@@ -32,4 +23,13 @@ module.exports = {
   devServer: {
     contentBase: join(__dirname, '../server/public'),
   },
+
+  // plugins: [
+  //   // !!! NEW for .env file
+  //   new Dotenv({
+  //     path: join(__dirname, '../.env'),
+  //   }),
+  // ]
+
+
 }

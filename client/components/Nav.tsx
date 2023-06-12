@@ -1,17 +1,21 @@
-import {Link} from 'react-router-dom'
+import { IfAuthenticated} from './Authenticated'
+import { useAuth0 } from "@auth0/auth0-react";
 
-export function Nav () {
+
+function Nav() {
+  const {user, logout} = useAuth0() 
+  const handleSignOut = () => {
+    logout()
+  }
+
   return (
-    <>
-      <div className='nav'>
-        <Link to='/'><p>See All Images</p></Link>
-        <Link to='/search'><p>Find UnSplash Images</p></Link>
-        <Link to='/db'><p>Upload Images</p></Link>
-        {/* <Link to='/login'><p>Login</p></Link>
-        <Link to='/signup'><p>Sign Up</p></Link> */}
-      </div>
+  <>
+    <IfAuthenticated>
+      <button onClick={handleSignOut}>Sign out</button>
+      {user && <p>Signed in as: {user?.nickname}</p>}
+    </IfAuthenticated>
     </>
   )
 }
 
-// export default Nav
+export default Nav
