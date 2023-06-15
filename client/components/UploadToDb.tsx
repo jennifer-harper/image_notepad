@@ -14,6 +14,8 @@ type AreaChange = ChangeEvent<HTMLTextAreaElement>;
 function UploadToDb() {
 
   const { getAccessTokenSilently, isLoading } = useAuth0()
+  const [file, setFile] = useState(null as null | File)
+  const [graphic,  setGraphic] = useState([] as Img.UploadUser[])
 
   const [dataForm, setDataForm] = useState({
     category:'',
@@ -21,34 +23,26 @@ function UploadToDb() {
     image:''
   } as Img.UploadImgData)
 
-  const handleUpdate = (
-    e: InputChange | AreaChange
-  ) => {
-    setDataForm({
-      ...dataForm,
-      [e.target.name]: e.target.value,
-    }) 
-  } 
-  const [file, setFile] = useState(null as null | File)
-  const [graphic,  setGraphic] = useState([] as Img.UploadUser[])
-
+  const fetchUploads = async () => {
+    try {
+      const data = await getUploads()
+      setGraphic(data.reverse())
+    } catch (err) {
+      alert((err as Error).message)
+    }
+  }
+  
   useEffect(() => {
     if (!isLoading) {
-      getUploads()
-        .then((data) => {
-          setGraphic(data.reverse())
-        })
-        .catch((err) => alert(err.message))
+      fetchUploads()
     }
   }, [isLoading])
+  
+  const refreshList = () => {fetchUploads()}
 
-  const refreshList = () => {
-    getUploads()
-    .then((data) => {
-       setGraphic(data.reverse())
-    })
-    .catch((err) => alert(err.message));
-  }
+  const handleUpdate = (e: InputChange | AreaChange) => {
+    setDataForm({...dataForm, [e.target.name]: e.target.value}) 
+  } 
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -68,11 +62,7 @@ function UploadToDb() {
     createUpload(newData, token)
     .then(data => {
       setGraphic([data, ...graphic])
-      setDataForm({
-        category: '',
-        notes: '',
-        image: '',
-      }) 
+      setDataForm({category: '', notes: '', image: ''}) 
 
     // reset file input field value
     const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement 

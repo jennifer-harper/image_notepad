@@ -5242,30 +5242,34 @@ function UploadToDb() {
     getAccessTokenSilently,
     isLoading
   } = (0,_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_5__.useAuth0)();
+  const [file, setFile] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [graphic, setGraphic] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [dataForm, setDataForm] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     category: '',
     notes: '',
     image: ''
   });
+  const fetchUploads = async () => {
+    try {
+      const data = await (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.getUploads)();
+      setGraphic(data.reverse());
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!isLoading) {
+      fetchUploads();
+    }
+  }, [isLoading]);
+  const refreshList = () => {
+    fetchUploads();
+  };
   const handleUpdate = e => {
     setDataForm({
       ...dataForm,
       [e.target.name]: e.target.value
     });
-  };
-  const [file, setFile] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
-  const [graphic, setGraphic] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    if (!isLoading) {
-      (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.getUploads)().then(data => {
-        setGraphic(data.reverse());
-      }).catch(err => alert(err.message));
-    }
-  }, [isLoading]);
-  const refreshList = () => {
-    (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.getUploads)().then(data => {
-      setGraphic(data.reverse());
-    }).catch(err => alert(err.message));
   };
   const handleSubmit = async e => {
     e.preventDefault();
