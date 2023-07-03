@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState, useEffect} from "react";
 import * as Base64 from "base64-arraybuffer";
 import { getUploads, createUpload } from '../apis/uploadImgs';
 import {Home} from './Home'
-import { Profiles } from "./Profile";
+import {Notes } from "./Notes";
 import * as Img from '../../models/uploads'
 import { useAuth0 } from '@auth0/auth0-react' 
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
@@ -109,7 +109,7 @@ function UploadToDb() {
           </div>          
         </form>
       </div>
-      <Profiles graphic={graphic} refreshList={refreshList}/>
+      <Notes graphic={graphic} refreshList={refreshList}/>
     </section>
     </IfAuthenticated>
 

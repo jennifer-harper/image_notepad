@@ -8,6 +8,7 @@ body {
     max-width: 2000px;
     overflow-x: hidden;
     font-family: monospace; 
+
 }
 nav{
     display: flex;
@@ -32,30 +33,26 @@ input[type=text]{
     font-family: monospace;
 }
 
-
-.img__grid{
-    display: flex;
-    flex-wrap: wrap;
+h1{
+    font-size: 40px;
+    font-family: 'Averia Serif Libre', cursive;
 }
 
-.img__grid > div{
-    max-width: 33.33%;
-    min-width: 300px;
-    padding: 30px;
+p{
+    line-height: 1.5em;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
 }
 
-.img__grid img{
-    width: 100%;
-}
+/* **************** */
+
+
 
 h1{
     margin-top:0
 }
 
-.flex-wrapper{
-    display:flex;
-    padding: 20px;
-}
+
 form{
     max-width: 400px;
     margin-right: 20px;
@@ -71,10 +68,7 @@ form div{
     margin-bottom: 24px;
 }
 
-.gallery-wrapper{
- background-color: #f2f2f2;
- width: 100%;
-}
+
 
 .loading{
     position: absolute;
@@ -93,4 +87,81 @@ form div{
 }
 .imgRecap img{
     max-height: 80vh;    
+}
+
+/* **************** */
+
+button{
+    padding:14px 20px;
+    margin-top: 20px;
+    border:none;
+    border-radius: 5px;
+    transition:all 0.3s ease-in-out;
+}
+button:hover{
+    transition:all 0.3s ease-in-out;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19);
+}
+button.update{
+    background-color: lightcoral;
+    color:white
+}
+/* **************** */
+.home-wrapper{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    align-items: center;
+}
+.home-wrapper .content,
+.home-wrapper .visual{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.home-wrapper .content{
+    padding: 8%
+}
+.home-wrapper .visual{
+    background-color: lightblue;
+    width: 100%;
+}
+
+/* upload to db page */
+.flex-wrapper{
+    display:flex;
+    padding: 20px;
+    background-color: lightblue;
+}
+
+/* display notes*/
+.select-wrapper{
+    text-align: right;
+}
+.notes__grid{
+    /* display: flex;
+    flex-wrap: wrap; */
+    column-count: 2;
+}
+
+.notes__grid > div{
+    /* flex: 1 1 50%; */
+    display:inline-block;
+    max-width: calc(100% - 20px);
+    padding: 4%;
+    background-color: white;
+    margin: 10px;
+    border-radius: 5px;
+    /* box-shadow: 0 10px 20px rgba(0,0,0,0.19); */
+}
+
+.notes__grid div img{
+    width: 100%;
+}
+
+.notes__grid .button-wrapper{
+    display: flex;
+    justify-content: space-between;
 }
