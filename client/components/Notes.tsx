@@ -44,7 +44,7 @@ function Notes({ refreshList, graphic }: NotesProps) {
           ))}
         </select>
       </div>    
-      <div className="notes-wrapper">
+      <div className={`${filteredGraphic.length <=2 ? 'colFlex' : 'colCount'}`}>
         {filteredGraphic.map((imgs) => (
           <div key={imgs.id} >
             <img src={`data:image/jpg;base64,${imgs.image}`} alt={imgs.category} />

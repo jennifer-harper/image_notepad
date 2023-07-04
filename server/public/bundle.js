@@ -5263,7 +5263,7 @@ function Notes(_ref) {
           }, category))]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        className: "notes-wrapper",
+        className: `${filteredGraphic.length <= 2 ? 'colFlex' : 'colCount'}`,
         children: filteredGraphic.map(imgs => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
             src: `data:image/jpg;base64,${imgs.image}`,

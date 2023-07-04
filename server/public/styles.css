@@ -140,28 +140,40 @@ button.update{
 .select-wrapper{
     text-align: right;
 }
-.notes-wrapper{
-    /* display: flex;
-    flex-wrap: wrap; */
+
+.colCount{
     column-count: 2;
 }
 
-.notes-wrapper > div{
-    /* flex: 1 1 50%; */
-    display:inline-block;
-    max-width: calc(100% - 20px);
-    padding: 4%;
+.colFlex{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.colCount > div,
+.colFlex > div{   
+    max-width: calc(50% - 20px);
+    padding: 20px;
     background-color: white;
     margin: 10px;
     border-radius: 5px;
     /* box-shadow: 0 10px 20px rgba(0,0,0,0.19); */
 }
-
-.notes-wrapper div img{
-    width: 100%;
+.colCount > div{
+    display:inline-block;
+    max-width: calc(100% - 20px);
 }
 
-.notes-wrapper .button-wrapper{
+.colFlex > div{
+    align-self: flex-start;
+}
+
+.colFlex div img,
+.colCount div img{
+    width: 100%;
+}
+.colFlex .button-wrapper,
+.colCount .button-wrapper{
     display: flex;
     justify-content: space-between;
 }
