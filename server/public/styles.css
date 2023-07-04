@@ -140,13 +140,13 @@ button.update{
 .select-wrapper{
     text-align: right;
 }
-.notes__grid{
+.notes-wrapper{
     /* display: flex;
     flex-wrap: wrap; */
     column-count: 2;
 }
 
-.notes__grid > div{
+.notes-wrapper > div{
     /* flex: 1 1 50%; */
     display:inline-block;
     max-width: calc(100% - 20px);
@@ -157,11 +157,12 @@ button.update{
     /* box-shadow: 0 10px 20px rgba(0,0,0,0.19); */
 }
 
-.notes__grid div img{
+.notes-wrapper div img{
     width: 100%;
 }
 
-.notes__grid .button-wrapper{
+.notes-wrapper .button-wrapper{
     display: flex;
     justify-content: space-between;
 }
+

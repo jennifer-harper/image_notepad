@@ -6,7 +6,7 @@ exports.up = function (knex) {
     return knex.schema.createTable('upload-img', (table) => {
       table.increments('id').primary('id')
       table.text('image')
-      table.string('category').defaultTo(null)
+      table.string('category').defaultTo('undefined')
       table.text('notes')
       table.text('user_id')
     })

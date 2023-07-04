@@ -33,8 +33,10 @@ function Notebook() {
   return (
     <>
       <IfAuthenticated>
-        <UploadToDb refreshList={refreshList} />
-        <Notes graphic={graphic} refreshList={refreshList} />
+        <section className="flex-wrapper">
+          <UploadToDb refreshList={refreshList} />
+          <Notes graphic={graphic} refreshList={refreshList} />
+        </section>
       </IfAuthenticated>
 
       <IfNotAuthenticated>

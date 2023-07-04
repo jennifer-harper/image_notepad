@@ -12,10 +12,12 @@ export function delUploadsDB (id:number){
 }
 //*******************Create new
 export function createUploadDB (data:Img.UploadImgData){
+    if (!data.category) {
+        data.category = 'undefined';
+      }
     return dbCon('upload-img').insert(data)
     .returning('*')
 }
-
 
 //*******************Get and edit based on id
 export function getIdUploadDB(id:number){

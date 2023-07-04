@@ -1,18 +1,17 @@
 import { Routes, Route } from 'react-router-dom'
 import Nav from './Nav'
-import UploadToDb from "./UploadToDb"
 import  Notebook  from './Notebook'
 import {EditUpload } from './EditUpload'
-
+import NotFound from './NotFound'
 
 function App() {
   return (
     <>
       <Nav />
       <Routes>
-        {/* <Route path='/' element={<UploadToDb />} /> */}
         <Route path='/' element={<Notebook />} />
-        <Route path='/upload/:id' element={<EditUpload />} />
+        <Route path='/edit/:id' element={<EditUpload />} />
+        {/* <Route path='/edit' element={<NotFound />} /> */}
       </Routes>
     </>
   )

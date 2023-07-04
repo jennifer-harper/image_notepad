@@ -3,7 +3,7 @@ import * as Base64 from "base64-arraybuffer";
 import { createUpload } from '../apis/uploadImgs';
 import * as Img from '../../models/uploads'
 import { useAuth0 } from '@auth0/auth0-react' 
-import { IfAuthenticated} from './Authenticated'
+
 
 type InputChange = ChangeEvent<HTMLInputElement>
 type AreaChange = ChangeEvent<HTMLTextAreaElement>
@@ -67,9 +67,7 @@ function UploadToDb({ refreshList }: UploadToDbProps) {
   }
   
   return (
-    <>
-    <IfAuthenticated>
-    <section className="flex-wrapper">
+    <>    
       <div className="form-wrapper">
         <h1>Upload image and notes</h1>
         <form onSubmit={handleSubmit}>
@@ -91,9 +89,6 @@ function UploadToDb({ refreshList }: UploadToDbProps) {
           </div>          
         </form>
       </div>
-    </section>
-    </IfAuthenticated>
-
     </>
   )
 }
