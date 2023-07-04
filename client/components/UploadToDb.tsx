@@ -1,21 +1,20 @@
-import { ChangeEvent, FormEvent, useState, useEffect} from "react";
+import { ChangeEvent, FormEvent, useState} from "react";
 import * as Base64 from "base64-arraybuffer";
-import { getUploads, createUpload } from '../apis/uploadImgs';
-import {Home} from './Home'
-import {Notes } from "./Notes";
+import { createUpload } from '../apis/uploadImgs';
 import * as Img from '../../models/uploads'
 import { useAuth0 } from '@auth0/auth0-react' 
-import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+import { IfAuthenticated} from './Authenticated'
 
 type InputChange = ChangeEvent<HTMLInputElement>
-type AreaChange = ChangeEvent<HTMLTextAreaElement>;
+type AreaChange = ChangeEvent<HTMLTextAreaElement>
 
+type UploadToDbProps = {
+  refreshList: () => void
+}
 
-function UploadToDb() {
-
+function UploadToDb({ refreshList }: UploadToDbProps) {
   const { getAccessTokenSilently, isLoading } = useAuth0()
   const [file, setFile] = useState(null as null | File)
-  const [graphic,  setGraphic] = useState([] as Img.UploadUser[])
 
   const [dataForm, setDataForm] = useState({
     category:'',
@@ -23,22 +22,6 @@ function UploadToDb() {
     image:''
   } as Img.UploadImgData)
 
-  const fetchUploads = async () => {
-    try {
-      const data = await getUploads()
-      setGraphic(data.reverse())
-    } catch (err) {
-      alert((err as Error).message)
-    }
-  }
-  
-  useEffect(() => {
-    if (!isLoading) {
-      fetchUploads()
-    }
-  }, [isLoading])
-  
-  const refreshList = () => {fetchUploads()}
 
   const handleUpdate = (e: InputChange | AreaChange) => {
     setDataForm({...dataForm, [e.target.name]: e.target.value}) 
@@ -60,12 +43,11 @@ function UploadToDb() {
     const token = await getAccessTokenSilently() 
 
     createUpload(newData, token)
-    .then(data => {
-      setGraphic([data, ...graphic])
-      setDataForm({category: '', notes: '', image: ''}) 
 
-    // reset file input field value
-    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement 
+    .then(() => {
+      refreshList()
+      setDataForm({category: '', notes: '', image: ''}) 
+      const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement 
       fileInput.value = ''
       setFile(null)
     })    
@@ -109,13 +91,9 @@ function UploadToDb() {
           </div>          
         </form>
       </div>
-      <Notes graphic={graphic} refreshList={refreshList}/>
     </section>
     </IfAuthenticated>
 
-    <IfNotAuthenticated>
-      <Home />
-    </IfNotAuthenticated>
     </>
   )
 }

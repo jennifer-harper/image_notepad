@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import Nav from './Nav'
 import UploadToDb from "./UploadToDb"
+import  Notebook  from './Notebook'
 import {EditUpload } from './EditUpload'
 
 
@@ -9,7 +10,8 @@ function App() {
     <>
       <Nav />
       <Routes>
-        <Route path='/' element={<UploadToDb />} />
+        {/* <Route path='/' element={<UploadToDb />} /> */}
+        <Route path='/' element={<Notebook />} />
         <Route path='/upload/:id' element={<EditUpload />} />
       </Routes>
     </>

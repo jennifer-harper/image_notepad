@@ -11,7 +11,7 @@ type NotesProps = {
 }
 
 
-export function Notes({ refreshList, graphic }: NotesProps) {
+function Notes({ refreshList, graphic }: NotesProps) {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [filteredGraphic, setFilteredGraphic] = useState(graphic)
 
@@ -75,4 +75,4 @@ export function Notes({ refreshList, graphic }: NotesProps) {
   )
 }
 
-
+export default Notes

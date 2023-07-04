@@ -1,6 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react';
 
-export function Home() {
+function Home() {
   const {loginWithRedirect } = useAuth0();
 
   const handleSignIn = () => {
@@ -25,4 +25,4 @@ export function Home() {
   );
 }
 
-
+export default Home
