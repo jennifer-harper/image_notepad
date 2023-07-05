@@ -129,6 +129,9 @@ button.update{
     width: 100%;
 }
 
+
+
+
 /* upload to db page */
 .flex-wrapper{
     display:flex;
@@ -136,45 +139,48 @@ button.update{
     background-color: lightblue;
 }
 
-/* display notes*/
+/* upload to db page - display notes*/
 .select-wrapper{
     text-align: right;
+    width: 100%;
 }
 
-.colCount{
-    column-count: 2;
+.mainStyle > div{   
+    padding: 20px;
+    background-color: white;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19);
 }
+
+.mainStyle div img{
+    width: 100%;
+}
+
+.mainStyle .button-wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
 
 .colFlex{
     display: flex;
     flex-wrap: wrap;
 }
 
-.colCount > div,
-.colFlex > div{   
+.colFlex > div{  
     max-width: calc(50% - 20px);
-    padding: 20px;
-    background-color: white;
-    margin: 10px;
-    border-radius: 5px;
-    /* box-shadow: 0 10px 20px rgba(0,0,0,0.19); */
+    align-self: flex-start;
 }
+
+.colCount{
+    column-count: 2;
+}
+
 .colCount > div{
     display:inline-block;
     max-width: calc(100% - 20px);
 }
 
-.colFlex > div{
-    align-self: flex-start;
-}
 
-.colFlex div img,
-.colCount div img{
-    width: 100%;
-}
-.colFlex .button-wrapper,
-.colCount .button-wrapper{
-    display: flex;
-    justify-content: space-between;
-}
 

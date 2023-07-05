@@ -5238,15 +5238,21 @@ function Notes(_ref) {
   const {
     user
   } = (0,_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_2__.useAuth0)();
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    const filteredData = selectedCategory === "" ? graphic.filter(data => data.user_id === user?.sub) : graphic.filter(data => data.category === selectedCategory && data.user_id === user?.sub);
-    setFilteredGraphic(filteredData);
-  }, [selectedCategory, graphic, user?.sub]);
   const handleDel = async id => {
     (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_0__.delUpload)(id).then(() => {
       refreshList();
     }).catch(err => alert(err.message));
   };
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    //Ensures that only the user's categories are displayed initially.
+    setFilteredGraphic(graphic.filter(data => data.user_id === user?.sub));
+  }, [graphic, user?.sub]);
+
+  //Map filteredGraphic array and extracting the unique category values (only show once in dropdown) 
+  const userCategories = [...new Set(filteredGraphic.map(data => data.category))];
+
+  // Count the total number of times a category is present in the selected category
+  const categoryCount = selectedCategory ? filteredGraphic.filter(data => data.category === selectedCategory).length : filteredGraphic.length;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("section", {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -5257,14 +5263,14 @@ function Notes(_ref) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
             value: "",
             children: "All"
-          }), [...new Set(filteredGraphic.map(data => data.category))].map(category => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+          }), userCategories.map(category => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
             value: category,
             children: category
           }, category))]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        className: `${filteredGraphic.length <= 2 ? 'colFlex' : 'colCount'}`,
-        children: filteredGraphic.map(imgs => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: `mainStyle ${categoryCount <= 2 ? 'colFlex' : 'colCount'}`,
+        children: filteredGraphic.filter(data => selectedCategory === "" || data.category === selectedCategory).map(imgs => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
             src: `data:image/jpg;base64,${imgs.image}`,
             alt: imgs.category
