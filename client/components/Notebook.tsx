@@ -10,6 +10,16 @@ import * as Img from '../../models/uploads'
 function Notebook() {
   const [graphic, setGraphic] = useState([] as Img.UploadUser[])
   const { isLoading } = useAuth0()
+  const [editMode, setEditMode] = useState(false)
+
+  const toggleEditMode = () => {
+    setEditMode(!editMode)
+  }
+  const {user, logout} = useAuth0() 
+  const handleSignOut = () => {
+    logout()
+  }
+
 
   const fetchUploads = useCallback(async () => {
     try {
@@ -33,8 +43,38 @@ function Notebook() {
   return (
     <>
       <IfAuthenticated>
-        <section className="flex-wrapper">
-          <UploadToDb refreshList={refreshList} />
+      <header>
+        <div> 
+          <div>
+            <a href='/'>
+              <svg x="0px" y="0px" 	 viewBox="0 0 100 100" >
+                <circle cx="50" cy="50" r="47.5"/>
+              </svg>
+            </a>
+          </div> 
+          <nav>
+          {user && <p>Signed in as: {user?.nickname}</p>}    
+          <button className='user-btn' onClick={handleSignOut}>Sign out</button> 
+          <button onClick={toggleEditMode}>{editMode ? 'Close' : 'Add new'}</button>
+          </nav>
+        </div>     
+      </header>
+
+        <section className="wrapper">
+
+        <div className={`modal-edit ${editMode ? 'yes' : 'no'}`}>
+
+          <div className="button-wrapper">
+          
+          </div>
+            
+            {editMode && (
+              <>
+                <UploadToDb refreshList={refreshList} />
+                </>
+            )}
+          </div>
+
           <Notes graphic={graphic} refreshList={refreshList} />
         </section>
       </IfAuthenticated>

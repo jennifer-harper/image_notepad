@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom'
-import Nav from './Nav'
 import  Notebook  from './Notebook'
 import {EditUpload } from './EditUpload'
 
@@ -7,7 +6,7 @@ import {EditUpload } from './EditUpload'
 function App() {
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
       <Routes>
         <Route path='/' element={<Notebook />} />
         <Route path='/edit/:id' element={<EditUpload />} />

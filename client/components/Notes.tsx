@@ -42,6 +42,7 @@ function Notes({ refreshList, graphic }: NotesProps) {
     <>
       <div className="view-wrapper">
         <div className="select-wrapper">
+          <p>Filter by category: </p>
           <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
             <option value="">All</option>
             {userCategories.map((category) => (
@@ -52,7 +53,7 @@ function Notes({ refreshList, graphic }: NotesProps) {
           </select>
         </div>  
 
-        <div className={`mainStyle ${categoryCount <= 2 ? 'colFlex' : 'colCount'}`}>
+        <div className={`mainStyle ${categoryCount <= 3 ? 'colFlex' : 'colCount'}`}>
           {filteredGraphic
             .filter((data) => selectedCategory === "" || data.category === selectedCategory)
             .map((imgs) => (

@@ -16,6 +16,8 @@ function UploadToDb({ refreshList }: UploadToDbProps) {
   const { getAccessTokenSilently, isLoading } = useAuth0()
   const [file, setFile] = useState(null as null | File)
 
+
+
   const [dataForm, setDataForm] = useState({
     category:'',
     notes:'',
@@ -67,29 +69,30 @@ function UploadToDb({ refreshList }: UploadToDbProps) {
   }
   
   return (
-    <>    
-      <div className="form-wrapper">
-        <div>
-        <h1>Upload image and notes</h1>
+    <>  
+      <div className="form-wrapper"> 
+       
         <div className='temp-profile'>
-            <img src={tempUrl} alt={file ? 'chosen picture' : 'profile icon'} />
-          </div> 
-        <form onSubmit={handleSubmit}>
-          <div>
+          <img src={tempUrl} alt={file ? 'chosen picture' : 'profile icon'} />
+        </div> 
+
+        <div>
+          <form onSubmit={handleSubmit}>
+            <div>
             <label htmlFor='image'>Select Image</label>
             <input id='image' name="image" type='file' onChange={updateFile} />
-          </div>
-          <div>
+            </div>
+            <div>
             <label htmlFor='category'>Category</label>
             <input type="text" id="category" name="category" value={dataForm.category} onChange={handleUpdate}/>
-          </div>
-          <div>
+            </div>
+            <div>
             <label htmlFor='notes'>Notes</label>
             <textarea rows={5} name="notes" id="notes" value={dataForm.notes} onChange={handleUpdate}/>
-          </div>
-          <button>Add note</button>         
-        </form>
-      </div>
+            </div>
+            <button>Add note</button>         
+          </form>
+        </div>
       </div>
     </>
   )
