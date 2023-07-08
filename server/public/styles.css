@@ -10,13 +10,51 @@ body {
     font-family: monospace; 
 
 }
-nav{
+
+.loading{
+    position: absolute;
+    width: 100vw;
+    height:100vh;
+    background-color: #000;
+    left: 0;
+    top:0;
+}
+
+header{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+header > div{
     display: flex;
     padding-left: 20px;
+    position: fixed;
+    width: 100%;
+    align-items: center;
+    padding-right: 30px;
+    height: 70px;
+    background-color: white;
 }
-nav a{
-    margin-right: 14px;
+header svg{
+    width: 50px;
+    fill: darkred;
 }
+
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+nav button{
+   margin-top:0;
+   margin-left:20px;
+   background-color: #db4c4c;
+   color: white;
+}
+
   
 ::-webkit-scrollbar {
     width: 0;
@@ -33,7 +71,17 @@ input[type=text]{
     font-family: monospace;
 }
 
+input[type=text]{
+    line-height: 24px;
+}
+input::file-selector-button,
+select{
+    padding:8px 12px
+}
+
+
 h1{
+    margin-top:0;
     font-size: 40px;
     font-family: 'Averia Serif Libre', cursive;
 }
@@ -42,51 +90,6 @@ p{
     line-height: 1.5em;
     overflow-wrap: break-word;
     white-space: pre-wrap;
-}
-
-/* **************** */
-
-
-
-h1{
-    margin-top:0
-}
-
-
-form{
-    max-width: 400px;
-    margin-right: 20px;
-}
-
-form label{
-    margin-bottom: 8px;
-}
-
-form div{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 24px;
-}
-
-
-
-.loading{
-    position: absolute;
-    width: 100vw;
-    height:100vh;
-    background-color: #000;
-    left: 0;
-    top:0;
-}
-
-
-.imgRecap{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-.imgRecap img{
-    max-height: 80vh;    
 }
 
 /* **************** */
@@ -106,6 +109,9 @@ button.update{
     background-color: lightcoral;
     color:white
 }
+
+
+
 /* **************** */
 .home-wrapper{
     display: flex;
@@ -132,17 +138,48 @@ button.update{
 
 
 
-/* upload to db page */
+/************main wrapper */
 .flex-wrapper{
     display:flex;
     padding: 20px;
-    background-color: lightblue;
+    background-color: lightgray;
+    width: 100%;
+}
+.flex-wrapper .form-wrapper{
+    width:34%;
+    position: relative;
+}
+.flex-wrapper .view-wrapper{
+    width: 66%;
+}
+
+/* **************** */
+
+.form-wrapper .temp-profile img{
+    max-width: 200px;
+}
+
+form{
+    width: 100%;
+    max-width: 400px;
+    margin-right: 20px;
+}
+
+form label{
+    margin-bottom: 8px;
+}
+
+form div{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
 }
 
 /* upload to db page - display notes*/
 .select-wrapper{
     text-align: right;
     width: 100%;
+    padding-right: 10px;
 }
 
 .mainStyle > div{   
@@ -183,4 +220,13 @@ button.update{
 }
 
 
+/* **********edit page************ */
+.imgRecap{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.imgRecap img{
+    max-height: 80vh;    
+}
 

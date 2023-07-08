@@ -40,7 +40,7 @@ function Notes({ refreshList, graphic }: NotesProps) {
 
   return (
     <>
-      <section>
+      <div className="view-wrapper">
         <div className="select-wrapper">
           <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
             <option value="">All</option>
@@ -71,7 +71,7 @@ function Notes({ refreshList, graphic }: NotesProps) {
               </div>
           ))}
         </div>
-      </section>
+      </div>
     </>
   );
 }

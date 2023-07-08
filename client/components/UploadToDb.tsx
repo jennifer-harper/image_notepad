@@ -69,7 +69,11 @@ function UploadToDb({ refreshList }: UploadToDbProps) {
   return (
     <>    
       <div className="form-wrapper">
+        <div>
         <h1>Upload image and notes</h1>
+        <div className='temp-profile'>
+            <img src={tempUrl} alt={file ? 'chosen picture' : 'profile icon'} />
+          </div> 
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor='image'>Select Image</label>
@@ -83,11 +87,9 @@ function UploadToDb({ refreshList }: UploadToDbProps) {
             <label htmlFor='notes'>Notes</label>
             <textarea rows={5} name="notes" id="notes" value={dataForm.notes} onChange={handleUpdate}/>
           </div>
-          <button>Add</button>
-          <div className='temp_profile'>
-            <img src={tempUrl} alt={file ? 'chosen picture' : 'profile icon'} />
-          </div>          
+          <button>Add note</button>         
         </form>
+      </div>
       </div>
     </>
   )
