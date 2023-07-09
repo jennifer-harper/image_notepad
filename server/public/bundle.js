@@ -47802,14 +47802,15 @@ document.addEventListener('DOMContentLoaded', () => {
   (0,react_dom_client__WEBPACK_IMPORTED_MODULE_0__.createRoot)(document.getElementById('app')).render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__.Auth0Provider, {
     domain: "kahu-jennifer.au.auth0.com"
     // image notepad
-    //clientId="wSXyLTeM8M5tPaa3aXOL5GHzZqA8E3je" 
+    ,
+    clientId: "wSXyLTeM8M5tPaa3aXOL5GHzZqA8E3je"
     //fruits
+    //clientId="HZM1FKSsrKBdv0d58YsLG12sPXVoszAW" 
     ,
-    clientId: "HZM1FKSsrKBdv0d58YsLG12sPXVoszAW",
-    redirectUri: window.location.origin
-    //audience="https://image-pad/api"
+    redirectUri: window.location.origin,
+    audience: "https://image-pad/api"
+    //audience="https://fruits/api"
     ,
-    audience: "https://fruits/api",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.BrowserRouter, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_App__WEBPACK_IMPORTED_MODULE_2__["default"], {})
     })
