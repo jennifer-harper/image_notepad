@@ -12,7 +12,7 @@ function Home() {
     <div className='home-wrapper'>
       <div className="content">
         <h1>Need a great online notepad?</h1>
-        <p>Add images and record your thoughts. Its free to sign up, private and easy to use.</p>
+        <p>Add images and record your thoughts. Its free to sign up, private and easy to use. (There is no email conformation, you can make up a gmail account if your worried about security.)</p>
         <div>
           <button className='signup' onClick={handleSignIn}>Sign Up Today</button>
         </div>

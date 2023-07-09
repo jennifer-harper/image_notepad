@@ -5072,7 +5072,7 @@ function Home() {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
         children: "Need a great online notepad?"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-        children: "Add images and record your thoughts. Its free to sign up, private and easy to use."
+        children: "Add images and record your thoughts. Its free to sign up, private and easy to use. (There is no email conformation, you can make up a gmail account if your worried about security.)"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
           className: "signup",
