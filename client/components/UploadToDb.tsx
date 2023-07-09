@@ -33,6 +33,7 @@ function UploadToDb({ refreshList }: UploadToDbProps) {
     e.preventDefault()
 
   //if (!file || !file.type.includes('image')) return alert('please add a picture')
+
   //const fileAsBytes = await file.arrayBuffer() 
 
     const newData = {

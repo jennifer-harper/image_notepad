@@ -5313,10 +5313,12 @@ function Notes(_ref) {
         children: filteredGraphic.filter(data => selectedCategory === "" || data.category === selectedCategory).map(imgs => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           children: [imgs.image && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
             src: `data:image/jpg;base64,${imgs.image}`,
-            alt: imgs.category
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-            children: imgs.category
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            alt: `Visual for category: ${imgs.category}`
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("b", {
+              children: "Category:"
+            }), " ", imgs.category]
+          }), imgs.notes && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
             children: imgs.notes
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "button-wrapper",
@@ -5389,6 +5391,7 @@ function UploadToDb(_ref) {
     e.preventDefault();
 
     //if (!file || !file.type.includes('image')) return alert('please add a picture')
+
     //const fileAsBytes = await file.arrayBuffer() 
 
     const newData = {

@@ -62,10 +62,10 @@ function Notes({ refreshList, graphic }: NotesProps) {
             .filter((data) => selectedCategory === "" || data.category === selectedCategory)
             .map((imgs) => (
               <div key={imgs.id} >
-                {imgs.image && <img src={`data:image/jpg;base64,${imgs.image}`} alt={imgs.category} />}
+                {imgs.image && <img src={`data:image/jpg;base64,${imgs.image}`} alt={`Visual for category: ${imgs.category}`} />}                
+                <p><b>Category:</b> {imgs.category}</p>
+                {imgs.notes && <p>{imgs.notes}</p> }
 
-                <h2>{imgs.category}</h2>
-                <p>{imgs.notes}</p> 
                 <div className='button-wrapper'>  
                   <Link to={`/edit/${imgs.id}`}>
                     <button className="update">Update</button>
