@@ -63,18 +63,12 @@ function Notebook() {
         <section className="wrapper">
 
         <div className={`modal-edit ${editMode ? 'yes' : 'no'}`}>
-
-          <div className="button-wrapper">
-          
-          </div>
-            
+          <div className="button-wrapper">          
+          </div>            
             {editMode && (
-              <>
-                <UploadToDb refreshList={refreshList} />
-                </>
+              <UploadToDb refreshList={refreshList} />
             )}
           </div>
-
           <Notes graphic={graphic} refreshList={refreshList} />
         </section>
       </IfAuthenticated>

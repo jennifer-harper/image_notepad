@@ -41,16 +41,20 @@ function Notes({ refreshList, graphic }: NotesProps) {
   return (
     <>
       <div className="view-wrapper">
+       
         <div className="select-wrapper">
-          <p>Filter by category: </p>
-          <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
-            <option value="">All</option>
-            {userCategories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
+          <h1>Upload your notes:</h1>
+        <div>
+        <p>Filter by category: </p>
+              <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+                <option value="">All</option>
+                {userCategories.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+        </div>
         </div>  
 
         <div className={`mainStyle ${categoryCount <= 3 ? 'colFlex' : 'colCount'}`}>

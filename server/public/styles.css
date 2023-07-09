@@ -151,17 +151,19 @@ color: black;
     width: 100%;
     padding: 20px;
     position: fixed;
-    height: 0;
-
 }
 
 .modal-edit.yes{    
     height: 100vh;
-
-    background-color: rgba(255, 0, 0, 0.95);
-    transition: height  0.1s ease-in-out;
+    background-color: rgb(223, 223, 223);
+    transition: height  0.2s ease-in-out;
 }
 
+.modal-edit.no{    
+    height: 0vh;
+    padding:0;
+    transition: height  0.2s ease-in-out;
+}
 
 
 
@@ -187,23 +189,24 @@ color: black;
 .form-wrapper > div {
     width: 50%;
     display: flex;
-    justify-content: center;
-    
-   
+    justify-content: center;     
 }
-
+.form-wrapper .temp-profile{
+    justify-content: flex-end;
+}
+.form-wrapper div:last-of-type{
+    justify-content: flex-start;
+}
 .temp-profile img{
-    max-width: 400px;
-    
+    max-width: 400px;  
+    padding-right: 20px;  
 }
-
-form{
+ form{
+   display: block;
     width: 100%;
     max-width: 400px;
     margin-right: 20px;
 }
-
-
 form label{
     margin-bottom: 8px;
 }
@@ -212,6 +215,10 @@ form div{
     display: flex;
     flex-direction: column;
     margin-bottom: 24px;
+}
+
+form button{
+    background-color: lightcoral;
 }
 
 /* upload to db page - display notes*/
@@ -223,9 +230,17 @@ form div{
     padding-right: 10px;
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
 }
-
+.select-wrapper h1{
+    margin-bottom:0;
+    margin-left: 10px;
+}
+.select-wrapper div{
+    display: flex;
+    align-items: center;
+}
 
 .mainStyle > div{   
     padding: 20px;
