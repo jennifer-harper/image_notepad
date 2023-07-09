@@ -4828,12 +4828,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Nav */ "./client/components/Nav.tsx");
-/* harmony import */ var _UploadToDb__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UploadToDb */ "./client/components/UploadToDb.tsx");
-/* harmony import */ var _EditUpload__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EditUpload */ "./client/components/EditUpload.tsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _Notebook__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Notebook */ "./client/components/Notebook.tsx");
+/* harmony import */ var _EditUpload__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditUpload */ "./client/components/EditUpload.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -4841,16 +4839,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function App() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Nav__WEBPACK_IMPORTED_MODULE_0__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Routes, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Routes, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Route, {
         path: "/",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_UploadToDb__WEBPACK_IMPORTED_MODULE_1__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
-        path: "/upload/:id",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_EditUpload__WEBPACK_IMPORTED_MODULE_2__.EditUpload, {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Notebook__WEBPACK_IMPORTED_MODULE_0__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Route, {
+        path: "/edit/:id",
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_EditUpload__WEBPACK_IMPORTED_MODULE_1__.EditUpload, {})
       })]
-    })]
+    })
   });
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
@@ -5053,7 +5051,7 @@ function EditUpload() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Home": () => (/* binding */ Home)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
@@ -5068,23 +5066,33 @@ function Home() {
     loginWithRedirect();
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
-      children: "Welcome to the Homepage"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-      children: "Please sign in to continue."
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
-      onClick: handleSignIn,
-      children: "Sign In"
+    className: "home-wrapper",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "content",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+        children: "Need a great online notepad?"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+        children: "Add images and record your thoughts. Its free to sign up, private and easy to use."
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+          className: "signup",
+          onClick: handleSignIn,
+          children: "Sign Up Today"
+        })
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "visual"
     })]
   });
 }
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);
 
 /***/ }),
 
-/***/ "./client/components/Nav.tsx":
-/*!***********************************!*\
-  !*** ./client/components/Nav.tsx ***!
-  \***********************************/
+/***/ "./client/components/Notebook.tsx":
+/*!****************************************!*\
+  !*** ./client/components/Notebook.tsx ***!
+  \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -5092,47 +5100,121 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Authenticated__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Authenticated */ "./client/components/Authenticated.tsx");
-/* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _Notes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Notes */ "./client/components/Notes.tsx");
+/* harmony import */ var _UploadToDb__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UploadToDb */ "./client/components/UploadToDb.tsx");
+/* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Home */ "./client/components/Home.tsx");
+/* harmony import */ var _Authenticated__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Authenticated */ "./client/components/Authenticated.tsx");
+/* harmony import */ var _apis_uploadImgs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../apis/uploadImgs */ "./client/apis/uploadImgs.ts");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
 
 
-function Nav() {
+
+
+
+
+
+function Notebook() {
+  const [graphic, setGraphic] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
+  const {
+    isLoading
+  } = (0,_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_6__.useAuth0)();
+  const [editMode, setEditMode] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
+  const toggleEditMode = () => {
+    setEditMode(!editMode);
+  };
   const {
     user,
     logout
-  } = (0,_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__.useAuth0)();
+  } = (0,_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_6__.useAuth0)();
   const handleSignOut = () => {
     logout();
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_Authenticated__WEBPACK_IMPORTED_MODULE_0__.IfAuthenticated, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-        onClick: handleSignOut,
-        children: "Sign out"
-      }), user && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-        children: ["Signed in as: ", user?.nickname]
+  const fetchUploads = (0,react__WEBPACK_IMPORTED_MODULE_5__.useCallback)(async () => {
+    try {
+      const data = await (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_4__.getUploads)();
+      setGraphic(data.reverse());
+    } catch (err) {
+      alert(err.message);
+    }
+  }, []);
+  const refreshList = (0,react__WEBPACK_IMPORTED_MODULE_5__.useCallback)(() => {
+    fetchUploads();
+  }, [fetchUploads]);
+  (0,react__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
+    if (!isLoading) {
+      fetchUploads();
+    }
+  }, [isLoading, fetchUploads]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_Authenticated__WEBPACK_IMPORTED_MODULE_3__.IfAuthenticated, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("header", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
+              href: "/",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("svg", {
+                x: "0px",
+                y: "0px",
+                viewBox: "0 0 100 100",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("circle", {
+                  cx: "50",
+                  cy: "50",
+                  r: "47.5"
+                })
+              })
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("nav", {
+            children: [user && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("p", {
+              children: ["Signed in as: ", user?.nickname]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+              className: "user-btn",
+              onClick: handleSignOut,
+              children: "Sign out"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+              onClick: toggleEditMode,
+              children: editMode ? 'Close' : 'Add new'
+            })]
+          })]
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("section", {
+        className: "wrapper",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+          className: `modal-edit ${editMode ? 'yes' : 'no'}`,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+            className: "button-wrapper"
+          }), editMode && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_UploadToDb__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            refreshList: refreshList
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Notes__WEBPACK_IMPORTED_MODULE_0__["default"], {
+          graphic: graphic,
+          refreshList: refreshList
+        })]
       })]
-    })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Authenticated__WEBPACK_IMPORTED_MODULE_3__.IfNotAuthenticated, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Home__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+    })]
   });
 }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Nav);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Notebook);
 
 /***/ }),
 
-/***/ "./client/components/Profile.tsx":
-/*!***************************************!*\
-  !*** ./client/components/Profile.tsx ***!
-  \***************************************/
+/***/ "./client/components/Notes.tsx":
+/*!*************************************!*\
+  !*** ./client/components/Notes.tsx ***!
+  \*************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Profiles": () => (/* binding */ Profiles)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _apis_uploadImgs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../apis/uploadImgs */ "./client/apis/uploadImgs.ts");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
@@ -5147,7 +5229,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function Profiles(_ref) {
+function Notes(_ref) {
   let {
     refreshList,
     graphic
@@ -5157,53 +5239,73 @@ function Profiles(_ref) {
   const {
     user
   } = (0,_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_2__.useAuth0)();
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    const filteredData = selectedCategory === "" ? graphic.filter(data => data.user_id === user?.sub) : graphic.filter(data => data.category === selectedCategory && data.user_id === user?.sub);
-    setFilteredGraphic(filteredData);
-  }, [selectedCategory, graphic, user?.sub]);
   const handleDel = async id => {
     (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_0__.delUpload)(id).then(() => {
       refreshList();
     }).catch(err => alert(err.message));
   };
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    //Ensures that only the user's categories are displayed initially.
+    setFilteredGraphic(graphic.filter(data => data.user_id === user?.sub));
+  }, [graphic, user?.sub]);
+
+  //Map filteredGraphic array and extracting the unique category values (only show once in dropdown) 
+  const userCategories = [...new Set(filteredGraphic.map(data => data.category))];
+
+  // Count the total number of times a category is present in the selected category
+  const categoryCount = selectedCategory ? filteredGraphic.filter(data => data.category === selectedCategory).length : filteredGraphic.length;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-      className: "gallery-wrapper",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
-        value: selectedCategory,
-        onChange: e => setSelectedCategory(e.target.value),
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
-          value: "",
-          children: "All"
-        }), [...new Set(filteredGraphic.map(data => data.category))].map(category => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
-          value: category,
-          children: category
-        }, category))]
+      className: "view-wrapper",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "select-wrapper",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+          children: "Upload your notes:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            children: "Filter by category: "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
+            value: selectedCategory,
+            onChange: e => setSelectedCategory(e.target.value),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              value: "",
+              children: "All"
+            }), userCategories.map(category => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              value: category,
+              children: category
+            }, category))]
+          })]
+        })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        className: "img__grid",
-        children: filteredGraphic.map(imgs => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: `mainStyle ${categoryCount <= 3 ? 'colFlex' : 'colCount'}`,
+        children: filteredGraphic.filter(data => selectedCategory === "" || data.category === selectedCategory).map(imgs => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
             src: `data:image/jpg;base64,${imgs.image}`,
             alt: imgs.category
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
             children: imgs.category
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
             children: imgs.notes
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-            className: "del_button",
-            onClick: () => handleDel(imgs.id),
-            children: "Delete"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-            to: `/upload/${imgs.id}`,
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-              children: "Update"
-            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "button-wrapper",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+              to: `/edit/${imgs.id}`,
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                className: "update",
+                children: "Update"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              className: "del_button",
+              onClick: () => handleDel(imgs.id),
+              children: "Delete"
+            })]
           })]
         }, imgs.id))
       })]
     })
   });
 }
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Notes);
 
 /***/ }),
 
@@ -5222,11 +5324,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var base64_arraybuffer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! base64-arraybuffer */ "./node_modules/base64-arraybuffer/dist/base64-arraybuffer.es5.js");
 /* harmony import */ var _apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../apis/uploadImgs */ "./client/apis/uploadImgs.ts");
-/* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Home */ "./client/components/Home.tsx");
-/* harmony import */ var _Profile__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Profile */ "./client/components/Profile.tsx");
-/* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
-/* harmony import */ var _Authenticated__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Authenticated */ "./client/components/Authenticated.tsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -5234,14 +5333,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-function UploadToDb() {
+function UploadToDb(_ref) {
+  let {
+    refreshList
+  } = _ref;
   const {
     getAccessTokenSilently,
     isLoading
-  } = (0,_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_5__.useAuth0)();
+  } = (0,_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_3__.useAuth0)();
+  const [file, setFile] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [dataForm, setDataForm] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     category: '',
     notes: '',
@@ -5253,20 +5353,6 @@ function UploadToDb() {
       [e.target.name]: e.target.value
     });
   };
-  const [file, setFile] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
-  const [graphic, setGraphic] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    if (!isLoading) {
-      (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.getUploads)().then(data => {
-        setGraphic(data.reverse());
-      }).catch(err => alert(err.message));
-    }
-  }, [isLoading]);
-  const refreshList = () => {
-    (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.getUploads)().then(data => {
-      setGraphic(data.reverse());
-    }).catch(err => alert(err.message));
-  };
   const handleSubmit = async e => {
     e.preventDefault();
     if (!file || !file.type.includes('image')) return alert('please add a picture');
@@ -5277,15 +5363,13 @@ function UploadToDb() {
       image: base64_arraybuffer__WEBPACK_IMPORTED_MODULE_1__.encode(fileAsBytes)
     };
     const token = await getAccessTokenSilently();
-    (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.createUpload)(newData, token).then(data => {
-      setGraphic([data, ...graphic]);
+    (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.createUpload)(newData, token).then(() => {
+      refreshList();
       setDataForm({
         category: '',
         notes: '',
         image: ''
       });
-
-      // reset file input field value
       const fileInput = document.querySelector('input[type="file"]');
       fileInput.value = '';
       setFile(null);
@@ -5298,71 +5382,61 @@ function UploadToDb() {
   };
   const tempUrl = file ? URL.createObjectURL(file) : 'https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png';
   if (isLoading) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "loading",
       children: "Loading..."
     });
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Authenticated__WEBPACK_IMPORTED_MODULE_6__.IfAuthenticated, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("section", {
-        className: "flex-wrapper",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-          className: "form-wrapper",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h1", {
-            children: "Upload image and notes"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("form", {
-            onSubmit: handleSubmit,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("label", {
-                htmlFor: "image",
-                children: "Select Image"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-                id: "image",
-                name: "image",
-                type: "file",
-                onChange: updateFile
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("label", {
-                htmlFor: "category",
-                children: "Category"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-                type: "text",
-                id: "category",
-                name: "category",
-                value: dataForm.category,
-                onChange: handleUpdate
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("label", {
-                htmlFor: "notes",
-                children: "Notes"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("textarea", {
-                rows: 5,
-                name: "notes",
-                id: "notes",
-                value: dataForm.notes,
-                onChange: handleUpdate
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
-              children: "Add"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-              className: "temp_profile",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
-                src: tempUrl,
-                alt: file ? 'chosen picture' : 'profile icon'
-              })
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "form-wrapper",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "temp-profile",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+          src: tempUrl,
+          alt: file ? 'chosen picture' : 'profile icon'
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
+          onSubmit: handleSubmit,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+              htmlFor: "image",
+              children: "Select Image"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+              id: "image",
+              name: "image",
+              type: "file",
+              onChange: updateFile
             })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+              htmlFor: "category",
+              children: "Category"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+              type: "text",
+              id: "category",
+              name: "category",
+              value: dataForm.category,
+              onChange: handleUpdate
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+              htmlFor: "notes",
+              children: "Notes"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("textarea", {
+              rows: 5,
+              name: "notes",
+              id: "notes",
+              value: dataForm.notes,
+              onChange: handleUpdate
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            children: "Add note"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Profile__WEBPACK_IMPORTED_MODULE_4__.Profiles, {
-          graphic: graphic,
-          refreshList: refreshList
-        })]
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Authenticated__WEBPACK_IMPORTED_MODULE_6__.IfNotAuthenticated, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Home__WEBPACK_IMPORTED_MODULE_3__.Home, {})
-    })]
+        })
+      })]
+    })
   });
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UploadToDb);

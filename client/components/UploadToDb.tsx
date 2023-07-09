@@ -1,19 +1,22 @@
-import { ChangeEvent, FormEvent, useState, useEffect} from "react";
+import { ChangeEvent, FormEvent, useState} from "react";
 import * as Base64 from "base64-arraybuffer";
-import { getUploads, createUpload } from '../apis/uploadImgs';
-import {Home} from './Home'
-import { Profiles } from "./Profile";
+import { createUpload } from '../apis/uploadImgs';
 import * as Img from '../../models/uploads'
 import { useAuth0 } from '@auth0/auth0-react' 
-import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+
 
 type InputChange = ChangeEvent<HTMLInputElement>
-type AreaChange = ChangeEvent<HTMLTextAreaElement>;
+type AreaChange = ChangeEvent<HTMLTextAreaElement>
 
+type UploadToDbProps = {
+  refreshList: () => void
+}
 
-function UploadToDb() {
-
+function UploadToDb({ refreshList }: UploadToDbProps) {
   const { getAccessTokenSilently, isLoading } = useAuth0()
+  const [file, setFile] = useState(null as null | File)
+
+
 
   const [dataForm, setDataForm] = useState({
     category:'',
@@ -21,34 +24,10 @@ function UploadToDb() {
     image:''
   } as Img.UploadImgData)
 
-  const handleUpdate = (
-    e: InputChange | AreaChange
-  ) => {
-    setDataForm({
-      ...dataForm,
-      [e.target.name]: e.target.value,
-    }) 
+
+  const handleUpdate = (e: InputChange | AreaChange) => {
+    setDataForm({...dataForm, [e.target.name]: e.target.value}) 
   } 
-  const [file, setFile] = useState(null as null | File)
-  const [graphic,  setGraphic] = useState([] as Img.UploadUser[])
-
-  useEffect(() => {
-    if (!isLoading) {
-      getUploads()
-        .then((data) => {
-          setGraphic(data.reverse())
-        })
-        .catch((err) => alert(err.message))
-    }
-  }, [isLoading])
-
-  const refreshList = () => {
-    getUploads()
-    .then((data) => {
-       setGraphic(data.reverse())
-    })
-    .catch((err) => alert(err.message));
-  }
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -66,16 +45,11 @@ function UploadToDb() {
     const token = await getAccessTokenSilently() 
 
     createUpload(newData, token)
-    .then(data => {
-      setGraphic([data, ...graphic])
-      setDataForm({
-        category: '',
-        notes: '',
-        image: '',
-      }) 
 
-    // reset file input field value
-    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement 
+    .then(() => {
+      refreshList()
+      setDataForm({category: '', notes: '', image: ''}) 
+      const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement 
       fileInput.value = ''
       setFile(null)
     })    
@@ -95,37 +69,31 @@ function UploadToDb() {
   }
   
   return (
-    <>
-    <IfAuthenticated>
-    <section className="flex-wrapper">
-      <div className="form-wrapper">
-        <h1>Upload image and notes</h1>
-        <form onSubmit={handleSubmit}>
-          <div>
+    <>  
+      <div className="form-wrapper"> 
+       
+        <div className='temp-profile'>
+          <img src={tempUrl} alt={file ? 'chosen picture' : 'profile icon'} />
+        </div> 
+
+        <div>
+          <form onSubmit={handleSubmit}>
+            <div>
             <label htmlFor='image'>Select Image</label>
             <input id='image' name="image" type='file' onChange={updateFile} />
-          </div>
-          <div>
+            </div>
+            <div>
             <label htmlFor='category'>Category</label>
             <input type="text" id="category" name="category" value={dataForm.category} onChange={handleUpdate}/>
-          </div>
-          <div>
+            </div>
+            <div>
             <label htmlFor='notes'>Notes</label>
             <textarea rows={5} name="notes" id="notes" value={dataForm.notes} onChange={handleUpdate}/>
-          </div>
-          <button>Add</button>
-          <div className='temp_profile'>
-            <img src={tempUrl} alt={file ? 'chosen picture' : 'profile icon'} />
-          </div>          
-        </form>
+            </div>
+            <button>Add note</button>         
+          </form>
+        </div>
       </div>
-      <Profiles graphic={graphic} refreshList={refreshList}/>
-    </section>
-    </IfAuthenticated>
-
-    <IfNotAuthenticated>
-      <Home />
-    </IfNotAuthenticated>
     </>
   )
 }

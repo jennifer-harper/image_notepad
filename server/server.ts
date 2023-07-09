@@ -12,8 +12,10 @@ server.use(express.static(join(__dirname, './public')))
 
 server.use('/api/v1/uploads', uploadImgs)
 
+
 server.get('*', (req, res) => {
   res.sendFile(join(__dirname, 'public', 'index.html'))
 })
+
 
 export default server

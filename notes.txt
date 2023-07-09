@@ -1,7 +1,90 @@
-bugs:
-category fileter only shows selected and all if category is selected.
-Edit note form shows current category and note but doesnt show image name.
+import * as Img from '../../models/uploads'
+import { delUpload } from '../apis/uploadImgs';
+import { Link } from 'react-router-dom'
+import { useState, useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react"
 
-To do:
-Edit on one page? Dropdown options
-click on image, explan to full screen?
+type NotesProps = {
+  graphic: Img.UploadUser[]
+  refreshList: () => void;
+}
+
+function Notes({ refreshList, graphic }: NotesProps) {
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [filteredGraphic, setFilteredGraphic] = useState<Img.UploadUser[]>([]);
+  const { user } = useAuth0();
+
+  useEffect(() => {
+    const filterData = () => {
+      let filteredData = graphic;
+      if (selectedCategory !== "") {
+        filteredData = filteredData.filter(
+          (data) => data.category === selectedCategory && data.user_id === user?.sub
+        );
+      } else {
+        filteredData = filteredData.filter((data) => data.user_id === user?.sub);
+      }
+      setFilteredGraphic(filteredData);
+    };
+    filterData();
+  }, [selectedCategory, graphic, user?.sub]);
+
+  const handleDel = async (id: number) => {
+    try {
+      await delUpload(id);
+      refreshList();
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const renderGraphic = () => {
+    if (filteredGraphic.length === 0) {
+      return <p>No graphics found.</p>;
+    }
+
+    return filteredGraphic.map((img) => (
+      <div key={img.id}>
+        <img src={`data:image/jpg;base64,${img.image}`} alt={img.category} />
+        <h2>{img.category}</h2>
+        <p>{img.notes}</p>
+        <div className='button-wrapper'>
+          <Link to={`/upload/${img.id}`}>
+            <button className="update">Update</button>
+          </Link>
+          <button className="del_button" onClick={() => handleDel(img.id)}>
+            Delete
+          </button>
+        </div>
+      </div>
+    ));
+  };
+
+  const renderCategories = () => {
+    const categories = [...new Set(graphic.map((data) => data.category))];
+
+    return (
+      <div className="select-wrapper">
+        <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+          <option value="">All</option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+      </div>
+    );
+  };
+
+  return (
+    <>
+      {renderCategories()}
+      <div className="notes__grid">
+        {renderGraphic()}
+      </div>
+    </>
+  );
+}
+
+export default Notes;

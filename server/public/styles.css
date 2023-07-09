@@ -8,14 +8,20 @@ body {
     max-width: 2000px;
     overflow-x: hidden;
     font-family: monospace; 
+
 }
-nav{
-    display: flex;
-    padding-left: 20px;
+
+.loading{
+    position: absolute;
+    width: 100vw;
+    height:100vh;
+    background-color: #000;
+    left: 0;
+    top:0;
 }
-nav a{
-    margin-right: 14px;
-}
+
+
+
   
 ::-webkit-scrollbar {
     width: 0;
@@ -32,35 +38,175 @@ input[type=text]{
     font-family: monospace;
 }
 
+input[type=text]{
+    line-height: 24px;
+}
+input::file-selector-button,
+select{
+    padding:8px 12px
+}
 
-.img__grid{
+
+h1{
+    margin-top:0;
+    font-size: 40px;
+    font-family: 'Averia Serif Libre', cursive;
+}
+
+p{
+    line-height: 1.5em;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+/* **************** */
+
+button{
+    padding:14px 20px;
+    margin-top: 20px;
+    border:none;
+    border-radius: 5px;
+    transition:all 0.3s ease-in-out;
+}
+button:hover{
+    transition:all 0.3s ease-in-out;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19);
+}
+button.update{
+    background-color: lightcoral;
+    color:white
+}
+
+/* **************** */
+header{
+    width: 100%;
+    height: 70px;
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+}
+header > div{
+    display: flex;
+    padding-left: 20px;
+    position: fixed;
+    width: 100%;
+    align-items: center;
+    padding-right: 30px;
+    height: 70px;
+    background-color: white;
+}
+header svg{
+    width: 50px;
+    fill: darkred;
 }
 
-.img__grid > div{
-    max-width: 33.33%;
-    min-width: 300px;
-    padding: 30px;
-}
-
-.img__grid img{
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     width: 100%;
 }
 
-h1{
-    margin-top:0
+nav button{
+   margin-top:0;
+   margin-left:20px;
+   background-color: #db4c4c;
+   color: white;
+}
+.user-btn{
+background-color: lightgray;
+color: black;
 }
 
-.flex-wrapper{
-    display:flex;
-    padding: 20px;
+
+/* **************** */
+.home-wrapper{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    align-items: center;
 }
-form{
+.home-wrapper .content,
+.home-wrapper .visual{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.home-wrapper .content{
+    padding: 8%
+}
+.home-wrapper .visual{
+    background-color: lightblue;
+    width: 100%;
+}
+
+
+
+
+/************main wrapper */
+
+.modal-edit{
+    padding-top: 20px;
+    width: 100%;
+    padding: 20px;
+    position: fixed;
+}
+
+.modal-edit.yes{    
+    height: 100vh;
+    background-color: rgb(223, 223, 223);
+    transition: height  0.2s ease-in-out;
+}
+
+.modal-edit.no{    
+    height: 0vh;
+    padding:0;
+    transition: height  0.2s ease-in-out;
+}
+
+
+
+.button-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding-right: 30px;
+}
+.button-wrapper button{
+    margin-top: 0;
+}
+
+
+/* //////////////// */
+.form-wrapper{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+    min-height: 100%;
+}
+.form-wrapper > div {
+    width: 50%;
+    display: flex;
+    justify-content: center;     
+}
+.form-wrapper .temp-profile{
+    justify-content: flex-end;
+}
+.form-wrapper div:last-of-type{
+    justify-content: flex-start;
+}
+.temp-profile img{
+    max-width: 400px;  
+    padding-right: 20px;  
+}
+ form{
+   display: block;
+    width: 100%;
     max-width: 400px;
     margin-right: 20px;
 }
-
 form label{
     margin-bottom: 8px;
 }
@@ -71,21 +217,70 @@ form div{
     margin-bottom: 24px;
 }
 
-.gallery-wrapper{
- background-color: #f2f2f2;
- width: 100%;
+form button{
+    background-color: lightcoral;
 }
 
-.loading{
-    position: absolute;
-    width: 100vw;
-    height:100vh;
-    background-color: #000;
-    left: 0;
-    top:0;
+/* upload to db page - display notes*/
+.view-wrapper{
+    padding: 0 20px;
+}
+.select-wrapper{
+    padding-top: 20px;
+    padding-right: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.select-wrapper h1{
+    margin-bottom:0;
+    margin-left: 10px;
+}
+.select-wrapper div{
+    display: flex;
+    align-items: center;
+}
+
+.mainStyle > div{   
+    padding: 20px;
+    background-color: white;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19);
+}
+
+.mainStyle div img{
+    width: 100%;
+}
+
+.mainStyle .button-wrapper{
+    display: flex;
+    justify-content: space-between;
 }
 
 
+.colFlex{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.colFlex > div{  
+    max-width: calc(33.333% - 20px);
+    align-self: flex-start;
+}
+
+.colCount{
+    column-count: 3;
+}
+
+.colCount > div{
+    display:inline-block;
+    max-width: calc(100% - 20px);
+}
+
+
+/* **********edit page************ */
 .imgRecap{
     display: flex;
     justify-content: center;
@@ -94,3 +289,4 @@ form div{
 .imgRecap img{
     max-height: 80vh;    
 }
+
