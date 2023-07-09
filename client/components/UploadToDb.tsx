@@ -32,14 +32,14 @@ function UploadToDb({ refreshList }: UploadToDbProps) {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
 
-    if (!file || !file.type.includes('image')) return alert('please add a picture')
-
-    const fileAsBytes = await file.arrayBuffer() 
+  //if (!file || !file.type.includes('image')) return alert('please add a picture')
+  //const fileAsBytes = await file.arrayBuffer() 
 
     const newData = {
       category: dataForm.category,
       notes: dataForm.notes,
-      image: Base64.encode(fileAsBytes),
+      // image: Base64.encode(fileAsBytes),
+      image: file ? Base64.encode(await file.arrayBuffer()) : null
     }
 
     const token = await getAccessTokenSilently() 

@@ -1,6 +1,6 @@
 //upload images to db
 export interface UploadImgData {
-    image:string | undefined
+    image:string | null
     category:string
     notes:string
   }
