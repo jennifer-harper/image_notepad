@@ -5282,13 +5282,12 @@ function Notebook() {
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("section", {
         className: "wrapper",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
           className: `modal-edit ${editMode ? 'yes' : 'no'}`,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-            className: "button-wrapper"
-          }), editMode && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_UploadToDb__WEBPACK_IMPORTED_MODULE_1__["default"], {
-            refreshList: refreshList
-          })]
+          children: editMode && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_UploadToDb__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            refreshList: refreshList,
+            toggleEditMode: toggleEditMode
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Notes__WEBPACK_IMPORTED_MODULE_0__["default"], {
           graphic: graphic,
           refreshList: refreshList
@@ -5436,7 +5435,8 @@ __webpack_require__.r(__webpack_exports__);
 
 function UploadToDb(_ref) {
   let {
-    refreshList
+    refreshList,
+    toggleEditMode
   } = _ref;
   const {
     getAccessTokenSilently,
@@ -5456,20 +5456,15 @@ function UploadToDb(_ref) {
   };
   const handleSubmit = async e => {
     e.preventDefault();
-
-    //if (!file || !file.type.includes('image')) return alert('please add a picture')
-
-    //const fileAsBytes = await file.arrayBuffer() 
-
     const newData = {
       category: dataForm.category,
       notes: dataForm.notes,
-      // image: Base64.encode(fileAsBytes),
       image: file ? base64_arraybuffer__WEBPACK_IMPORTED_MODULE_1__.encode(await file.arrayBuffer()) : null
     };
     const token = await getAccessTokenSilently();
     (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_2__.createUpload)(newData, token).then(() => {
       refreshList();
+      toggleEditMode();
       setDataForm({
         category: '',
         notes: '',

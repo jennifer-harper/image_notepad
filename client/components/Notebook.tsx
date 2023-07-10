@@ -43,30 +43,26 @@ function Notebook() {
   return (
     <>
       <IfAuthenticated>
-      <header>
-        <div> 
-          <div>
-            <a href='/'>
-              <svg x="0px" y="0px" 	 viewBox="0 0 100 100" >
-                <circle cx="50" cy="50" r="47.5"/>
-              </svg>
-            </a>
-          </div> 
-          <nav>
-          {user && <p>Signed in as: {user?.nickname}</p>}    
-          <button onClick={handleSignOut}>Sign out</button> 
-          <button className='add-new' onClick={toggleEditMode}>{editMode ? 'Close' : 'Add new'}</button>
-          </nav>
-        </div>     
-      </header>
-
+        <header>
+          <div> 
+            <div>
+              <a href='/'>
+                <svg x="0px" y="0px" 	 viewBox="0 0 100 100" >
+                  <circle cx="50" cy="50" r="47.5"/>
+                </svg>
+              </a>
+            </div> 
+            <nav>
+            {user && <p>Signed in as: {user?.nickname}</p>}    
+            <button onClick={handleSignOut}>Sign out</button> 
+            <button className='add-new' onClick={toggleEditMode}>{editMode ? 'Close' : 'Add new'}</button>
+            </nav>
+          </div>     
+        </header>
         <section className="wrapper">
-
-        <div className={`modal-edit ${editMode ? 'yes' : 'no'}`}>
-          <div className="button-wrapper">          
-          </div>            
+          <div className={`modal-edit ${editMode ? 'yes' : 'no'}`}>
             {editMode && (
-              <UploadToDb refreshList={refreshList} />
+              <UploadToDb refreshList={refreshList} toggleEditMode={toggleEditMode} />
             )}
           </div>
           <Notes graphic={graphic} refreshList={refreshList} />

@@ -10,9 +10,10 @@ type AreaChange = ChangeEvent<HTMLTextAreaElement>
 
 type UploadToDbProps = {
   refreshList: () => void
+  toggleEditMode: () => void;
 }
 
-function UploadToDb({ refreshList }: UploadToDbProps) {
+function UploadToDb({ refreshList, toggleEditMode }: UploadToDbProps) {
   const { getAccessTokenSilently, isLoading } = useAuth0()
   const [file, setFile] = useState(null as null | File)
 
@@ -31,15 +32,9 @@ function UploadToDb({ refreshList }: UploadToDbProps) {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-
-  //if (!file || !file.type.includes('image')) return alert('please add a picture')
-
-  //const fileAsBytes = await file.arrayBuffer() 
-
     const newData = {
       category: dataForm.category,
       notes: dataForm.notes,
-      // image: Base64.encode(fileAsBytes),
       image: file ? Base64.encode(await file.arrayBuffer()) : null
     }
 
@@ -49,6 +44,7 @@ function UploadToDb({ refreshList }: UploadToDbProps) {
 
     .then(() => {
       refreshList()
+      toggleEditMode()
       setDataForm({category: '', notes: '', image: ''}) 
       const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement 
       fileInput.value = ''
@@ -71,11 +67,10 @@ function UploadToDb({ refreshList }: UploadToDbProps) {
   
   return (
     <>  
-      <div className="form-wrapper"> 
-       
+      <div className="form-wrapper">       
         <div className='temp-profile'>
           <img src={tempUrl} alt={file ? 'chosen picture' : 'profile icon'} />
-        </div> 
+        </div>
 
         <div>
           <form onSubmit={handleSubmit}>
