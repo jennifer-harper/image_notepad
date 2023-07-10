@@ -25,7 +25,7 @@ export function EditUpload(){
     const [formData, setFormData] = useState<Img.UploadImgData>({
         category:'',
         notes:'',
-        image:undefined
+        image:null
     })      
 
     // fill out those fields and accept changes

@@ -6,9 +6,10 @@ https://image-notepad.up.railway.app/
 
 
 ### To do list
+[x] - toggle add modal on form submit
 [] - add modal functionality to edit process
 
 [] - add responsive css to site
 [] - add css to edit process
 [] - style 404 page
-[] - style home page
+[x] - style home page

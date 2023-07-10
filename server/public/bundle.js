@@ -4949,7 +4949,7 @@ function EditUpload() {
   const [formData, setFormData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     category: '',
     notes: '',
-    image: undefined
+    image: null
   });
 
   // fill out those fields and accept changes
@@ -5250,21 +5250,20 @@ function Notebook() {
     }
   }, [isLoading, fetchUploads]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_Authenticated__WEBPACK_IMPORTED_MODULE_3__.IfAuthenticated, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Authenticated__WEBPACK_IMPORTED_MODULE_3__.IfNotAuthenticated, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Home__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_Authenticated__WEBPACK_IMPORTED_MODULE_3__.IfAuthenticated, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("header", {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
-              href: "/",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("svg", {
-                x: "0px",
-                y: "0px",
-                viewBox: "0 0 100 100",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("circle", {
-                  cx: "50",
-                  cy: "50",
-                  r: "47.5"
-                })
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("svg", {
+              x: "0px",
+              y: "0px",
+              viewBox: "0 0 100 100",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("circle", {
+                cx: "50",
+                cy: "50",
+                r: "47.5"
               })
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("nav", {
@@ -5293,8 +5292,6 @@ function Notebook() {
           refreshList: refreshList
         })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Authenticated__WEBPACK_IMPORTED_MODULE_3__.IfNotAuthenticated, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Home__WEBPACK_IMPORTED_MODULE_2__["default"], {})
     })]
   });
 }
@@ -5439,8 +5436,7 @@ function UploadToDb(_ref) {
     toggleEditMode
   } = _ref;
   const {
-    getAccessTokenSilently,
-    isLoading
+    getAccessTokenSilently
   } = (0,_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_3__.useAuth0)();
   const [file, setFile] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [dataForm, setDataForm] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
@@ -5480,13 +5476,7 @@ function UploadToDb(_ref) {
     const selectedFile = fileArr[0];
     setFile(selectedFile);
   };
-  const tempUrl = file ? URL.createObjectURL(file) : 'https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png';
-  if (isLoading) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-      className: "loading",
-      children: "Loading..."
-    });
-  }
+  const tempUrl = file ? URL.createObjectURL(file) : '/img/placeholder.svg';
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "form-wrapper",
@@ -5502,7 +5492,7 @@ function UploadToDb(_ref) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
               htmlFor: "image",
-              children: "Select Image"
+              children: "Select Image (.jpg and .png)"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
               id: "image",
               name: "image",

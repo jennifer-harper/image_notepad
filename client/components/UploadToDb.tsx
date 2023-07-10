@@ -14,7 +14,7 @@ type UploadToDbProps = {
 }
 
 function UploadToDb({ refreshList, toggleEditMode }: UploadToDbProps) {
-  const { getAccessTokenSilently, isLoading } = useAuth0()
+  const { getAccessTokenSilently} = useAuth0()
   const [file, setFile] = useState(null as null | File)
 
 
@@ -59,12 +59,12 @@ function UploadToDb({ refreshList, toggleEditMode }: UploadToDbProps) {
     setFile(selectedFile)
   }  
 
-  const tempUrl = file ? URL.createObjectURL(file) : 'https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png'
+  const tempUrl = file ? URL.createObjectURL(file) : 
+  '/img/placeholder.svg'
 
-  if (isLoading) {
-    return <div className="loading">Loading...</div>
-  }
+
   
+ 
   return (
     <>  
       <div className="form-wrapper">       
@@ -75,7 +75,7 @@ function UploadToDb({ refreshList, toggleEditMode }: UploadToDbProps) {
         <div>
           <form onSubmit={handleSubmit}>
             <div>
-            <label htmlFor='image'>Select Image</label>
+            <label htmlFor='image'>Select Image (.jpg and .png)</label>
             <input id='image' name="image" type='file' onChange={updateFile} />
             </div>
             <div>
