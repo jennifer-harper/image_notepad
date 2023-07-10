@@ -67,6 +67,7 @@ button{
     border:none;
     border-radius: 5px;
     transition:all 0.3s ease-in-out;
+    background-color:#cfdbe0;
 }
 button:hover{
     transition:all 0.3s ease-in-out;
@@ -74,10 +75,11 @@ button:hover{
 }
 
 button.update{
-    background-color: lightcoral;
-    color:white;
+    background-color: #403145;
     margin-right: 10px;
+    color: white;
 }
+
 
 /* **************** */
 header{
@@ -115,8 +117,30 @@ nav button{
    color: white;
 }
 .user-btn{
-background-color: lightgray;
-color: black;
+    background-color: #f6e5f6;
+    color: black;
+}
+button.signup{
+    background-color: #d8efe3;
+}
+
+
+/* **************** */
+.main-style .note{   
+    padding: 20px;
+    background-color: white;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19);
+}
+
+.main-style .note img{
+    width: 100%;
+}
+
+.main-style .button-wrapper{
+    display: flex;
+    justify-content: space-between;
 }
 
 
@@ -124,23 +148,57 @@ color: black;
 .home-wrapper{
     display: flex;
     flex-direction: row;
-    height: 100vh;
     align-items: center;
+    min-height: 100vh;
 }
+
 .home-wrapper .content,
 .home-wrapper .visual{
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
+    position: relative;
 }
 
 .home-wrapper .content{
     padding: 8%
 }
+.home-wrapper .content p{
+    max-width: 500px;
+}
+
 .home-wrapper .visual{
-    background-color: lightblue;
+    padding-right: 8%;
+}
+.home-wrapper .visual::after{
+    position: absolute;
+    content:'';
+    left: -8%;
+    top:15%;
     width: 100%;
+    height: 70%;
+    background-color: #d8efe3;
+    z-index: -1;
+    border-radius: 5px;
+}
+
+.home-wrapper .visual .main-style {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+.home-wrapper .visual .main-style > div{
+    flex: 1;
+}
+.home-wrapper .visual .main-style div:first-of-type{
+    padding-right: 10px;
+}
+
+.home-wrapper .visual .main-style .note{
+    width: 100%;
+    margin: 10px 0
 }
 
 
@@ -244,22 +302,8 @@ form button{
     align-items: center;
 }
 
-.mainStyle > div{   
-    padding: 20px;
-    background-color: white;
-    margin: 10px;
-    border-radius: 5px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19);
-}
+/* /////////////////// */
 
-.mainStyle div img{
-    width: 100%;
-}
-
-.mainStyle .button-wrapper{
-    display: flex;
-    justify-content: space-between;
-}
 
 
 .colFlex{
