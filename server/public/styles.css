@@ -146,60 +146,110 @@ button.signup{
 
 /* **************** */
 .home-wrapper{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    min-height: 100vh;
+    padding:8% 0;
 }
-
-.home-wrapper .content,
-.home-wrapper .visual{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
+.home-wrapper .visual,
+.home-wrapper .content{
+    padding: 0 8%;
     position: relative;
 }
-
-.home-wrapper .content{
-    padding: 8%
+.home-wrapper .visual{
+    padding-top: 2%;
+    margin-top: 4%;
 }
+
 .home-wrapper .content p{
     max-width: 500px;
-}
-
-.home-wrapper .visual{
-    padding-right: 8%;
-}
-.home-wrapper .visual::after{
-    position: absolute;
-    content:'';
-    left: -8%;
-    top:15%;
-    width: 100%;
-    height: 70%;
-    background-color: #d8efe3;
-    z-index: -1;
-    border-radius: 5px;
-}
-
-.home-wrapper .visual .main-style {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-}
-.home-wrapper .visual .main-style > div{
-    flex: 1;
-}
-.home-wrapper .visual .main-style div:first-of-type{
-    padding-right: 10px;
 }
 
 .home-wrapper .visual .main-style .note{
     width: 100%;
     margin: 10px 0
 }
+
+.home-wrapper .visual::after{
+    position: absolute;
+    content:'';
+    top: 0;
+    height: 101.5%;
+    left: 5%;
+    width: 90%;
+    background-color: #d8efe3;
+    z-index: -1;
+    border-radius: 5px;
+}
+
+
+@media (min-width:768px){
+    .home-wrapper .content,
+    .home-wrapper .visual{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        position: relative;
+    }
+    .home-wrapper .visual .main-style {
+        display: flex;
+        flex-direction: row;
+        align-items: center;    
+    }    
+    .home-wrapper .visual .main-style > div{
+        flex: 1;
+    }
+    .home-wrapper .visual .main-style div:first-of-type{
+        padding-right: 10px;
+    }
+}
+
+
+@media (min-width:768px) and (orientation: portrait){
+    .home-wrapper{
+        flex-direction: column;
+        min-height: 100vh;
+        justify-content: center;
+    }
+    .home-wrapper .content{
+        padding: 0 12%;
+    }
+    .home-wrapper .visual{
+        padding:4%;
+    }
+    .home-wrapper .visual::after{
+        height: 101.5%;
+        left: 10%;
+        width: 80%;
+    }
+}
+@media (min-width:1024px){
+    .home-wrapper .visual{
+        margin-top: 0;
+        padding:0;
+        padding-right: 8%;
+    }
+}
+
+@media (min-width:1024px) and (orientation:landscape){
+    .home-wrapper{
+        padding:0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .home-wrapper .visual::after{
+        left: -8%;
+        top:15%;
+        width: 100%;
+        height: 70%;
+
+    }
+}
+
+
+
+
 
 
 

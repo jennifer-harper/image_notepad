@@ -24,7 +24,7 @@ function Home() {
             <div className='note'>
               <img src='/img/cocktail-rosemary.jpg' alt='White boysenberry cake with green stand' />              
               <p><b>Category:</b> Cocktails</p>
-              <p>Make lists of great cocktails, cocktail ideas, or cocktail venues.</p> 
+              <p>Make notes about anything!</p> 
               <div className='button-wrapper'>
                 <button className="update">Update</button>                        
                 <button className="del_button" >Delete</button>
@@ -42,7 +42,7 @@ function Home() {
           <div className='note'>
               <img src='/img/cake-green-stand.jpg' alt='White boysenberry cake with green stand' />              
               <p><b>Category:</b> Baking</p>
-              <p>Add your notes and thoughts for subjects such as baking. Include links and edits to recipes. Never loose that great recipe again. <br/>Link: greatcakes.com/vanilla</p> 
+              <p>Add your notes and thoughts for subjects such as baking. <br/>Include links and edits to recipes. Never loose that great recipe again. <br/>Link: greatcakes.com/vanilla</p> 
               <div className='button-wrapper'>
                 <button className="update">Update</button>                        
                 <button className="del_button" >Delete</button>

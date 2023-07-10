@@ -5103,7 +5103,7 @@ function Home() {
                 children: "Category:"
               }), " Cocktails"]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-              children: "Make lists of great cocktails, cocktail ideas, or cocktail venues."
+              children: "Make notes about anything!"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
               className: "button-wrapper",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
@@ -5143,7 +5143,7 @@ function Home() {
               children: "Category:"
             }), " Baking"]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("p", {
-            children: ["Add your notes and thoughts for subjects such as baking. Include links and edits to recipes. Never loose that great recipe again. ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("br", {}), "Link: greatcakes.com/vanilla"]
+            children: ["Add your notes and thoughts for subjects such as baking. ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("br", {}), "Include links and edits to recipes. Never loose that great recipe again. ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("br", {}), "Link: greatcakes.com/vanilla"]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
             className: "button-wrapper",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
