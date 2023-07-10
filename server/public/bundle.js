@@ -5078,7 +5078,7 @@ function Home() {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       className: "content",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
-        children: "Need a great online notepad?"
+        children: "Need an online notepad?"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
         children: "Add images and record your thoughts. Its free to sign up, private and easy to use. (There is no email conformation, you can make up a gmail account if your worried about security.)"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
@@ -47907,15 +47907,14 @@ document.addEventListener('DOMContentLoaded', () => {
   (0,react_dom_client__WEBPACK_IMPORTED_MODULE_0__.createRoot)(document.getElementById('app')).render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__.Auth0Provider, {
     domain: "kahu-jennifer.au.auth0.com"
     // image notepad
-    ,
-    clientId: "wSXyLTeM8M5tPaa3aXOL5GHzZqA8E3je"
+    //clientId="wSXyLTeM8M5tPaa3aXOL5GHzZqA8E3je" 
     //fruits
-    //clientId="HZM1FKSsrKBdv0d58YsLG12sPXVoszAW" 
     ,
-    redirectUri: window.location.origin,
-    audience: "https://image-pad/api"
-    //audience="https://fruits/api"
+    clientId: "HZM1FKSsrKBdv0d58YsLG12sPXVoszAW",
+    redirectUri: window.location.origin
+    //audience="https://image-pad/api"
     ,
+    audience: "https://fruits/api",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.BrowserRouter, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_App__WEBPACK_IMPORTED_MODULE_2__["default"], {})
     })

@@ -195,7 +195,7 @@ button.signup{
     .home-wrapper .visual .main-style > div{
         flex: 1;
     }
-    .home-wrapper .visual .main-style div:first-of-type{
+    .home-wrapper .visual .main-style > div{
         padding-right: 10px;
     }
 }
@@ -219,12 +219,25 @@ button.signup{
         width: 80%;
     }
 }
+
+
 @media (min-width:1024px){
     .home-wrapper .visual{
         margin-top: 0;
         padding:0;
         padding-right: 8%;
     }
+    .home-wrapper .visual .main-style .note{
+        margin:0;
+    }
+    
+    .home-wrapper .visual .main-style > div .note:first-of-type{
+        margin-bottom: 20px;
+    }
+    .home-wrapper .visual .main-style > div{
+        padding-right: 20px;
+    }
+
 }
 
 @media (min-width:1024px) and (orientation:landscape){
@@ -270,8 +283,8 @@ button.signup{
     width: 100%;
     display: flex;
     justify-content: end;
-    /* padding-right: 30px; */
 }
+
 .button-wrapper button{
     margin-top: 0;
 }
