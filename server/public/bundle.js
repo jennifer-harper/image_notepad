@@ -5271,10 +5271,10 @@ function Notebook() {
             children: [user && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("p", {
               children: ["Signed in as: ", user?.nickname]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
-              className: "user-btn",
               onClick: handleSignOut,
               children: "Sign out"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+              className: "add-new",
               onClick: toggleEditMode,
               children: editMode ? 'Close' : 'Add new'
             })]
@@ -5375,7 +5375,7 @@ function Notes(_ref) {
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        className: `main-style ${categoryCount <= 3 ? 'colFlex' : 'colCount'}`,
+        className: `main-style ${categoryCount <= 3 ? 'flex-style' : 'column-style'}`,
         children: filteredGraphic.filter(data => selectedCategory === "" || data.category === selectedCategory).map(imgs => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "note",
           children: [imgs.image && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {

@@ -100,7 +100,7 @@ header > div{
 }
 header svg{
     width: 50px;
-    fill: darkred;
+    fill: #d8efe3;
 }
 
 nav{
@@ -113,12 +113,10 @@ nav{
 nav button{
    margin-top:0;
    margin-left:20px;
-   background-color: #db4c4c;
-   color: white;
 }
-.user-btn{
-    background-color: #f6e5f6;
-    color: black;
+button.add-new{
+    background-color: #5f9c7b; 
+    color:white;
 }
 button.signup{
     background-color: #d8efe3;
@@ -247,13 +245,6 @@ button.signup{
     }
 }
 
-
-
-
-
-
-
-
 /************main wrapper */
 
 .modal-edit{
@@ -265,7 +256,7 @@ button.signup{
 
 .modal-edit.yes{    
     height: 100vh;
-    background-color: rgb(223, 223, 223);
+    background-color:#cfdbe0;
     transition: height  0.2s ease-in-out;
 }
 
@@ -274,8 +265,6 @@ button.signup{
     padding:0;
     transition: height  0.2s ease-in-out;
 }
-
-
 
 .button-wrapper{
     width: 100%;
@@ -294,7 +283,13 @@ button.signup{
     width: 100%;
     align-items: center;
     justify-content: space-evenly;
-    min-height: 100%;
+    min-height: calc(100% - 70px);
+    flex-direction: column;
+}
+@media (min-width:1024px){
+    .form-wrapper{
+        flex-direction: row;
+    }
 }
 .form-wrapper > div {
     width: 50%;
@@ -328,7 +323,8 @@ form div{
 }
 
 form button{
-    background-color: lightcoral;
+    background-color:#403145;
+    color: white;
 }
 
 /* upload to db page - display notes*/
@@ -354,26 +350,38 @@ form button{
 
 /* /////////////////// */
 
+@media (min-width:768px){
+   .flex-style{
+        display: flex;
+        flex-wrap: wrap;
+    }
 
+    .flex-style > div{  
+        width: calc(50% - 20px);
+        align-self: flex-start;
+    }
 
-.colFlex{
-    display: flex;
-    flex-wrap: wrap;
+   .column-style{
+        column-count: 2;
+    }
+
+    .column-style > div{
+        display:inline-block;
+        width: calc(100% - 20px);
+    }
 }
 
-.colFlex > div{  
-    width: calc(33.333% - 20px);
-    align-self: flex-start;
+@media (min-width:1024px){
+    .flex-style > div{  
+        width: calc(33.333% - 20px);
+        align-self: flex-start;
+    }
+
+    .column-style{
+        column-count: 3;
+    }
 }
 
-.colCount{
-    column-count: 3;
-}
-
-.colCount > div{
-    display:inline-block;
-    width: calc(100% - 20px);
-}
 
 
 /* **********edit page************ */

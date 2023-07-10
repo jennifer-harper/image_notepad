@@ -54,8 +54,8 @@ function Notebook() {
           </div> 
           <nav>
           {user && <p>Signed in as: {user?.nickname}</p>}    
-          <button className='user-btn' onClick={handleSignOut}>Sign out</button> 
-          <button onClick={toggleEditMode}>{editMode ? 'Close' : 'Add new'}</button>
+          <button onClick={handleSignOut}>Sign out</button> 
+          <button className='add-new' onClick={toggleEditMode}>{editMode ? 'Close' : 'Add new'}</button>
           </nav>
         </div>     
       </header>

@@ -57,7 +57,7 @@ function Notes({ refreshList, graphic }: NotesProps) {
         </div>
         </div>  
 
-        <div className={`main-style ${categoryCount <= 3 ? 'colFlex' : 'colCount'}`}>
+        <div className={`main-style ${categoryCount <= 3 ? 'flex-style' : 'column-style'}`}>
           {filteredGraphic
             .filter((data) => selectedCategory === "" || data.category === selectedCategory)
             .map((imgs) => (
