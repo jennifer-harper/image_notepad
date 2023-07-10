@@ -87,6 +87,7 @@ header{
     height: 70px;
     display: flex;
     align-items: center;
+   
 }
 header > div{
     display: flex;
@@ -97,6 +98,8 @@ header > div{
     padding-right: 30px;
     height: 70px;
     background-color: white;
+    z-index: 2;
+
 }
 header svg{
     width: 50px;
@@ -109,14 +112,6 @@ nav{
     justify-content: flex-end;
     width: 100%;
 }
-
-/* @media (max-width:700px){
-    nav p{
-        position: absolute;
-        top: 55px;
-        left: 30px;
-    }
-} */
 
 nav button{
    margin-top:0;
@@ -283,7 +278,6 @@ button.signup{
 .modal-edit.yes{    
     min-height: calc(100vh - 70px);
     background-color:#cfdbe0;
-    transition: height  0.2s ease-in-out;
     display: flex;
     align-items: center;
 }
@@ -291,7 +285,6 @@ button.signup{
 .modal-edit.no{    
     height: 0vh;
     padding:0;
-    transition: height  0.2s ease-in-out;
 }
 
 .button-wrapper{
@@ -307,8 +300,6 @@ button.signup{
 @media (min-width:1024px){
     .modal-edit.yes{    
         height: 100vh;
-        background-color:#cfdbe0;
-        transition: height  0.2s ease-in-out;
     }
     .modal-edit{
         position: fixed;
@@ -466,3 +457,7 @@ form button{
     max-height: 80vh;    
 }
 
+/* **********404************ */
+.non-wrapper{
+
+}

@@ -9,6 +9,7 @@ function Home() {
 
 
   return (
+    <>
     <div className='home-wrapper'>
       <div className="content">
         <h1>Need an online notepad?</h1>
@@ -51,7 +52,8 @@ function Home() {
         </div>
       </div>
     </div>
-  );
+    </>
+  )
 }
 
 export default Home

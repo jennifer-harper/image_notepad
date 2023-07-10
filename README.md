@@ -7,9 +7,13 @@ https://image-notepad.up.railway.app/
 
 ### To do list
 [x] - toggle add modal on form submit
-[] - add modal functionality to edit process
-
 [] - add responsive css to site
-[] - add css to edit process
-[] - style 404 page
 [x] - style home page
+
+[] - style 404 page
+[] - footer - links to github etc
+
+[] - add modal functionality to edit process
+[] - add css to edit process
+
+[] - auth transition delay shows homepage - fix
