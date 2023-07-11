@@ -43,7 +43,7 @@ function Notes({ refreshList, graphic }: NotesProps) {
       <div className="view-wrapper">
        
         <div className="select-wrapper">
-          <h1>Upload your notes:</h1>
+          <h1>Your notes:</h1>
         <div>
         <p>Filter by category: </p>
               <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>

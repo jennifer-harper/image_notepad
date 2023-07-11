@@ -7,13 +7,14 @@ https://image-notepad.up.railway.app/
 
 ### To do list
 [x] - toggle add modal on form submit
-[] - add responsive css to site
+[x] - add responsive css to site
 [x] - style home page
 
-[] - style 404 page
+[x] - style 404 page
 [] - footer - links to github etc
 
 [] - add modal functionality to edit process
 [] - add css to edit process
 
 [] - auth transition delay shows homepage - fix
+[] - merge the 2 nav components to one for whole site
