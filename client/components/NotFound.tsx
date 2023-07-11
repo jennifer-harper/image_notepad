@@ -5,7 +5,7 @@ function NotFound(){
     return(
         <>
             <Nav />
-            <div className='home-wrapper'>
+            <div className='home-wrapper nf'>
                 <div className="content">
                     <h1>This page doesn&apos;t exist</h1>
                     <p>Looks like you&apos;re trying to locate a page that doesn&apos;t exist. Please return to the homepage.</p>

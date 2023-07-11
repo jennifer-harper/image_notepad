@@ -266,6 +266,9 @@ button.signup{
         align-items: center;
         min-height: 100vh;
     }
+    .home-wrapper.nf{
+        min-height:calc(100vh - 70px) 
+    }
 
     .home-wrapper .visual::after{
         left: -8%;
