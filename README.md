@@ -9,10 +9,8 @@ https://image-notepad.up.railway.app/
 [x] - toggle add modal on form submit
 [x] - add responsive css to site
 [x] - style home page
-
 [x] - style 404 page
-[] - footer - links to github etc
-
+[x] - contact - links to github etc
 [x] - add modal functionality to edit process
 [x] - add css to edit process
 

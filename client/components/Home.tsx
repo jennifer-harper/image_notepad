@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react';
-
+import Contact from './Contact';
 function Home() {
   const {loginWithRedirect } = useAuth0();
 
@@ -10,6 +10,7 @@ function Home() {
 
   return (
     <>
+    <Contact />
     <div className='home-wrapper'>
       <div className="content">
         <h1>Need an online notepad?</h1>

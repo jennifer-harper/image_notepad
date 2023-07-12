@@ -6,7 +6,7 @@ import { useState, useEffect, useCallback } from "react"
 import { useAuth0 } from '@auth0/auth0-react'
 import * as Img from '../../models/uploads'
 import NavModal from "./NavModal"
-
+import Contact from "./Contact"
 
 function Notebook() {
   const [graphic, setGraphic] = useState([] as Img.UploadUser[])
@@ -39,6 +39,7 @@ function Notebook() {
       <IfAuthenticated>        
         <NavModal refreshList={refreshList}/>
         <Notes graphic={graphic} refreshList={refreshList} />
+        <Contact />
       </IfAuthenticated>
     </>
   )
