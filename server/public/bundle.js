@@ -4919,9 +4919,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _apis_uploadImgs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apis/uploadImgs */ "./client/apis/uploadImgs.ts");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var base64_arraybuffer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! base64-arraybuffer */ "./node_modules/base64-arraybuffer/dist/base64-arraybuffer.es5.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -4929,14 +4927,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-function EditUpload() {
-  const {
-    id
-  } = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useParams)();
+function EditUpload(_ref) {
+  let {
+    id,
+    toggleEditMode,
+    refreshList
+  } = _ref;
   const [imgData, setImgData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(undefined);
-  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useNavigate)();
 
   //get the id data item
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -4981,18 +4978,16 @@ function EditUpload() {
     evt.preventDefault();
     try {
       await (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_1__.editUpload)(Number(id), formData);
-      navigate('/');
+      toggleEditMode();
+      refreshList();
     } catch (err) {
       alert(err.message);
     }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
-      to: "/",
-      children: "Back "
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "flex-wrapper",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
         onSubmit: handleSubmit,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
@@ -5037,14 +5032,8 @@ function EditUpload() {
           type: "submit",
           children: "Update"
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        className: "imgRecap",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-          src: `data:image/jpg;base64,${imgData?.image}`,
-          alt: imgData?.category
-        })
-      })]
-    })]
+      })
+    })
   });
 }
 
@@ -5275,10 +5264,10 @@ function NavModal(_ref) {
     user,
     logout
   } = (0,_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_0__.useAuth0)();
-  const [editMode, setEditMode] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false);
   const handleSignOut = () => {
     logout();
   };
+  const [editMode, setEditMode] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false);
   const toggleEditMode = () => {
     setEditMode(!editMode);
   };
@@ -5465,11 +5454,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _apis_uploadImgs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../apis/uploadImgs */ "./client/apis/uploadImgs.ts");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _EditUpload__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EditUpload */ "./client/components/EditUpload.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -5487,69 +5476,86 @@ function Notes(_ref) {
   const {
     user
   } = (0,_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_2__.useAuth0)();
+  const [editMode, setEditMode] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [editItemId, setEditItem] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+
+  //set id of item being toggled
+  const toggleEditMode = itemId => {
+    if (editMode && editItemId === itemId) {
+      setEditMode(false);
+      setEditItem(null);
+    } else {
+      setEditMode(true);
+      setEditItem(itemId);
+    }
+  };
   const handleDel = async id => {
     (0,_apis_uploadImgs__WEBPACK_IMPORTED_MODULE_0__.delUpload)(id).then(() => {
       refreshList();
     }).catch(err => alert(err.message));
   };
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    //Ensures that only the user's categories are displayed initially.
     setFilteredGraphic(graphic.filter(data => data.user_id === user?.sub));
   }, [graphic, user?.sub]);
 
-  //Map filteredGraphic array and extracting the unique category values (only show once in dropdown) 
+  //so that each category appears only once
   const userCategories = [...new Set(filteredGraphic.map(data => data.category))];
 
-  // Count the total number of times a category is present in the selected category
+  //Count the number of times the class is present for the correct css category
   const categoryCount = selectedCategory ? filteredGraphic.filter(data => data.category === selectedCategory).length : filteredGraphic.length;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "view-wrapper",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "select-wrapper",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
           children: "Your notes:"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
             children: "Filter by category: "
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("select", {
             value: selectedCategory,
             onChange: e => setSelectedCategory(e.target.value),
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
               value: "",
               children: "All"
-            }), userCategories.map(category => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+            }), userCategories.map(category => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
               value: category,
               children: category
             }, category))]
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: `main-style ${categoryCount <= 3 ? 'flex-style' : 'column-style'}`,
-        children: filteredGraphic.filter(data => selectedCategory === "" || data.category === selectedCategory).map(imgs => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: filteredGraphic.filter(data => selectedCategory === "" || data.category === selectedCategory).map(imgs => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "note",
-          children: [imgs.image && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+          children: [imgs.image && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
             src: `data:image/jpg;base64,${imgs.image}`,
             alt: `Visual for category: ${imgs.category}`
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("b", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
               children: "Category:"
             }), " ", imgs.category]
-          }), imgs.notes && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          }), imgs.notes && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
             children: imgs.notes
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "button-wrapper",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-              to: `/edit/${imgs.id}`,
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-                className: "update",
-                children: "Update"
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+              className: "add-new",
+              onClick: () => toggleEditMode(imgs.id),
+              children: editMode && editItemId === imgs.id ? 'Close' : 'Edit'
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
               className: "del_button",
               onClick: () => handleDel(imgs.id),
               children: "Delete"
             })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: `x ${editItemId === imgs.id ? 'yes' : 'no'}`,
+            children: editMode && editItemId === imgs.id && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_EditUpload__WEBPACK_IMPORTED_MODULE_3__.EditUpload, {
+              id: imgs.id,
+              toggleEditMode: () => toggleEditMode(imgs.id),
+              refreshList: refreshList
+            })
           })]
         }, imgs.id))
       })]

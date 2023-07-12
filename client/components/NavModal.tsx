@@ -8,9 +8,8 @@ type Props= {
 
 function NavModal({ refreshList}: Props){
     const {user, logout} = useAuth0() 
-    const [editMode, setEditMode] = useState(false)
-
     const handleSignOut = () => {logout()}
+    const [editMode, setEditMode] = useState(false)
     const toggleEditMode = () => {setEditMode(!editMode)}
 
     return(

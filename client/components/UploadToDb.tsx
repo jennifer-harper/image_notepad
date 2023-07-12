@@ -8,12 +8,12 @@ import { useAuth0 } from '@auth0/auth0-react'
 type InputChange = ChangeEvent<HTMLInputElement>
 type AreaChange = ChangeEvent<HTMLTextAreaElement>
 
-type UploadToDbProps = {
+type Props = {
   refreshList: () => void
   toggleEditMode: () => void;
 }
 
-function UploadToDb({ refreshList, toggleEditMode }: UploadToDbProps) {
+function UploadToDb({ refreshList, toggleEditMode }: Props) {
   const { getAccessTokenSilently} = useAuth0()
   const [file, setFile] = useState(null as null | File)
 

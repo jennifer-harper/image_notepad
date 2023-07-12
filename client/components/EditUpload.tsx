@@ -1,15 +1,17 @@
 import { useEffect, useState, ChangeEvent, FormEvent} from 'react'
 import * as Img from '../../models/uploads'
 import { editUpload, getIdUpload } from '../apis/uploadImgs'
-import { useParams } from 'react-router-dom'
 import * as Base64 from 'base64-arraybuffer' 
-import { useNavigate, Link } from 'react-router-dom'
+
+type Props = {
+id: string | number;
+  toggleEditMode: () => void;
+  refreshList: () => void
+}
 
 
-export function EditUpload(){
-    const {id} = useParams()
+export function EditUpload({ id, toggleEditMode, refreshList }: Props){
     const [imgData, setImgData] = useState<Img.UploadImgData| undefined>(undefined)
-    const navigate = useNavigate()
 
     //get the id data item
     useEffect(() => {
@@ -58,8 +60,9 @@ export function EditUpload(){
     const handleSubmit = async (evt: FormEvent) => {
         evt.preventDefault()
         try {
-            await editUpload(Number(id), formData);
-            navigate('/')
+            await editUpload(Number(id), formData)
+            toggleEditMode()
+            refreshList()
         } catch (err) {
             alert((err as Error).message);
         }
@@ -67,7 +70,7 @@ export function EditUpload(){
 
     return(
     <>
-    <Link to="/">Back </Link>
+
     <div className="flex-wrapper">              
         <form onSubmit={handleSubmit}>
             <div>
@@ -96,9 +99,6 @@ export function EditUpload(){
             </div>
             <button type='submit'>Update</button>  
         </form>
-        <div className="imgRecap">
-        <img src={`data:image/jpg;base64,${imgData?.image}`} alt={imgData?.category} />
-        </div>
     </div>
     </>
     )

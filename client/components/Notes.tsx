@@ -1,9 +1,8 @@
 import * as Img from '../../models/uploads'
 import { delUpload } from '../apis/uploadImgs';
-import {Link} from 'react-router-dom'
 import { useState, useEffect} from "react";
 import { useAuth0 } from "@auth0/auth0-react"
-
+import { EditUpload } from './EditUpload';
 
 type NotesProps = {
   graphic: Img.UploadUser[]
@@ -16,6 +15,20 @@ function Notes({ refreshList, graphic }: NotesProps) {
   const [filteredGraphic, setFilteredGraphic] = useState(graphic)
   const { user } = useAuth0()
 
+  const [editMode, setEditMode] = useState(false)
+  const [editItemId, setEditItem] = useState<number | null>(null)
+  
+  //set id of item being toggled
+  const toggleEditMode = (itemId: number) => {
+    if (editMode && editItemId === itemId){
+      setEditMode(false)
+      setEditItem(null)
+    } else {
+      setEditMode(true)
+      setEditItem(itemId)
+    }
+  }
+
   const handleDel = async (id: number) => {
     delUpload(id)
     .then(() => {
@@ -25,14 +38,13 @@ function Notes({ refreshList, graphic }: NotesProps) {
   }
 
   useEffect(() => {
-    //Ensures that only the user's categories are displayed initially.
     setFilteredGraphic(graphic.filter((data) => data.user_id === user?.sub))
   }, [graphic, user?.sub])
 
-  //Map filteredGraphic array and extracting the unique category values (only show once in dropdown) 
+   //so that each category appears only once
   const userCategories = [...new Set(filteredGraphic.map((data) => data.category))]
 
-  // Count the total number of times a category is present in the selected category
+  //Count the number of times the class is present for the correct css category
   const categoryCount = selectedCategory
   ? filteredGraphic.filter((data) => data.category === selectedCategory).length
   : filteredGraphic.length
@@ -67,15 +79,20 @@ function Notes({ refreshList, graphic }: NotesProps) {
                 {imgs.notes && <p>{imgs.notes}</p> }
 
                 <div className='button-wrapper'>  
-                  <Link to={`/edit/${imgs.id}`}>
-                    <button className="update">Update</button>
-                  </Link>       
+                  <button className='add-new' onClick={() => toggleEditMode(imgs.id)}>{editMode && editItemId === imgs.id ? 'Close' : 'Edit'}</button>
+
                   <button className="del_button" onClick={() => handleDel(imgs.id)}>
                     Delete
-                  </button>
+                  </button>                  
                 </div>
+
+                <div className={`x ${editItemId === imgs.id ? 'yes' : 'no'}`}>
+                    {editMode && editItemId === imgs.id && (
+                      <EditUpload id={imgs.id} toggleEditMode={() => toggleEditMode(imgs.id)} refreshList={refreshList} />
+                    )}
+                </div> 
               </div>
-          ))}
+            ))}
         </div>
       </div>
     </>
