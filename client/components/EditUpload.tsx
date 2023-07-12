@@ -12,6 +12,9 @@ id: string | number;
 
 export function EditUpload({ id, toggleEditMode, refreshList }: Props){
     const [imgData, setImgData] = useState<Img.UploadImgData| undefined>(undefined)
+    const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+
+
 
     //get the id data item
     useEffect(() => {
@@ -44,10 +47,12 @@ export function EditUpload({ id, toggleEditMode, refreshList }: Props){
     const updateFile = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0]
+            setImagePreviewUrl(URL.createObjectURL(file))
+
             const reader = new FileReader()
             reader.readAsArrayBuffer(file)
             reader.onload = () => {
-            setFormData({
+               setFormData({
                 ...formData,
                 image: Base64.encode(reader.result as ArrayBuffer),
             })
@@ -70,8 +75,8 @@ export function EditUpload({ id, toggleEditMode, refreshList }: Props){
 
     return(
     <>
-
-    <div className="flex-wrapper">              
+    <div className="flex-wrapper"> 
+    <p>Edit note details:</p>             
         <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor='category'>Category</label>
@@ -97,8 +102,12 @@ export function EditUpload({ id, toggleEditMode, refreshList }: Props){
                 accept="image/*"
                 onChange={updateFile}/>
             </div>
+            <div className="imgRecap">
+                {imagePreviewUrl && <img src={imagePreviewUrl} alt={formData.category} />}
+            </div>
             <button type='submit'>Update</button>  
         </form>
+
     </div>
     </>
     )

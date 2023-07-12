@@ -59,8 +59,7 @@ function UploadToDb({ refreshList, toggleEditMode }: Props) {
     setFile(selectedFile)
   }  
 
-  const tempUrl = file ? URL.createObjectURL(file) : 
-  '/img/placeholder.svg'
+  const tempUrl = file ? URL.createObjectURL(file) : '/img/placeholder.svg'
 
 
   

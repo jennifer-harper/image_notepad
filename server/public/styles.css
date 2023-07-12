@@ -481,6 +481,9 @@ form button{
 
 
 /* **********edit page************ */
+.flex-wrapper{
+    margin-top:20px
+}
 .imgRecap{
     display: flex;
     justify-content: center;
@@ -491,6 +494,3 @@ form button{
 }
 
 /* **********404************ */
-.non-wrapper{
-
-}

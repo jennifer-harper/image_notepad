@@ -4934,6 +4934,7 @@ function EditUpload(_ref) {
     refreshList
   } = _ref;
   const [imgData, setImgData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(undefined);
+  const [imagePreviewUrl, setImagePreviewUrl] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
 
   //get the id data item
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -4962,6 +4963,7 @@ function EditUpload(_ref) {
   const updateFile = e => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
+      setImagePreviewUrl(URL.createObjectURL(file));
       const reader = new FileReader();
       reader.readAsArrayBuffer(file);
       reader.onload = () => {
@@ -4985,9 +4987,11 @@ function EditUpload(_ref) {
     }
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "flex-wrapper",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        children: "Edit note details:"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
         onSubmit: handleSubmit,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
@@ -5028,11 +5032,17 @@ function EditUpload(_ref) {
             accept: "image/*",
             onChange: updateFile
           })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "imgRecap",
+          children: imagePreviewUrl && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+            src: imagePreviewUrl,
+            alt: formData.category
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
           type: "submit",
           children: "Update"
         })]
-      })
+      })]
     })
   });
 }
