@@ -209,6 +209,11 @@ button.signup{
     border-radius: 5px;
 }
 
+.home-wrapper.nf .visual::after{
+    height: 92%;
+}
+
+
 
 @media (min-width:768px){
     .home-wrapper .content{
@@ -275,6 +280,7 @@ button.signup{
     .home-wrapper.nf{
         min-height:calc(100vh - 70px) 
     }
+
 
     .home-wrapper .visual::after{
         left: -8%;
