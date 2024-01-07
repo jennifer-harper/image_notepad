@@ -17,7 +17,7 @@ function Contact(){
             <div className="navLinks">
             <ul>
                 <li><Link to="https://github.com/jennifer-harper" target="_blank"><i className="fa-brands fa-github fa-lg"></i></Link></li>
-                <li><Link to="https://www.linkedin.com/in/jennifer-harper-nz/" target="_blank"> <i className="fa-brands fa-linkedin fa-lg"></i></Link></li>
+{/*                 <li><Link to="https://www.linkedin.com/in/jennifer-harper-nz/" target="_blank"> <i className="fa-brands fa-linkedin fa-lg"></i></Link></li>
             
                 <li>
                 <a href="https://jennifer-harper.github.io/img/jennifer-harper-cv.pdf" target="_blank"  rel="noreferrer">
@@ -32,7 +32,7 @@ function Contact(){
                     M34.1,34.5h-2.1l-7.7-18.9h2.5l6.3,15.9l6.2-15.9h2.5L34.1,34.5z"></path>
                     </svg>
                 </a>
-                </li>
+                </li> */}
             </ul>
             </div>
         </div>
